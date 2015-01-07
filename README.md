@@ -6,8 +6,8 @@ Services team
 
 **Includes:**
 * End-to-end test tools
-** Scripts to verify service deployments via (relying) client products
-** Client configuration scripts
+  * Scripts to verify service deployments via (relying) client products
+  * Client configuration scripts
 * Release verification tools
 * Deployment automation
 * Misc - kitchen sink
