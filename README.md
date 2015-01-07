@@ -1,6 +1,15 @@
 services-test
 =============
 
-Tools and test scripts used by the Mozilla Cloud Services team
-- scripts to verify mozilla-service deployments via relying client products
-- end-to-end test scripts and configuration tools
+This repo is intended for tools and test scripts used by the Mozilla Cloud 
+Services team
+
+**Includes:**
+* End-to-end test tools
+** Scripts to verify service deployments via (relying) client products
+** Client configuration scripts
+* Release verification tools
+* Deployment automation
+* Misc - kitchen sink
+
+

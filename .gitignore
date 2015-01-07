@@ -1,0 +1,17 @@
+# general
+*.sw[op]
+.DS_Store
+/.idea
+
+*.py[cod]
+
+.Python
+build/
+dist/
+sdist/
+*.egg-info/
+*.egg
+
+
+
+
