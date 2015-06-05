@@ -12,6 +12,5 @@ sdist/
 *.egg-info/
 *.egg
 
-
-
-
+node_modules
+*.log
