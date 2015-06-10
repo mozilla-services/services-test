@@ -24,6 +24,7 @@
   },
   "scripts": {
     "pocket": "marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /Applications/Firefox.app/Contents/MacOS/firefox-bin tests/",
+    "pocket-ubuntu": "marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /home/ubuntu/firefox/firefox-bin tests/",
     "test": "marionette-mocha"
   }
 }
