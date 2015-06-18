@@ -6,7 +6,4 @@
 # LATEST_DMG=$(curl -s ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-central/ | fgrep en-US.mac.dmg | awk '{print $9}'
 # curl -# -C - -o $DIR'/LatestNightly.dmg' "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-central/$LATEST_DMG"
 
-rm -rf services-test
-git clone https://github.com/mozilla-services/services-test
-cd services-test/e2e/pocket
 npm install
