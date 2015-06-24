@@ -1,3 +1,13 @@
 {
-  "manifest": "stub"
+  "envs" : {
+    "stage": {
+      "test_types": [ "stack-check", "e2e", "loadtest", "schema-check" ]
+    },
+    "pre-prod": {
+      "test_types": [ "stack-check", "e2e", "schema-check" ]
+    },
+    "prod": {
+      "test_types": [ "stack-check", "e2e", "schema-check" ]
+    }
+  }
 }
