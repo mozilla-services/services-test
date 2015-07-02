@@ -1,0 +1,13 @@
+{
+  "envs" : {
+    "stage": {
+      "test_types": [ "e2e" ]
+    },
+    "pre-prod": {
+      "test_types": [ "e2e" ]
+    },
+    "prod": {
+      "test_types": [ "e2e" ]
+    }
+  }
+}
