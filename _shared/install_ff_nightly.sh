@@ -1,6 +1,5 @@
-
-
 #!/bin/bash
+
 echo
 echo Downloading latest Nightly...
 echo  
@@ -19,9 +18,11 @@ open $DIR'/LatestNightly.dmg'
 # wget https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/latest/linux-x86_64/en-US/firefox-38.0.5.tar.bz2
 # tar -xjvf *.bz2 -C /home/ubuntu
 
+# TODO: Replace with monitor for download complete
 echo
 echo Waiting 20 seconds for disk image to be mounted...
 echo
 sleep 20
-
+echo mounting Firefox...
+cd /Volumes/Nightly/FirefoxNightly.app/Contents/MacOS
 npm install

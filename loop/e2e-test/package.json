@@ -1,9 +1,9 @@
 {
-  "name": "fxa-gecko-tests",
+  "name": "loop-e2e-test",
   "version": "1.0.0",
-  "description": "FxA Gecko Integration Tests",
+  "description": "End-2-end test for Hello Firefox (Loop)",
   "scripts": {
-    "pocket": "marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /Applications/Firefox.app/Contents/MacOS/firefox-bin tests/pocket_cheat.js",
+    "pocket": "marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /Volumes/FirefoxNightly.app/Contents/MacOS/firefox-bin tests/loop_signup.js",
     "test": "./run-tests.sh"
   },
   "author": "Mozilla",
