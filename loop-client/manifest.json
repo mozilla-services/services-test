@@ -1,7 +1,7 @@
 {
     "envs" : {
 	"stage": {
-            "test_types" : [ "stack-check", "loadtest" ],
+            "test_types" : [ "stack-check" ],
             "urls" : {
 	      "root" : "call.stage.mozaws.net",
 	      "config.js" : "call.stage.mozaws.net/config.js",

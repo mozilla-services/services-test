@@ -1,0 +1,19 @@
+{
+  "name": "fxa-gecko-tests",
+  "version": "1.0.0",
+  "description": "FxA Gecko Integration Tests",
+  "scripts": {
+    "pocket": "marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /Applications/Firefox.app/Contents/MacOS/firefox-bin tests/pocket_cheat.js",
+    "test": "./run-tests.sh"
+  },
+  "author": "Mozilla",
+  "license": "MPL",
+  "dependencies": {
+    "chai": "3.0.0",
+    "marionette-firefox-host": "1.0.3",
+    "marionette-helper": "0.3.1",
+    "marionette-js-runner": "1.1.2",
+    "promise": "7.0.1",
+    "restmail-client": "1.0.0"
+  }
+}

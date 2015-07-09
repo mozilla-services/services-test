@@ -6,4 +6,15 @@
 # LATEST_DMG=$(curl -s ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-central/ | fgrep en-US.mac.dmg | awk '{print $9}'
 # curl -# -C - -o $DIR'/LatestNightly.dmg' "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-central/$LATEST_DMG"
 
+#-------------------
+# Install deps
+#-------------------
+
 npm install
+
+#-------------------
+# Run test
+#-------------------
+export DISPLAY=:11.0
+
+npm run pocket-ubuntu
