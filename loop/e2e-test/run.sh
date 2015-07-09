@@ -1,4 +1,3 @@
-clear 
 echo
 echo "-------------------"
 echo "SETUP"

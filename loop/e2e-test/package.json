@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "End-2-end test for Hello Firefox (Loop)",
   "scripts": {
-    "pocket": "marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /Volumes/FirefoxNightly.app/Contents/MacOS/firefox-bin tests/loop_signup.js",
-    "test": "./run-tests.sh"
+    "loop": "marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /Volumes/FirefoxNightly.app/Contents/MacOS/firefox-bin tests/loop_signup.js",
+    "test": "./run.sh"
   },
   "author": "Mozilla",
-  "license": "MPL",
+  "license": "MPL-2.0",
   "dependencies": {
     "chai": "3.0.0",
     "marionette-firefox-host": "1.0.3",
