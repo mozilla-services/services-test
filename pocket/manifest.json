@@ -1,13 +1,13 @@
 {
   "envs" : {
     "stage": {
-      "test_types": [ "stack-check", "e2e", "loadtest", "schema-check" ]
+      "test_types": [ "e2e-test" ]
     },
     "pre-prod": {
-      "test_types": [ "stack-check", "e2e", "schema-check" ]
+      "test_types": [ "e2e-test" ]
     },
     "prod": {
-      "test_types": [ "stack-check", "e2e", "schema-check" ]
+      "test_types": [ "e2e-test" ]
     }
   }
 }

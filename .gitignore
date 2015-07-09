@@ -1,9 +1,9 @@
-# general
-*.sw[op]
 .DS_Store
 /.idea
 
 *.py[cod]
+*.sw[op]
+*.dmg
 
 .Python
 build/
@@ -11,6 +11,7 @@ dist/
 sdist/
 *.egg-info/
 *.egg
+*.tar*
 
 node_modules
 *.log
