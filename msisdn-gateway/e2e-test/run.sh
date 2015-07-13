@@ -13,4 +13,4 @@ fab teardown || exit 1
 echo "-----------------------------------Finished Teardown-------------------------------"
 echo "---------------------------Virtual Environment Deactivated-------------------------"
 deactivate
-rm -fr venv#!/bin/sh
+rm -fr venv
