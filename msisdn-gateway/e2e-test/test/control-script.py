@@ -10,8 +10,6 @@ import json
 from twilio.rest import TwilioRestClient
 
 host = "https://msisdn.services.mozilla.com"
-host_number = "+12182967993"
-
 
 def clean_up_message_logs(client):
 	# clean up the previous message logs
@@ -54,6 +52,10 @@ def main():
 		"-n", "--numbers",
 		required=True)
 
+	parser.add_argument(
+		"-h", "--host-number",
+		required=True)
+
 	args = vars(parser.parse_args())
 
 	with open(args["account_auth"]) as account_auth_file:
@@ -64,7 +66,7 @@ def main():
 	client = TwilioRestClient(account_auth["account_sid"], account_auth["auth_token"])
 	clean_up_message_logs(client)
 	command = "msisdn-cli -H " + host + " -c " + numbers["mcc"] + " -n " + numbers["number"]
-	run_msisdn_cli(client, command, host_number, numbers["number"])
+	run_msisdn_cli(client, command, args["host_number"], numbers["number"])
 
 
 if __name__ == "__main__":
