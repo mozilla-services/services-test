@@ -1,7 +1,7 @@
 {
     "envs" : {
 	"stage": {
-	    "test_types" : [ "stack-check" ],
+	    "test_types" : [ "stack-check", "e2e-test" ],
             "stack_label" : "msisdnstage",
             "aws_region": "eu-west-1",
             "urls": {
@@ -10,7 +10,7 @@
             }
 	},
 	"stage-loadtest": {
-	    "test_types" : [ "stack-check" ],
+	    "test_types" : [ "stack-check", "e2e-test" ],
             "stack_label" : "msisdnload",
             "aws_region": "eu-west-1",
             "urls": {
@@ -19,7 +19,7 @@
             }
 	},
 	"pre-prod": {
-	    "test_types" : [ "stack-check" ],
+	    "test_types" : [ "stack-check", "e2e-test" ],
             "aws_region": "eu-west-1",
             "urls": {
 	      "root": "msisdn.services.mozilla.com",
@@ -27,7 +27,7 @@
             }
 	},
 	"prod": {
-	    "test_types" : [ "stack-check" ],
+	    "test_types" : [ "stack-check", "e2e-test" ],
             "urls": {
 	      "root": "msisdn.services.mozilla.com",
 	      "heartbeat" : "msisdn.services.mozilla.com/__heartbeat__"
