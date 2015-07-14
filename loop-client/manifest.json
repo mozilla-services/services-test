@@ -1,27 +1,39 @@
 {
-    "envs" : {
-	"stage": {
-            "test_types" : [ "stack-check" ],
-            "urls" : {
-	      "root" : "call.stage.mozaws.net",
-	      "config.js" : "call.stage.mozaws.net/config.js",
-	      "push_config" : "loop.stage.mozaws.net/push-server-config",
-	      "loop_server": "loop.stage.mozaws.net"
-	    }
-	},
-	"prod": {
-            "test_types" : [ "stack-check" ],
-            "urls" : {
-	      "root": "hello.firefox.com",
-	      "config.js" : "hello.firefox.com/config.js",
-	      "push_config" : "loop.services.mozilla.com/push-server-config",
-	      "loop_server": "loop.services.mozilla.com"
-	    }
-	}
+  "envs" : {
+    "stage": {
+      "test_types": [ "stack-check" ], 
+      "stack_label": "loopclientstage", 
+      "aws_region": "eu-west-1", 
+      "urls": {
+        "root" : "call.stage.mozaws.net",
+        "config.js" : "call.stage.mozaws.net/config.js",
+        "push_config" : "loop.stage.mozaws.net/push-server-config",
+        "loop_server": "loop.stage.mozaws.net"
+      }
     },
-    "protocols" : [ "http", "https" ],
-    "processes" : [ "loop", "node", "datadog", "circus", "heka", "nginx" ],
-    "commands" : {
-        "curl -I": [ "<root>" ]
+    "pre-prod": {
+      "test_types": [ "stack-check" ], 
+      "aws_region": "eu-west-1", 
+      "urls": {
+        "root": "hello.firefox.com",
+	"config.js" : "hello.firefox.com/config.js",
+	"push_config" : "loop.services.mozilla.com/push-server-config",
+	"loop_server": "loop.services.mozilla.com"
+      }
+    },
+    "prod": {
+      "test_types": [ "stack-check" ], 
+      "urls": {
+        "root": "hello.firefox.com",
+        "config.js" : "hello.firefox.com/config.js",
+        "push_config" : "loop.services.mozilla.com/push-server-config",
+        "loop_server": "loop.services.mozilla.com"
+      }
+    }
+  },
+  "protocols" : [ "http", "https" ],
+  "processes" : [ "loop", "node", "datadog", "circus", "heka", "nginx" ],
+  "commands" : {
+      "curl -I": [ "<root>" ]
     }
 }
