@@ -53,7 +53,7 @@ def main():
 		required=True)
 
 	parser.add_argument(
-		"-h", "--host-number",
+		"-H", "--host-number",
 		required=True)
 
 	args = vars(parser.parse_args())
