@@ -28,16 +28,19 @@ test environment: stage, pre-prod, prod, etc.
 
 Test Environments
 ----------------------
+Environments where tests should be run for a given project
 
- TEST ENV     |    DESCRIPTION                             
- -------------|---------------------------------------------------
- stage        | where most testing happens before prod deployment 
- pre-prod     | final verification in an actual prod env (before DNS switch)
- prod         | final verification to make sure prod deploy was successful. Also, continuous prod testing can be executed as a kind of prod "health check" 
+ TEST ENV       |    DESCRIPTION                             
+ ---------------|---------------------------------------------------
+ stage          | where most testing happens before prod deployment 
+ stage-loadtest | this is a special env for msisnd where we need a different setup for loadtesting.  In general loadtesting can take place in stage. 
+ pre-prod       | final verification in an actual prod env (before DNS switch)
+ prod           | final verification to make sure prod deploy was successful. Also, continuous prod testing can be executed as a kind of prod "health check" 
 
 
 Test Types
 ----------------------
+Specify what kinds of tests should be run for any given environment
 
  TEST TYPE     | DESCRIPTION                                
  ------------- | -------------------------------------------

@@ -1,3 +1,5 @@
+#!/bin/bash +x
+
 echo
 echo "-------------------"
 echo "SETUP"
