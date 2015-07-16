@@ -6,8 +6,8 @@
       "aws_region": "eu-west-1",
       "urls": {
 	"root" : "loop.stage.mozaws.net",
-	"push_config" : "loop.stage.mozaws.net/push-server-config",
-	"heartbeat" : "loop.stage.mozaws.net/__heartbeat__"
+	"root/push_config" : "push-server-config",
+	"root/heartbeat" : "__heartbeat__"
       }
     },
     "pre-prod": {
@@ -15,8 +15,8 @@
       "aws_region": "eu-west-1",
       "urls": {
         "root": "loop.services.mozilla.com",
-	"push_config" : "loop.services.mozilla.com/push-server-config",
-	"heartbeat" : "loop.services.mozilla.com/__heartbeat__"
+	"root/push_config" : "push-server-config",
+	"root/heartbeat" : "__heartbeat__"
       }
     },
     "prod": {
@@ -24,8 +24,8 @@
       "aws_region": "eu-west-1",
       "urls": {
         "root": "loop.services.mozilla.com",
-	"push_config" : "loop.services.mozilla.com/push-server-config",
-	"heartbeat" : "loop.services.mozilla.com/__heartbeat__"
+	"root/push_config" : "push-server-config",
+	"root/heartbeat" : "__heartbeat__"
       }
     }
   },

@@ -6,9 +6,9 @@
       "aws_region": "eu-west-1", 
       "urls": {
         "root" : "call.stage.mozaws.net",
-        "config.js" : "config.js",
-        "push_config" : "push-server-config",
-        "loop_server": "loop.stage.mozaws.net"
+        "root/config.js" : "config.js",
+        "loop_server": "loop.stage.mozaws.net",
+        "loop_server/push_config" : "push-server-config"
       }
     },
     "pre-prod": {
@@ -16,18 +16,18 @@
       "aws_region": "eu-west-1", 
       "urls": {
         "root": "hello.firefox.com",
-	"config.js" : "config.js",
-	"push_config" : "push-server-config",
-	"loop_server": "loop.services.mozilla.com"
+	"root/config.js" : "config.js",
+	"loop_server": "loop.services.mozilla.com",
+	"loop_server/push_config" : "push-server-config"
       }
     },
     "prod": {
       "test_types": [ "stack-check" ], 
       "urls": {
         "root": "hello.firefox.com",
-        "config.js" : "config.js",
-        "push_config" : "push-server-config",
-        "loop_server": "loop.services.mozilla.com"
+        "root/config.js" : "config.js",
+        "loop_server": "loop.services.mozilla.com",
+        "loop_server/push_config" : "push-server-config"
       }
     }
   },

@@ -6,7 +6,7 @@
             "aws_region": "eu-west-1",
             "urls": {
 	      "root" : "msisdn.stage.mozaws.net",
-	      "heartbeat" : "msisdn.stage.mozaws.net/__heartbeat__"
+	      "root/heartbeat" : "__heartbeat__"
             }
 	},
 	"stage-loadtest": {
@@ -15,7 +15,7 @@
             "aws_region": "eu-west-1",
             "urls": {
 	      "root" : "msisdn-loadtest.stage.mozaws.net",
-	      "heartbeat" : "msisdn-loadtest.stage.mozaws.net/__heartbeat__"
+	      "root/heartbeat" : "__heartbeat__"
             }
 	},
 	"pre-prod": {
@@ -23,14 +23,14 @@
             "aws_region": "eu-west-1",
             "urls": {
 	      "root": "msisdn.services.mozilla.com",
-	      "heartbeat" : "msisdn.services.mozilla.com/__heartbeat__"
+	      "root/heartbeat" : "__heartbeat__"
             }
 	},
 	"prod": {
 	    "test_types" : [ "stack-check", "e2e-test" ],
             "urls": {
 	      "root": "msisdn.services.mozilla.com",
-	      "heartbeat" : "msisdn.services.mozilla.com/__heartbeat__"
+	      "root/heartbeat" : "__heartbeat__"
             }
 	}
     },
