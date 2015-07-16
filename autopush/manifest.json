@@ -7,8 +7,8 @@
             "aws_region": "us-east-1",
             "urls": {
               "root" : "updates-autopush.stage.mozaws.net",
-	      "status" : "updates-autopush.stage.mozaws.net/status",
-              "health" : "updates-autopush.stage.mozaws.net/health"
+	      "root/status" : "status",
+              "root/health" : "health"
             }
 	},
 	"pre-prod": {
@@ -17,8 +17,8 @@
             "stack_label" : "autopush-stage",
             "urls": {
 	      "root": "autopush.services.mozilla.com",
-              "status" : "updates.push.services.mozilla.com/status",
-              "health" : "updates.push.services.mozilla.com/health"
+              "root/status" : "status",
+              "root/health" : "health"
             }
 	},
 	"prod": {
@@ -26,8 +26,8 @@
             "aws_region": "us-east-1",
             "urls": {
 	      "root": "updates.push.services.mozilla.com",
-              "status" : "updates.push.services.mozilla.com/status",
-              "health" : "updates.push.services.mozilla.com/health"
+              "root/status" : "status",
+              "root/health" : "health"
             }
 	}
     },

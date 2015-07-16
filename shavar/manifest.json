@@ -3,7 +3,7 @@
     "stage": {
       "test_types": [ "stack-check", "loadtest" ],
       "stack_label": "shavar-server",
-      "aws_region": "us-west-2",
+      "aws_region": "us-east-1",
       "urls": {
 	"root" : "tracking.stage.mozaws.net"
       }
@@ -11,7 +11,7 @@
     "pre-prod": {
       "test_types": [ "stack-check" ],
       "stack_label": "shavar-server",
-      "aws_region": "us-west-2",
+      "aws_region": "us-east-1",
       "urls": {
         "root": "tracking.services.mozilla.com"
       }
@@ -19,7 +19,7 @@
     "prod": {
       "test_types": [ "stack-check" ],
       "stack_label": "shavar-server",
-      "aws_region": "us-west-2",
+      "aws_region": "us-east-1",
       "urls": {
         "root": "tracking.services.mozilla.com"
       }
