@@ -5,9 +5,6 @@ from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-with open(os.path.join(here, 'README.md')) as f:
-    README = f.read()
-
 REQUIREMENTS = [
     'fabric',
     'twilio',
@@ -24,7 +21,7 @@ setup(
     name='msisdn-gateway-e2e-test',
     version='0.0.1',
     description='msisdn-gateway-e2e-test',
-    long_description=README,
+    long_description="",
     author='Koki Yoshida',
     author_email='kreamkorokke@gmail.com',
     url='https://github.com/services-test/msisdn-gateway',
