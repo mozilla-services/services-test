@@ -2,30 +2,35 @@
     "envs" : {
 	"stage": {
 	    "test_types" : [ "stack-check", "e2e-test" ],
+            "stack_label" : "msisdnstage",
+            "aws_region": "eu-west-1",
             "urls": {
 	      "root" : "msisdn.stage.mozaws.net",
-	      "heartbeat" : "msisdn.stage.mozaws.net/__heartbeat__"
+	      "root/heartbeat" : "__heartbeat__"
             }
 	},
 	"stage-loadtest": {
 	    "test_types" : [ "stack-check", "e2e-test" ],
+            "stack_label" : "msisdnload",
+            "aws_region": "eu-west-1",
             "urls": {
 	      "root" : "msisdn-loadtest.stage.mozaws.net",
-	      "heartbeat" : "msisdn-loadtest.stage.mozaws.net/__heartbeat__"
+	      "root/heartbeat" : "__heartbeat__"
             }
 	},
 	"pre-prod": {
 	    "test_types" : [ "stack-check", "e2e-test" ],
+            "aws_region": "eu-west-1",
             "urls": {
 	      "root": "msisdn.services.mozilla.com",
-	      "heartbeat" : "msisdn.services.mozilla.com/__heartbeat__"
+	      "root/heartbeat" : "__heartbeat__"
             }
 	},
 	"prod": {
 	    "test_types" : [ "stack-check", "e2e-test" ],
             "urls": {
 	      "root": "msisdn.services.mozilla.com",
-	      "heartbeat" : "msisdn.services.mozilla.com/__heartbeat__"
+	      "root/heartbeat" : "__heartbeat__"
             }
 	}
     },

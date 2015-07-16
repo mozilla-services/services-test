@@ -1,3 +1,5 @@
+#!/bin/bash +x
+
 # TODO: Download and install latest Firefox browser for Ubuntu.
 # wget https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/latest/linux-x86_64/en-US/firefox-38.0.5.tar.bz2
 # tar -xjvf *.bz2 -C /home/ubuntu
