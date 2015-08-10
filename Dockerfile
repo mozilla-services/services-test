@@ -20,8 +20,13 @@ RUN \
   rm -rf /var/lib/apt/lists/* && \
   git clone https://github.com/mozilla-services/services-test
 
+WORKDIR /services-test
+
+# add your "docker" private key pair
+ADD ~/.ssh/docker /
+RUN \
+  chmod 600 /docker && \
+  echo "IdentityFile /docker" >> /etc/ssh/ssh_config \
 
 # Expose ports needed for tests to run
 # e.g. EXPOSE 80
-
-WORKDIR /services-test
