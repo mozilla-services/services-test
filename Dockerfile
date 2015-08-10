@@ -23,7 +23,7 @@ RUN \
 WORKDIR /services-test
 
 # add your "docker" private key pair
-ADD ~/.ssh/docker /
+ADD docker /
 RUN \
   chmod 600 /docker && \
   echo "IdentityFile /docker" >> /etc/ssh/ssh_config \
