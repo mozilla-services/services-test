@@ -20,13 +20,14 @@ Docker Instructions
 
 If you don't have docker, follow [these instructions](https://docs.docker.com/installation/mac/)
 
-From the root of services-test (where the Dockerfile is)
+To build your own image from the latest code, from the root of services-test (where the Dockerfile is)
 * docker build -t mozilla-services/services-test .
 * docker run -i -t mozilla-services/services-test /bin/bash
 
 Run tests from the image’s bash shell, e.g.:
 * $ absearch/schema-check/run.sh
 
+TODO: Docker hub
 
 Test Manifests
 ----------------------
