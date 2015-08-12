@@ -21,12 +21,9 @@ RUN \
   x11vnc -storepasswd 1234 ~/.vnc/passwd
 
 RUN \
-  add-apt-repository ppa:chris-lea/node.js && \
-  apt-get install -y nodejs-legacy npm
-
-RUN \
   apt-get install -y byobu curl git htop man unzip vim wget && \
   apt-get install -y python python-dev python-pip && \
+  apt-get install -y nodejs-legacy npm
   pip install virtualenv jsonschema functools32 && \
   rm -rf /var/lib/apt/lists/* && \
   git clone https://github.com/mozilla-services/services-test
