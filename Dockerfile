@@ -18,12 +18,13 @@ RUN \
 RUN \
   apt-get install -y x11vnc xvfb firefox && \
   mkdir ~/.vnc && \
-  x11vnc -storepasswd 1234 ~/.vnc/passwd
+  x11vnc -storepasswd 1234 ~/.vnc/passwd && \
+  bash -c 'echo "firefox" >> /.bashrc'
 
 RUN \
   apt-get install -y byobu curl git htop man unzip vim wget && \
   apt-get install -y python python-dev python-pip && \
-  apt-get install -y nodejs-legacy npm
+  apt-get install -y nodejs-legacy npm && \
   pip install virtualenv jsonschema functools32 && \
   rm -rf /var/lib/apt/lists/* && \
   git clone https://github.com/mozilla-services/services-test
