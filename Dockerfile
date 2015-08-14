@@ -25,18 +25,11 @@ RUN \
   apt-get install -y byobu curl git htop man unzip vim wget && \
   apt-get install -y python python-dev python-pip && \
   apt-get install -y nodejs-legacy npm && \
-  pip install virtualenv jsonschema functools32 && \
+  pip install virtualenv jsonschema functools32 shyaml && \
   rm -rf /var/lib/apt/lists/* && \
   git clone https://github.com/mozilla-services/services-test
 
 WORKDIR /services-test
-
-# add your "docker" private key pair
-# ADD docker /
-RUN \
-  # chmod 600 /docker && \
-  mkdir /root/.ssh/ && \
-  echo "IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config \
 
 # Expose ports needed for tests to run
 # e.g. EXPOSE 80
