@@ -31,5 +31,10 @@ RUN \
 
 WORKDIR /services-test
 
+# make sure you copy your ~/.ssh/id_rsa to the container to allow ssh
+RUN \
+  mkdir /root/.ssh/ && \
+  echo "IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config \
+
 # Expose ports needed for tests to run
 # e.g. EXPOSE 80
