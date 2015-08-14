@@ -29,6 +29,14 @@ Run tests from the image’s bash shell, e.g.:
 
 TODO: Docker hub
 
+Test Execution via Docker
+----------------------
+
+Execute the schema_check test on absearch:
+
+docker run -it -v /Users/your-username/path/to/services-qa-secrets/secrets:/secrets -v /Users/your-username/.ssh/id_rsa:/root/.ssh/id_rsa -p 5900 -e HOME=/ -w /services-test/absearch/schema-check/ mozilla-services/services-test ./run.sh
+
+
 Test Manifests
 ----------------------
 
