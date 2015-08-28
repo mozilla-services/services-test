@@ -20,12 +20,21 @@ Docker Instructions
 
 If you don't have docker, follow [these instructions](https://docs.docker.com/installation/mac/)
 
-From the root of services-test (where the Dockerfile is)
+To build your own image from the latest code, from the root of services-test (where the Dockerfile is)
 * docker build -t mozilla-services/services-test .
 * docker run -i -t mozilla-services/services-test /bin/bash
 
 Run tests from the image’s bash shell, e.g.:
 * $ absearch/schema-check/run.sh
+
+TODO: Docker hub
+
+Test Execution via Docker
+----------------------
+
+Execute the schema_check test on absearch:
+
+docker run -it -v /Users/your-username/path/to/services-qa-secrets/secrets:/secrets -v /Users/your-username/.ssh/id_rsa:/root/.ssh/id_rsa -p 5900 -e HOME=/ -w /services-test/absearch/schema-check/ mozilla-services/services-test ./run.sh
 
 
 Test Manifests
