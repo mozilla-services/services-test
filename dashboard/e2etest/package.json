@@ -1,6 +1,6 @@
 {
-  "name": "pocket-e2e",
-  "description": "Pocket e2e test",
+  "name": "dashboard-e2e",
+  "description": "Dashboard e2e test",
   "version": "1.0.0",
   "author": "Stuart Philp <sphilp@mozilla.com>",
   "bugs": {
