@@ -10,7 +10,7 @@ var expect = chai.expect
 
 marionette.plugin('helper', helper)
 marionette('dashboard', function () {
-  const DASHBOARD_URL = 'https://getpocket.com/ff_signup'
+  const DASHBOARD_URL = 'http://dashboard.stage.mozaws.net' //TODO: move to config file
 
   var client = marionette.client({
     prefs: {
@@ -18,21 +18,21 @@ marionette('dashboard', function () {
       'browser.uitour.enabled': false
     }
   })
-  var email
 
   setup(function () {
+    client.setSearchTimeout(5000)
     client.goUrl(DASHBOARD_URL)
   })
 
   test('check links', function (done) {
-    waitForElement(client, 'a')
-    var overall_dashboard_link = client.findElement("//a[@href='/quality']")
-    expect('a[href=/quality]').dom.to.have.count(1)
+    waitForElement(client, "#overall")
+    var overall_dashboard_link = client.findElement("#overall")
     expect(overall_dashboard_link).to.exist
     overall_dashboard_link.click()
-    waitForElement(client, 'div.ready')
-    var overall_header = client.findElement("//div[text()='Overall Services QA Metrics and KPIs']")
-    expect(overall_header).to.exist
+    waitForElement(client, "#dashboard_title")
+    var title = client.findElement('#dashboard_title').text()
+    expect(title).to.equal("Overall Services QA Metrics and KPIs")
+    done()
   })
 })
 
@@ -47,6 +47,7 @@ function waitForElement (client, el) {
     try {
       return client.findElement(el)
     } catch (err) {
+      console.error(err)
       return false
     }
   })
