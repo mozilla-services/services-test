@@ -16,7 +16,7 @@ class Kinto_Fetch_Buckets(unittest.TestCase):
         self.client = None
 
     def run_test(self):
-        """Check heartbeat to make sure It's Alive™."""
+        """Check heartbeat to make sure It's Alive."""
         resource = '__heartbeat__'
         response = self.client.request(resource)
         self.assertIn('cache', response)
