@@ -20,7 +20,13 @@ class Kinto_Buckets(unittest.TestCase):
     def test_replace_bucket(self):
         raise NotImplementedError("test not implemented")
     def test_retrieve_bucket(self):
-        raise NotImplementedError("test not implemented")
+        resource = 'buckets/default'
+        response = self.client.request(resource)
+        self.assertIn('data', response)
+        self.assertIn('permissions', response)
+        print(response['data'])
+        self.assertIn('last_modified', response['data'])
+        self.assertIn('id', response['data'])
     def test_retrieve_all_buckets(self):
         """Fetch list of available buckets"""
         #
