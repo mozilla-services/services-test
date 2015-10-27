@@ -25,7 +25,7 @@
   },
   "scripts": {
     "dashboard": "marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /Applications/Firefox.app/Contents/MacOS/firefox-bin tests/",
-    "dashboard-ubuntu": "marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /usr/bin/firefox tests/",
+    "dashboard-ubuntu": "xvfb-run -a marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /usr/bin/firefox tests/",
     "test": "marionette-mocha"
   }
 }
