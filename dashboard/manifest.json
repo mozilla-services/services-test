@@ -1,5 +1,8 @@
 {
   "envs" : {
+    "dev": {
+      "test_types": [ "e2e-test" ]
+    },
     "stage": {
       "test_types": [ "e2e-test" ]
     },

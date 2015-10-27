@@ -5,12 +5,13 @@ var chai = require('chai')
 var helper = require('marionette-helper')
 var restmail = require('restmail-client')
 var P = require('promise')
+var config = require('config');
 
 var expect = chai.expect
 
 marionette.plugin('helper', helper)
 marionette('dashboard', function () {
-  const DASHBOARD_URL = 'http://dashboard.stage.mozaws.net' //TODO: move to config file
+  const DASHBOARD_URL = "http://" + config.host + ":" + config.port
 
   var client = marionette.client({
     prefs: {
