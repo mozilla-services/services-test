@@ -1,6 +1,7 @@
 import unittest
 
-from mockclient import MockClient
+from .mockclient import MockClient
+
 
 
 class Kinto_Records(unittest.TestCase):

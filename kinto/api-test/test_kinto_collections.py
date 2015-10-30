@@ -142,4 +142,3 @@ class Kinto_Collections(unittest.TestCase):
             self.assertEqual(response['message'], "The resource you are looking for could not be found.")
             self.assertEqual(response['code'], 404)
             self.assertEqual(response['error'], 'Not Found')
-
