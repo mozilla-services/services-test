@@ -70,28 +70,96 @@
 <h2>pop-notification.sikuli</h2> <a href="pop-notification.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-NIGHTLY64 = <span class="str">"C:/Program Files/Nightly/firefox.exe"</span>
-GENREL32 = <span class="str">"C:/Program Files (x86)/Mozilla Firefox/firefox.exe"</span>
+<span class="kw">import</span> os
+
+<span class="kw">if</span> os.getenv(<span class="str">'APP_NAME'</span>):
+    APP_NAME = os.getenv(<span class="str">'APP_NAME'</span>)
+<span class="kw">else</span>:
+    APP_NAME = <span class="str">'Nightly'</span>
+
+NIGHTLY64 = <span class="str">"C:/Program Files/%s/firefox.exe -height 768 -width 1024"</span> % APP_NAME
+PATH_FIREFOX = NIGHTLY64
+
+<span class="kw">if</span> APP_NAME == <span class="str">'Nightly'</span>:
+    PATH_IMGS = <span class="str">'../images_nightly64/'</span>
+<span class="kw">else</span>:
+    PATH_IMGS = <span class="str">'../images_release32/'</span>
+    <span class="kw">print</span>(<span class="str">'TBD -&gt; need images for GR32!!'</span>)
+    exit(<span class="dig">1</span>)
 
 
-App.open(GENREL32)
+URL_TEST_PAGE = <span class="str">'https://pdehaan.github.io/push-notification-test'</span>
 
-<span class="skw">click</span>(<img src="1446153249015.png" />)
+IMG_REFRESH = PATH_IMGS + <img src="btn_refresh.png" /> <span class="cmt"># </span>
+URL_ENTRY_POINT_1 = Pattern(PATH_IMGS + <img src="url_entry_moz.png" />).targetOffset(<span class="dig">110</span>,-<span class="dig">4</span>)
+URL_ENTRY_POINT_2 = PATH_IMGS + <img src="url_entry_search.png" />
+URL_ENTRY_POINT_3 = Pattern(PATH_IMGS + <img src="url_entry_nightly.png" />).targetOffset(<span class="dig">59</span>,<span class="dig">0</span>)
+URL_ENTRY_POINT_4 = Pattern(PATH_IMGS + <img src="url_entry_green_padlock.png" />).targetOffset(<span class="dig">59</span>,<span class="dig">1</span>)
+IMG_WIN_MAXIMIZE = PATH_IMGS + <img src="win_maximize.png" />
+IMG_ALWAYS_RECEIVE_NOTIFICATIONS = PATH_IMGS + <img src="btn_always_receive.png" />
+IMG_BTN_POP_NOTIFICATION = PATH_IMGS + <img src="btn_pop_notification.png" />
+IMG_WIN_POP_NOTIFICATION = PATH_IMGS + <img src="win_pop_notification.png" />
+LINE = <span class="str">'--------------------------'</span>
+
+
+firefox = App(APP_NAME)
+
+<span class="kw">def</span> header(label):
+    <span class="kw">return</span> <span class="str">'%s\n%s\n%s'</span> % (LINE, label, LINE)
+
+<span class="kw">def</span> setup():
+
+    <span class="kw">print</span> header(<span class="str">'SETUP'</span>)
+    firefox.open(PATH_FIREFOX)
+    <span class="kw">if</span> exists(IMG_REFRESH):
+        <span class="kw">print</span>(<span class="str">'REFRESH NIGHTLY: TRYING....!'</span>)
+        <span class="skw">click</span>(IMG_REFRESH)
+        <span class="skw">click</span>(<img src="1446188189853.png" />)
+
+    firefox.focus()
+
+<span class="kw">def</span> teardown():
+
+    <span class="cmt">#print('%s\n%s\n%s' % (LINE, 'TEARDOWN', LINE))
+</span>    <span class="kw">print</span> header(<span class="str">'TEARDOWN'</span>)
+    <span class="kw">print</span>(<span class="str">'closing browser now'</span>)
+    firefox.close()
+    <span class="kw">print</span>(<span class="str">'Firefox closed'</span>)
+
+setup()
+
+<span class="kw">print</span> header(<span class="str">'TEST'</span>)
+
+<span class="kw">if</span> exists(URL_ENTRY_POINT_1):
+    <span class="kw">print</span>(<span class="str">'URL ENTRY POINT: &lt;Mozilla Foundation&gt;'</span>)
+    <span class="skw">click</span>(URL_ENTRY_POINT_1)
+<span class="kw">elif</span> exists(URL_ENTRY_POINT_2):
+    <span class="kw">print</span>(<span class="str">'URL ENTRY POINT: &lt;Search or enter address&gt;'</span>)
+    <span class="skw">click</span>(URL_ENTRY_POINT_2)
+<span class="kw">elif</span> exists(URL_ENTRY_POINT_3):
+    <span class="kw">print</span>(<span class="str">'URL ENTRY POINT: &lt;Nightly...&gt;'</span>)
+    <span class="skw">click</span>(URL_ENTRY_POINT_3)
+<span class="kw">else</span>:
+    <span class="kw">print</span>(<span class="str">'URL ENTRY POINT: &lt;green padlock&gt;'</span>)
+    <span class="skw">click</span>(URL_ENTRY_POINT_4)
+<span class="skw">type</span>(URL_TEST_PAGE + Key.ENTER)
+
+<span class="skw">click</span>(IMG_BTN_POP_NOTIFICATION)
 
 <span class="skw">sleep</span>(<span class="dig">2</span>)
 
-<span class="kw">if</span> exists(<img src="1446153637218.png" />):
-    <span class="skw">click</span>(<img src="1446153637218.png" />)
+<span class="kw">print</span>(<span class="str">'PERMISSIONS: &lt;Always Receive Notifications?&gt;'</span>)
+<span class="kw">if</span> exists(IMG_ALWAYS_RECEIVE_NOTIFICATIONS):
+    <span class="skw">click</span>(IMG_ALWAYS_RECEIVE_NOTIFICATIONS)
 
-<span class="kw">print</span> <span class="str">"here?"</span>
+<span class="kw">print</span> <span class="str">"POP NOTIFICATION: ???"</span>
+<span class="skw">wait</span>(IMG_WIN_POP_NOTIFICATION)
+<span class="kw">print</span>(<span class="str">'POP NOTIFICATION: COMPLETE!'</span>)
+<span class="kw">print</span>(<span class="str">'POP NOTIFICATION: WAITING FOR VANISH.....'</span>)
+waitVanish(IMG_WIN_POP_NOTIFICATION)
+<span class="kw">print</span>(<span class="str">'TEST COMPLETE!'</span>)
 
-<span class="skw">wait</span>(<img src="1446153338359.png" />)
-
-waitVanish(<img src="1446153338359.png" />)
-
-<span class="kw">print</span> <span class="str">"yay"</span>
-
-<span class="skw">click</span>(<img src="1446154091312.png" />)
+teardown()
 </pre>
 </body>
 </html>
