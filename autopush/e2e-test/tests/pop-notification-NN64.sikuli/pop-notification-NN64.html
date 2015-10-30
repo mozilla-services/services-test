@@ -72,61 +72,74 @@
 <pre class="sikuli-code">
 NIGHTLY64 = <span class="str">"C:/Program Files/Nightly/firefox.exe -height 768 -width 1024"</span>
 PATH_FIREFOX = NIGHTLY64
+PATH_IMGS = <span class="str">'../images/'</span>
 APP_NAME = <span class="str">'Nightly'</span>
 URL_TEST_PAGE = <span class="str">'https://pdehaan.github.io/push-notification-test'</span>
 
-URL_ENTRY_POINT_1 = Pattern(<img src="1446175705142.png" />).targetOffset(<span class="dig">110</span>,-<span class="dig">4</span>)
-URL_ENTRY_POINT_2 = <img src="1446176591082.png" />
-URL_ENTRY_POINT_3 = Pattern(<img src="1446175756881.png" />).targetOffset(<span class="dig">59</span>,<span class="dig">0</span>)
-URL_ENTRY_POINT_4 = Pattern(<img src="1446178093719.png" />).targetOffset(<span class="dig">35</span>,<span class="dig">1</span>)
+IMG_REFRESH_NIGHTLY = PATH_IMGS + <img src="1446181480598.png" />
+<span class="cmt"># moz foundation
+</span>URL_ENTRY_POINT_1 = Pattern(PATH_IMGS + <img src="1446175705142.png" />).targetOffset(<span class="dig">110</span>,-<span class="dig">4</span>)
+<span class="cmt">#search
+</span>URL_ENTRY_POINT_2 = PATH_IMGS + <img src="1446176591082.png" />
+<span class="cmt"># nightly
+</span>URL_ENTRY_POINT_3 = Pattern(PATH_IMGS + <img src="1446175756881.png" />).targetOffset(<span class="dig">59</span>,<span class="dig">0</span>)
+<span class="cmt"># green padlock
+</span>URL_ENTRY_POINT_4 = Pattern(PATH_IMGS + <img src="1446178093719.png" />).targetOffset(<span class="dig">35</span>,<span class="dig">1</span>)
 
+IMG_WIN_MAXIMIZE = PATH_IMGS + <img src="1446160870518.png" />
+IMG_ALWAYS_RECEIVE_NOTIFICATIONS = PATH_IMGS + <img src="1446176332222.png" />
+IMG_BTN_POP_NOTIFICATION = PATH_IMGS + <img src="1446153249015.png" />
+IMG_WIN_POP_NOTIFICATION = PATH_IMGS + <img src="1446161475675.png" />
+LINE = <span class="str">'--------------------------'</span>
+
+
+
+<span class="kw">def</span> setup():
+
+    <span class="kw">print</span>(<span class="str">'%s\n%s\n%s'</span> % (LINE, <span class="str">'SETUP'</span>, LINE))
+    firefox = App(APP_NAME)
+    firefox.open(PATH_FIREFOX)
+    <span class="kw">if</span> exists(IMG_REFRESH_NIGHTLY):
+        <span class="skw">click</span>(IMG_REFRESH_NIGHTLY)
+        <span class="skw">click</span>(IMG_REFRESH_NIGHTLY)
+    firefox.focus()
 
 <span class="kw">def</span> teardown():
+
+    <span class="kw">print</span>(<span class="str">'%s\n%s\n%s'</span> % (LINE, <span class="str">'TEARDOWN'</span>, LINE))
     <span class="kw">print</span>(<span class="str">'closing browser now'</span>)
     firefox.close()
     <span class="kw">print</span>(<span class="str">'Firefox closed'</span>)
 
-<span class="kw">def</span> setup():
-    firefox = App(APP_NAME)
-    firefox.open(PATH_FIREFOX)
-    <span class="skw">sleep</span>(<span class="dig">2</span>)
-    firefox.focus()
-
 setup()
 
-<span class="skw">click</span>(<img src="1446160870518.png" />)
-
 <span class="kw">if</span> exists(URL_ENTRY_POINT_1):
-    <span class="kw">print</span>(<span class="str">'URL entry point: &lt;Mozilla Foundation&gt;'</span>)
+    <span class="kw">print</span>(<span class="str">'URL ENTRY POINT: &lt;Mozilla Foundation&gt;'</span>)
     <span class="skw">click</span>(URL_ENTRY_POINT_1)
 <span class="kw">elif</span>(URL_ENTRY_POINT_2):
-    <span class="kw">print</span>(<span class="str">'URL entry point: &lt;Search or enter address&gt;'</span>)
+    <span class="kw">print</span>(<span class="str">'URL ENTRY POINT: &lt;Search or enter address&gt;'</span>)
     <span class="skw">click</span>(URL_ENTRY_POINT_2)
 <span class="kw">elif</span>(URL_ENTRY_POINT_3):
-    <span class="kw">print</span>(<span class="str">'URL entry point: &lt;Nightly...&gt;'</span>)
+    <span class="kw">print</span>(<span class="str">'URL ENTRY POINT: &lt;Nightly...&gt;'</span>)
     <span class="skw">click</span>(URL_ENTRY_POINT_3)
 <span class="kw">else</span>:
-    <span class="kw">print</span>(<span class="str">'URL entry point: &lt;green padlock&gt;'</span>)
+    <span class="kw">print</span>(<span class="str">'URL ENTRY POINT: &lt;green padlock&gt;'</span>)
     <span class="skw">click</span>(URL_ENTRY_POINT_4)
 <span class="skw">type</span>(URL_TEST_PAGE + Key.ENTER)
 
-<span class="skw">click</span>(<img src="1446153249015.png" />)
+<span class="skw">click</span>(IMG_BTN_POP_NOTIFICATION)
 
 <span class="skw">sleep</span>(<span class="dig">2</span>)
 
-<span class="kw">print</span>(<span class="str">'&lt;Always Receive Notifications?&gt;'</span>)
-<span class="kw">if</span> exists(<img src="1446176332222.png" />):
-    <span class="skw">click</span>(<img src="1446176332222.png" />)
+<span class="kw">print</span>(<span class="str">'PERMISSIONS: &lt;Always Receive Notifications?&gt;'</span>)
+<span class="kw">if</span> exists(IMG_ALWAYS_RECEIVE_NOTIFICATIONS):
+    <span class="skw">click</span>(IMG_ALWAYS_RECEIVE_NOTIFICATIONS)
 
-<span class="kw">print</span> <span class="str">"pop notification: ???"</span>
-
-<span class="skw">wait</span>(<img src="1446161475675.png" />)
-<span class="kw">print</span>(<span class="str">'pop notification complete!'</span>)
-
-<span class="kw">print</span>(<span class="str">'pop notification: waiting for vanish'</span>)
-
-waitVanish(<img src="1446161475675.png" />)
-
+<span class="kw">print</span> <span class="str">"POP NOTIFICATION: ???"</span>
+<span class="skw">wait</span>(IMG_WIN_POP_NOTIFICATION)
+<span class="kw">print</span>(<span class="str">'POP NOTIFICATION: COMPLETE!'</span>)
+<span class="kw">print</span>(<span class="str">'POP NOTIFICATION: WAITING FOR VANISH.....'</span>)
+waitVanish(IMG_WIN_POP_NOTIFICATION)
 <span class="kw">print</span>(<span class="str">'TEST COMPLETE!'</span>)
 
 teardown()
