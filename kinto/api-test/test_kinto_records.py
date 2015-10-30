@@ -1,7 +1,7 @@
-import os.path
 import unittest
 
-from mockclient import MockClient
+from .mockclient import MockClient
+
 
 class Kinto_Records(unittest.TestCase):
     """
@@ -79,7 +79,7 @@ class Kinto_Records(unittest.TestCase):
             self.assertIn('id', response['data'])
             self.assertEqual(response['data']['id'], self.record_id)
 
-    #should return an array in data, each item being a record with a unique id and last_modified
+    # should return an array in data, each item being a record with a unique id and last_modified
     def test_retrieve_all_records(self):
         resource = 'buckets/test_bucket/collections/test_collection/records'
         response = self.client.get_request(resource)
