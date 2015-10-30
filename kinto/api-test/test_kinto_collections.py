@@ -16,6 +16,7 @@ class Kinto_Collections(unittest.TestCase):
         self.client = None
 
     def test_create_collection(self):
+        # Create the bucket
         resource = 'buckets/test_bucket'
         response = self.client.put_request(resource)
         self.assertIn('data', response)
@@ -24,6 +25,7 @@ class Kinto_Collections(unittest.TestCase):
         self.assertIn('id', response['data'])
         self.assertEqual(response['data']['id'], 'test_bucket')
 
+        # Create the collection
         resource = 'buckets/test_bucket/collections/test_collection'
         response = self.client.put_request(resource)
         self.assertIn('data', response)
@@ -34,20 +36,18 @@ class Kinto_Collections(unittest.TestCase):
         self.assertIn('write', response['permissions'])
         self.assertEqual(response['data']['id'], 'test_collection')
 
-    # patch request for updates currently broken, see:
-    # https://github.com/mozilla-services/cliquet/issues/516
     def test_update_collection_no_data(self):
-        # resource = 'buckets/test_bucket/collections/test_collection'
-        # data = ''
-        # response = self.client.patch_request(resource, data)
-        # self.assertIn('data', response)
-        # self.assertIn('permissions', response)
-        # self.assertIn('last_modified', response['data'])
-        # self.assertIn('id', response['data'])
-        # self.assertIn('schema', response['data'])
-        # self.assertIn('write', response['permissions'])
-        # self.assertEqual(response['data']['id'], 'test_collection')
-        raise NotImplementedError("collection update currently broken for patch with no data")
+        resource = 'buckets/test_bucket/collections/test_collection'
+        data = ''
+        response = self.client.patch_request(resource, data, status_code=400)
+        self.assertIn('errno', response)
+        self.assertIn('message', response)
+        self.assertIn('code', response)
+        self.assertIn('error', response)
+        self.assertEqual(response['errno'], 107)
+        self.assertEqual(response['message'], "Provide at least one of data or permissions")
+        self.assertEqual(response['code'], 400)
+        self.assertEqual(response['error'], 'Invalid parameters')
 
     def test_update_collection_with_data(self):
         resource = 'buckets/test_bucket/collections/test_collection'
@@ -96,12 +96,12 @@ class Kinto_Collections(unittest.TestCase):
 
     def test_delete_collection_not_exist(self):
         resource = 'buckets/test_bucket/collections/invalid_delete'
-        response = self.client.delete_request(resource)
+        response = self.client.delete_request(resource, status_code=404)
         self.assertIn('errno', response)
         self.assertIn('message', response)
         self.assertIn('code', response)
         self.assertIn('error', response)
         self.assertEqual(response['errno'], 111)
-        self.assertEqual(response['message'], "The resource your are looking for could not be found.")
+        self.assertEqual(response['message'], "The resource you are looking for could not be found.")
         self.assertEqual(response['code'], 404)
         self.assertEqual(response['error'], 'Not Found')
