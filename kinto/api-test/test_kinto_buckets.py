@@ -1,7 +1,7 @@
-import os.path
 import unittest
 
 from mockclient import MockClient
+
 
 class Kinto_Buckets(unittest.TestCase):
     """

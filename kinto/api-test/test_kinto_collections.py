@@ -1,7 +1,7 @@
-import os.path
 import unittest
 
 from mockclient import MockClient
+
 
 class Kinto_Collections(unittest.TestCase):
     """
@@ -105,6 +105,3 @@ class Kinto_Collections(unittest.TestCase):
         self.assertEqual(response['message'], "The resource your are looking for could not be found.")
         self.assertEqual(response['code'], 404)
         self.assertEqual(response['error'], 'Not Found')
-
-
-
