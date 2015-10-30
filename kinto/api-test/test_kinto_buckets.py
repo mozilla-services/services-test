@@ -2,7 +2,6 @@ import unittest
 
 from mockclient import MockClient
 
-
 class Kinto_Buckets(unittest.TestCase):
     """
         Tests to verify the Kinto buckets function

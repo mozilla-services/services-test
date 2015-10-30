@@ -4,7 +4,6 @@ import requests
 
 stage_url = "https://kinto.stage.mozaws.net/v1/"
 
-
 class MockClient(object):
 
     def __init__(self):
