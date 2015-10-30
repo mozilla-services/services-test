@@ -1,6 +1,6 @@
 import unittest
 
-from .mockclient import MockClient
+from mockclient import MockClient
 
 
 
