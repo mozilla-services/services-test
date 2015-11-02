@@ -1,6 +1,6 @@
 import unittest
 
-from .mockclient import MockClient
+from mockclient import MockClient
 
 
 class Kinto_Records(unittest.TestCase):
@@ -18,11 +18,13 @@ class Kinto_Records(unittest.TestCase):
 
     def create_record(self, data=""):
         resource = 'buckets/test_bucket/collections/test_collection/records'
-        data = '{"data": {"test": #{data}}}'
+        data = '{"data": {"test": "%s"}}' % data
         response = self.client.post_request(resource, data)
         self.record_id = response['data']['id']
+        return response
 
     def test_upload_record(self):
+        # Create bucket
         resource = 'buckets/test_bucket'
         response = self.client.put_request(resource)
         self.assertIn('data', response)
@@ -31,6 +33,7 @@ class Kinto_Records(unittest.TestCase):
         self.assertIn('id', response['data'])
         self.assertEqual(response['data']['id'], 'test_bucket')
 
+        # Create collection
         resource = 'buckets/test_bucket/collections/test_collection'
         response = self.client.put_request(resource)
         self.assertIn('data', response)
@@ -41,8 +44,8 @@ class Kinto_Records(unittest.TestCase):
         self.assertIn('write', response['permissions'])
         self.assertEqual(response['data']['id'], 'test_collection')
 
-        self.create_record("sample_record")
-
+        # Create record
+        response = self.create_record("sample_record")
         self.assertIn('data', response)
         self.assertIn('permissions', response)
         self.assertIn('last_modified', response['data'])
@@ -53,6 +56,9 @@ class Kinto_Records(unittest.TestCase):
         self.assertEqual(response['data']['id'], self.record_id)
 
     def test_replace_record(self):
+        if not self.record_id:
+            self.create_record("sample_record")
+
         resource = 'buckets/test_bucket/collections/test_collection/records/' + self.record_id
         data = '{"data": {"test": "new_record"}}'
         response = self.client.put_request(resource, data)
@@ -60,12 +66,24 @@ class Kinto_Records(unittest.TestCase):
         self.assertIn('permissions', response)
         self.assertIn('last_modified', response['data'])
         self.assertIn('id', response['data'])
-        self.assertIn('schema', response['data'])
         self.assertIn('write', response['permissions'])
-        self.assertEqual(response['data']['id'], 'test_collection')
+        self.assertEqual(response['data']['id'], self.record_id)
+        self.assertEqual(response['data']['test'], "new_record")
 
     def test_update_record(self):
-        raise NotImplementedError("test not implemented")
+        if not self.record_id:
+            self.create_record("sample_record")
+
+        resource = 'buckets/test_bucket/collections/test_collection/records/' + self.record_id
+        data = '{"data": {"test": "updated_record"}}'
+        response = self.client.patch_request(resource, data)
+        self.assertIn('data', response)
+        self.assertIn('permissions', response)
+        self.assertIn('last_modified', response['data'])
+        self.assertIn('id', response['data'])
+        self.assertIn('write', response['permissions'])
+        self.assertEqual(response['data']['id'], self.record_id)
+        self.assertEqual(response['data']['test'], "updated_record")
 
     # should return one specific record in data, with id and last_modified
     def test_retrieve_record(self):
