@@ -14,3 +14,4 @@ sdist/
 
 node_modules
 *.log
+.env
