@@ -1,0 +1,31 @@
+{
+  "name": "dashboard-e2e",
+  "description": "Dashboard e2e test",
+  "version": "1.0.0",
+  "author": "Stuart Philp <sphilp@mozilla.com>",
+  "bugs": {
+    "url": "https://github.com/mozilla-services/services-test/issues"
+  },
+  "dependencies": {
+    "chai": "3.0.0",
+    "marionette-client": "1.7.5",
+    "marionette-firefox-host": "1.0.3",
+    "marionette-helper": "0.3.1",
+    "marionette-js-runner": "1.1.2",
+    "promise": "7.0.1",
+    "restmail-client": "1.0.0",
+    "config": "1.16.0"
+  },
+  "homepage": "https://github.com/mozilla-services/services-test#readme",
+  "license": "MPL-2.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mozilla-services/services-test.git"
+  },
+  "scripts": {
+    "dashboard": "marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /Applications/Firefox.app/Contents/MacOS/firefox-bin tests/",
+    "dashboard-ubuntu": "xvfb-run -a marionette-mocha --host marionette-firefox-host --timeout 60s --runtime /usr/bin/firefox tests/",
+    "test": "marionette-mocha"
+  }
+}
