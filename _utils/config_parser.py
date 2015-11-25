@@ -46,3 +46,4 @@ def load_firefox_paths(in_file, out_file):
 
 
 load_firefox_paths('../manifest.ini', '.env')
+
