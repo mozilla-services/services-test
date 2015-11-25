@@ -32,12 +32,11 @@ echo
 # We only destroy adjacent dirs if jenkins workspace found
 PATH_CURRENT=$(echo $(PWD) | awk '{printf tolower($0)}')
 if [[ "$PATH_CURRENT" == *"jenkins"* ]]; then
-    echo "FOUND JENKINS WORKSPACES, PREPARE TO NUKE!!!"
+    echo "FOUND JENKINS WORKSPACES, DESTROYING!!!"
     # ls -d * | grep -v slave-restore | xargs rm -rf
     echo "ls -d * | grep -v slave-restore | xargs rm -rf"
 else
     echo "NO JENKINS WORKSPACES FOUND!"
-    echo "ls -d * | grep -v slave-restore | xargs rm -rf"
 fi
 echo
 
