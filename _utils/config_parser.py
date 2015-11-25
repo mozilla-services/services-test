@@ -2,6 +2,7 @@ import os
 import platform
 import ConfigParser
 
+PREFIX = 'desktop'
 
 def get_os():
     """
@@ -17,6 +18,7 @@ def load_firefox_paths(in_file, out_file):
     """
     env_vars = []
     system = get_os()
+    section = '{0}_{1}'.format(PREFIX, system)
 
     if os.path.isfile(out_file):
         os.remove(out_file)
@@ -29,8 +31,10 @@ def load_firefox_paths(in_file, out_file):
     Config.read(in_file)
 
     try:
-        for key in Config.options(system):
-            value = Config.get(system, key)
+        #for key in Config.options(system):
+        for key in Config.options(section):
+            #value = Config.get(system, key)
+            value = Config.get(section, key)
             env_vars.append('export %s=%s' % (key.upper(), value))
     except:
         print('Unable to find config for "%s" in %s' % (system, in_file))
@@ -41,4 +45,4 @@ def load_firefox_paths(in_file, out_file):
         f.write('\n'.join(env_vars))
 
 
-load_firefox_paths('path_firefox.ini', '.env')
+load_firefox_paths('../manifest.ini', '.env')
