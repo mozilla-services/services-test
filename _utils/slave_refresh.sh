@@ -1,23 +1,49 @@
 #!/bin/bash
 
+CLEANUP=$1
+
+releases=( NN DE BETA GR )
+
+
+if [[ $OSTYPE == "darwin"* ]]; then
+    clear
+else
+    cls
+fi
+
 if [ $# -eq 0 ]; then
     echo
     echo "WARNING!"
     echo "This script will destroy your Firefox profiles!"
-    echo "if you really want to do this, run: $0 DESTROY"
-    exit
+    echo "if you really want to do this, run: $0 CLEANUP"
     echo
+    echo
+    exit
 else
     echo "BEGIN SLAVE REFRESH...."
     echo
 fi
 
-releases=( NN DE BETA GR )
-
 echo
-echo "--------------------"
+echo "-------------------------------"
+echo "NUKE WORKSPACES (EXCEPT THIS)"
+echo "-------------------------------"
+echo
+# We only destroy adjacent dirs if jenkins workspace found
+PATH_CURRENT=$(echo $(PWD) | awk '{printf tolower($0)}')
+if [[ "$PATH_CURRENT" == *"jenkins"* ]]; then
+    echo "FOUND JENKINS WORKSPACES, PREPARE TO NUKE!!!"
+    # ls -d * | grep -v slave-restore | xargs rm -rf
+    echo "ls -d * | grep -v slave-restore | xargs rm -rf"
+else
+    echo "NO JENKINS WORKSPACES FOUND!"
+    echo "ls -d * | grep -v slave-restore | xargs rm -rf"
+fi
+echo
+
+echo "-------------------------------"
 echo "SET ENVS"
-echo "--------------------"
+echo "-------------------------------"
 echo
 echo "set env vars"
 python config_parser.py
@@ -25,9 +51,10 @@ cat "$PWD/.env"
 . "$PWD/.env"
 
 echo
-echo "--------------------"
+echo
+echo "-------------------------------"
 echo "UNINSTALL FIREFOXES"
-echo "--------------------"
+echo "-------------------------------"
 echo
 
 for release in "${releases[@]}"
@@ -46,18 +73,18 @@ do
 done
 
 echo
-echo "--------------------"
+echo "-------------------------------"
 echo "UNINSTALL PROFILES"
-echo "--------------------"
+echo "-------------------------------"
 echo
 #rm -rf $PATH_FIREFOX_PROFILES
 echo "rm -rf $PATH_FIREFOX_PROFILES"
 ls "$PATH_FIREFOX_PROFILES"
 
 echo
-echo "--------------------"
+echo "-------------------------------"
 echo "INSTALL FIREFOXES"
-echo "--------------------"
+echo "-------------------------------"
 echo
 echo "mozdownloaden...."
 echo
@@ -83,3 +110,4 @@ echo "...some OS specific copypasta here...."
 
 
 echo "DONE!"
+
