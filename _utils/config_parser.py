@@ -2,9 +2,6 @@ import os
 import platform
 import ConfigParser
 
-WGET_CMD = "wget -O tmp/%s \"https://download.mozilla.org/?product=%s&os=%s\""
-
-
 def get_os():
     """
     Get the current Operating System.
@@ -34,6 +31,9 @@ def download_firefoxes(config):
     TODO: Do that thing.
     """
     header("DOWNLOAD FIREFOXES")
+
+    WGET_CMD = "wget -O tmp/%s \"https://download.mozilla.org/?product=%s&os=%s\""
+
     for section in config.sections():
         print WGET_CMD % (
             config.get(section, "INSTALLER_FILENAME"),
@@ -56,14 +56,14 @@ def create_env_file(config, out_file):
     Generic paths to Sikuli and Firefox profile directories.
     """
     for key in ["PATH_SIKULIX_BIN", "PATH_FIREFOX_PROFILES"]:
-        env_vars.append(env_fmt % (key, config.get("DEFAULT", key)))
+        env_vars.append(env_fmt % (key, config.get("DEFAULT", key + "_ENV")))
 
     """
     Channel specific Firefox binary paths.
     """
     for section in config.sections():
         export_name = "PATH_FIREFOX_APP_" + section.upper()
-        firefox_bin = config.get(section, "PATH_FIREFOX_BIN")
+        firefox_bin = config.get(section, "PATH_FIREFOX_BIN_ENV")
         env_vars.append(env_fmt % (export_name, firefox_bin))
 
     output = "\n".join(env_vars) + "\n"
@@ -75,7 +75,7 @@ def create_env_file(config, out_file):
 
 def header(str):
     divider = "=" * 60
-    print("%s\n%s\n%s" % (divider, str.upper(), divider))
+    print("\n\n%s\n%s\n%s" % (divider, str.upper(), divider))
 
 
 def main():
