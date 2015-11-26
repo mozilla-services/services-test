@@ -101,10 +101,9 @@ class Kinto_Groups(unittest.TestCase):
             self.assertEqual(response['error'], 'Not Found')
         else:
             self.assertIn('data', response)
-            for record in response['data']:
-                self.assertIn('last_modified', record)
-                self.assertIn('id', record)
-                self.assertEqual(record['id'], self.group_id)
+            self.assertIn('last_modified', response['data'])
+            self.assertIn('id', response['data'])
+            self.assertEqual(response['data']['id'], self.group_id)
 
     def test_retrieve_all_groups(self):
         resource = 'buckets/test_bucket/groups'
