@@ -2,48 +2,86 @@ import os
 import platform
 import ConfigParser
 
-PREFIX = 'desktop'
+WGET_CMD = "wget -O tmp/%s \"https://download.mozilla.org/?product=%s&os=%s\""
+
 
 def get_os():
     """
     Get the current Operating System.
     """
-    return platform.system().lower().split('_').pop(0)
+    return platform.system().lower().split("_").pop(0)
 
 
-def load_firefox_paths(in_file, out_file):
+def load_config():
     """
-    Load Firefox configs from an input .INI file and add them as exportable
-    environment variables in a new file.
+    Load an INI config filed based on operating system.
     """
+    os_config = "configs/%s.ini" % (get_os())
+
+    """ fail fast if the input INI file isn't found for current OS. """
+    if not os.path.isfile(os_config):
+        print("Config file not found for specified OS: %s" % (get_os()))
+        exit(1)
+
+    config = ConfigParser.ConfigParser()
+    config.read(os_config)
+    return config
+
+
+def download_firefoxes(config):
+    """
+    Download Firefox archives for all the channels.
+    TODO: Do that thing.
+    """
+    header("DOWNLOAD FIREFOXES")
+    for section in config.sections():
+        print WGET_CMD % (
+            config.get(section, "INSTALLER_FILENAME"),
+            config.get(section, "PRODUCT"),
+            config.get(section, "OS")
+        )
+
+
+def create_env_file(config, out_file):
+    """
+    Generate and save the output environment file so we can source it from
+    something like .bashrc or .bashprofile.
+    """
+    header("CREATE ENV FILE (%s)" % (out_file))
+
+    env_fmt = "export %s=\"%s\""
     env_vars = []
-    system = get_os()
-    section = '{0}_{1}'.format(PREFIX, system)
 
-    if os.path.isfile(out_file):
-        os.remove(out_file)
+    """
+    Generic paths to Sikuli and Firefox profile directories.
+    """
+    for key in ["PATH_SIKULIX_BIN", "PATH_FIREFOX_PROFILES"]:
+        env_vars.append(env_fmt % (key, config.get("DEFAULT", key)))
 
-    if not os.path.isfile(in_file):
-        print('Config file not found: %s' % (in_file))
-        exit(1)
+    """
+    Channel specific Firefox binary paths.
+    """
+    for section in config.sections():
+        export_name = "PATH_FIREFOX_APP_" + section.upper()
+        firefox_bin = config.get(section, "PATH_FIREFOX_BIN")
+        env_vars.append(env_fmt % (export_name, firefox_bin))
 
-    Config = ConfigParser.ConfigParser()
-    Config.read(in_file)
+    output = "\n".join(env_vars) + "\n"
+    print(output)
 
-    try:
-        #for key in Config.options(system):
-        for key in Config.options(section):
-            #value = Config.get(system, key)
-            value = Config.get(section, key)
-            env_vars.append('export %s=%s' % (key.upper(), value))
-    except:
-        print('Unable to find config for "%s" in %s' % (system, in_file))
-        print('Valid environments are: %s' % (', '.join(Config.sections())))
-        exit(1)
-
-    with open(out_file, 'w') as f:
-        f.write('\n'.join(env_vars))
+    with open(out_file, "w") as env_file:
+        env_file.write(output)
 
 
-load_firefox_paths('../manifest.ini', '.env')
+def header(str):
+    divider = "=" * 60
+    print("%s\n%s\n%s" % (divider, str.upper(), divider))
 
+
+def main():
+    config = load_config()
+    download_firefoxes(config)
+    create_env_file(config, ".env")
+
+
+main()
