@@ -1,0 +1,16 @@
+{
+  "envs" : {
+    "dev": {
+      "test_types": [ "api-test" ]
+    },
+    "stage": {
+      "test_types": [ "api-test" ]
+    },
+    "pre-prod": {
+      "test_types": [ "api-test" ]
+    },
+    "prod": {
+      "test_types": [ "api-test" ]
+    }
+  }
+}
