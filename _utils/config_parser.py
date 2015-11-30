@@ -1,6 +1,9 @@
+#!/usr/bin/env python
+
 import os
 import platform
 import ConfigParser
+
 
 def get_os():
     """
@@ -30,16 +33,10 @@ def download_firefoxes(config):
     Download Firefox archives for all the channels.
     TODO: Do that thing.
     """
-    header("DOWNLOAD FIREFOXES")
-
-    WGET_CMD = "wget -O tmp/%s \"https://download.mozilla.org/?product=%s&os=%s\""
+    header("DOWNLOAD FIREFOXES (%s)" % (get_os()))
 
     for section in config.sections():
-        print WGET_CMD % (
-            config.get(section, "INSTALLER_FILENAME"),
-            config.get(section, "PRODUCT"),
-            config.get(section, "OS")
-        )
+        print config.get(section, "DOWNLOAD_COMMAND")
 
 
 def create_env_file(config, out_file):
@@ -75,7 +72,7 @@ def create_env_file(config, out_file):
 
 def header(str):
     divider = "=" * 60
-    print("\n\n%s\n%s\n%s" % (divider, str.upper(), divider))
+    print("\n\n%s\n%s\n%s" % (divider, str, divider))
 
 
 def main():
