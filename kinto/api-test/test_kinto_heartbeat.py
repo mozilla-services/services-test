@@ -24,6 +24,6 @@ class Kinto_Fetch_Heartbeat(unittest.TestCase):
         self.assertIn('storage', response)
         self.assertIn('permission', response)
         self.assertEqual(response['oauth'], True)
-        self.assertEqual(response['cache'], False)
+        self.assertEqual(response['cache'], True)
         self.assertEqual(response['storage'], True)
         self.assertEqual(response['permission'], True)
