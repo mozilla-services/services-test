@@ -15,3 +15,4 @@ sdist/
 node_modules
 *.log
 .env
+.tmp
