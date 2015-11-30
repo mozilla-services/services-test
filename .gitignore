@@ -22,3 +22,4 @@ lib/
 node_modules
 *.log
 .env
+.tmp
