@@ -11,7 +11,7 @@ class MockClient(object):
         self.auth_string = base64.b64encode('%s:%s' % ("testuser", "abc123"))
         self.headers = {
             "Authorization": "Basic %s" % self.auth_string,
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         }
 
     def is_read_only(self):
