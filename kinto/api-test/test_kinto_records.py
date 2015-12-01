@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import unittest
 
 from mockclient import MockClient
@@ -179,3 +180,21 @@ class Kinto_Records(unittest.TestCase):
                 self.assertIn('id', record)
                 self.assertIn('deleted', record)
                 self.assertEqual(record['deleted'], True)
+
+    def test_badly_formed_records(self):
+        resource = 'buckets/test_bucket/collections/test_collection/records'
+        expected_status_code = 405 if self.client.is_read_only() else 400
+        data = '{"data": {"test": }'
+        response = self.client.post_request(resource, data, status_code=expected_status_code)
+
+    def test_utf8_stored_correctly(self):
+        resource = 'buckets/test_bucket/collections/test_collection/records'
+        expected_status_code = 405 if self.client.is_read_only() else 200
+        greeting = u'Comment ça va ? Très bien'
+        data = {'data': {'greeting': greeting}}
+        response = self.client.post_json_request(resource, data, status_code=expected_status_code)
+        if self.client.is_read_only():
+            self.assert_not_allowed(response)
+        else:
+            self.assertIn('data', response)
+            self.assertEqual(greeting, response['data']['greeting'])
