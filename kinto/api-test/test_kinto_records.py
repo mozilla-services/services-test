@@ -23,7 +23,8 @@ class Kinto_Records(unittest.TestCase):
         self.assertIn('code', response)
         self.assertIn('error', response)
         self.assertEqual(response['errno'], 115)
-        self.assertEqual(response['message'], "Method not allowed on this endpoint.")
+        self.assertEqual(response['message'],
+                         "Method not allowed on this endpoint.")
         self.assertEqual(response['code'], 405)
         self.assertEqual(response['error'], 'Method Not Allowed')
 
@@ -31,7 +32,8 @@ class Kinto_Records(unittest.TestCase):
         resource = 'buckets/test_bucket/collections/test_collection/records'
         data = '{"data": {"test": "%s"}}' % data
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.post_request(resource, data, status_code=expected_status_code)
+        response = self.client.post_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
             self.record_id = "invalid_group"
@@ -43,7 +45,8 @@ class Kinto_Records(unittest.TestCase):
         # Create bucket
         resource = 'buckets/test_bucket'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.put_request(resource, status_code=expected_status_code)
+        response = self.client.put_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -56,7 +59,8 @@ class Kinto_Records(unittest.TestCase):
         # Create collection
         resource = 'buckets/test_bucket/collections/test_collection'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.put_request(resource, status_code=expected_status_code)
+        response = self.client.put_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -89,7 +93,8 @@ class Kinto_Records(unittest.TestCase):
         resource = 'buckets/test_bucket/collections/test_collection/records/' + self.record_id
         data = '{"data": {"test": "new_record"}}'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.put_request(resource, data, status_code=expected_status_code)
+        response = self.client.put_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -108,7 +113,8 @@ class Kinto_Records(unittest.TestCase):
         resource = 'buckets/test_bucket/collections/test_collection/records/' + self.record_id
         data = '{"data": {"test": "updated_record"}}'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.patch_request(resource, data, status_code=expected_status_code)
+        response = self.client.patch_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -126,7 +132,8 @@ class Kinto_Records(unittest.TestCase):
             self.create_record("sample_record")
         resource = 'buckets/test_bucket/collections/test_collection/records/' + self.record_id
         expected_status_code = 400 if self.client.is_read_only() else 200
-        response = self.client.get_request(resource, status_code=expected_status_code)
+        response = self.client.get_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assertIn('errno', response)
             self.assertIn('message', response)
@@ -143,7 +150,8 @@ class Kinto_Records(unittest.TestCase):
                 self.assertIn('id', response['data'])
                 self.assertEqual(response['data']['id'], self.record_id)
 
-    # should return an array in data, each item being a record with a unique id and last_modified
+    # should return an array in data, each item being a record with a unique
+    # id and last_modified
     def test_retrieve_all_records(self):
         resource = 'buckets/test_bucket/collections/test_collection/records'
         response = self.client.get_request(resource)
@@ -157,7 +165,8 @@ class Kinto_Records(unittest.TestCase):
             self.create_record("sample_record")
         resource = 'buckets/test_bucket/collections/test_collection/records/' + self.record_id
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.delete_request(resource, status_code=expected_status_code)
+        response = self.client.delete_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -170,7 +179,8 @@ class Kinto_Records(unittest.TestCase):
     def test_delete_all_records(self):
         resource = 'buckets/test_bucket/collections/test_collection/records'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.delete_request(resource, status_code=expected_status_code)
+        response = self.client.delete_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -185,14 +195,16 @@ class Kinto_Records(unittest.TestCase):
         resource = 'buckets/test_bucket/collections/test_collection/records'
         expected_status_code = 405 if self.client.is_read_only() else 400
         data = '{"data": {"test": }'
-        response = self.client.post_request(resource, data, status_code=expected_status_code)
+        response = self.client.post_request(
+            resource, data, status_code=expected_status_code)
 
     def test_utf8_stored_correctly(self):
         resource = 'buckets/test_bucket/collections/test_collection/records'
         expected_status_code = 405 if self.client.is_read_only() else 200
         greeting = u'Comment ça va ? Très bien'
         data = {'data': {'greeting': greeting}}
-        response = self.client.post_json_request(resource, data, status_code=expected_status_code)
+        response = self.client.post_json_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
