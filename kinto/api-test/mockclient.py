@@ -40,6 +40,13 @@ class MockClient(object):
             r.raise_for_status()
         return json.loads(r.content.decode('utf-8'))
 
+    def post_json_request(self, resource, data=None, status_code=None):
+        url = stage_url + resource
+        r = requests.post(url, json=data, headers=self.headers)
+        if r.status_code != status_code:
+            r.raise_for_status()
+        return json.loads(r.content)
+
     def put_request(self, resource, data=None, status_code=None):
         url = stage_url + resource
         r = requests.put(url, data, headers=self.headers)
