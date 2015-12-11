@@ -5,12 +5,6 @@
     },
     "stage": {
       "test_types": [ "e2e-test" ]
-    },
-    "pre-prod": {
-      "test_types": [ "e2e-test" ]
-    },
-    "prod": {
-      "test_types": [ "e2e-test" ]
     }
   }
 }
