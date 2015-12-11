@@ -4,4 +4,4 @@ From /kinto/
 
 1. virtualenv .
 2. ./bin/pip install -r dev-requirements.txt
-3. ./bin/nosetest -w api-test/
+3. ./bin/nosetests -w api-test/
