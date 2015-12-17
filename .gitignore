@@ -11,6 +11,7 @@ sdist/
 *.egg-info/
 *.egg
 *.tar*
+<<<<<<< Updated upstream
 bin/
 */bin/
 include/
@@ -18,6 +19,9 @@ include/
 lib/
 */lib/
 
+=======
+**/.idea
+>>>>>>> Stashed changes
 node_modules
 *.log
 .env

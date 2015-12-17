@@ -1,0 +1,4 @@
+
+[submodule "services-marionette/firefox-ui-tests"]
+	path = services-marionette/firefox-ui-tests
+	url = https://github.com/mozilla/firefox-ui-tests.git
