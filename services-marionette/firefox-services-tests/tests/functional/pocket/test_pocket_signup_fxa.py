@@ -10,8 +10,7 @@ class TestCreateNewFxaSignIn(FirefoxTestCase):
     def setUp(self):
         FirefoxTestCase.setUp(self)
         self.pocket_page = Pocket(self.marionette)
-        self.login_page = self.pocket_page.launch_signin()
         # TODO: Probably have some Firefox Accounts login info
 
     def test_create_new_fxa_account_sign_into_pocket(self):
-        self.login_page.sign_up_for_fxa()
+        self.pocket_page.launch_signin()
