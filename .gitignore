@@ -18,6 +18,7 @@ include/
 lib/
 */lib/
 
+**/.idea
 node_modules
 *.log
 .env

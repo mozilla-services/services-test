@@ -1,0 +1,36 @@
+db1:
+  image: postgres
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+db2:
+  image: postgres
+  environment:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+master:
+  image: kinto/kinto-server
+  links:
+   - db1
+  ports:
+   - "8888:8888"
+  environment:
+    KINTO_CACHE_BACKEND: cliquet.cache.postgresql
+    KINTO_CACHE_URL: postgres://postgres:postgres@db/postgres
+    KINTO_STORAGE_BACKEND: cliquet.storage.postgresql
+    KINTO_STORAGE_URL: postgres://postgres:postgres@db/postgres
+    KINTO_PERMISSION_BACKEND: cliquet.permission.postgresql
+    KINTO_PERMISSION_URL: postgres://postgres:postgres@db/postgres
+read-only:
+  image: chartjes/kinto-read-only
+  links:
+   - db2
+  ports:
+   - "8889:8889"
+  environment:
+    KINTO_CACHE_BACKEND: cliquet.cache.postgresql
+    KINTO_CACHE_URL: postgres://postgres:postgres@db/postgres
+    KINTO_STORAGE_BACKEND: cliquet.storage.postgresql
+    KINTO_STORAGE_URL: postgres://postgres:postgres@db/postgres
+    KINTO_PERMISSION_BACKEND: cliquet.permission.postgresql
+    KINTO_PERMISSION_URL: postgres://postgres:postgres@db/postgres
