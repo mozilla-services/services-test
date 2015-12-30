@@ -10,10 +10,11 @@ mozinfo==0.8
 mozlog==3.0
 moznetwork==0.27
 mozprocess==0.22
-mozprofile==0.27
+mozprofile==0.28
 mozrunner==6.9
 moztest==0.7
 mozversion==1.4
+firefox_puppeteer==3.0.0
 
 # Also pin external packages to minimize the risk of version conflicts
 requests==2.7.0

@@ -1,8 +1,8 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-from firefox_services_tests.apps.base import Base
-from firefox_services_tests.helpers import utils
+from apps.base import Base
+from helpers import utils
 
 from marionette_driver import By
 
