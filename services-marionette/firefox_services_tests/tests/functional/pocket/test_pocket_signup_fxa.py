@@ -4,6 +4,7 @@
 
 
 from firefox_puppeteer.testcases.base import FirefoxTestCase
+
 from apps.pocket.app import Pocket
 
 

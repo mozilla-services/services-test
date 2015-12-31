@@ -37,7 +37,6 @@ class LoginPage(Base):
             self.click_element(*self._fxa_create_account_link_locator)
 
         self.wait_for_element_displayed(*self._fxa_sign_up_header_locator)
-        # self.wait(5000)
         email_address = utils.generate_random_email_address()
         self.send_keys_to_element(
             *self._fxa_email_input_locator, **{'string': email_address})
