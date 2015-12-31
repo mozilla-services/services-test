@@ -4,6 +4,7 @@
 
 
 from firefox_puppeteer.testcases.base import FirefoxTestCase
+
 from apps.ideatown.app import IdeaTown
 
 

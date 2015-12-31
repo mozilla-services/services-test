@@ -1,7 +1,7 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-from marionette_driver import expected, Wait
+from marionette_driver import expected, Wait, Actions
 from marionette_driver.errors import NoSuchElementException
 
 import re
@@ -14,6 +14,7 @@ class Base(object):
         self.CHROME = 'chrome'
         self.CONTENT = 'content'
         self.set_context(self.CONTENT)
+        self.action = Actions(marionette)
 
     def launch(self, url):
         if url is not None:
@@ -79,6 +80,9 @@ class Base(object):
 
     def send_keys_to_element(self, by, locator, string):
         self.marionette.find_element(by, locator).send_keys(string)
+
+    def wait(self, time):
+        self.action.wait(time).perform()
 
 
 class PageRegion(Base):
