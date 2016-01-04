@@ -7,13 +7,13 @@ from marionette_driver import By
 
 
 class IdeaTown(Base):
-    _login_url = 'https://ideatown.stage.mozaws.net'
+    _login_url = 'http://idea-town-dev.elasticbeanstalk.com'
     _login_with_firefox_button_locator = (
         By.CSS_SELECTOR, 'div.cta-layout a.fxa-alternate')
     _ideatown_sign_me_up_button_locator = (
         By.XPATH, '//a[text()="Sign me up!"]')
     _ideatown_thanks_for_signing_up_header_locator = (
-        By.XPATH, '//a[text()="Thanks for signing up!"]')
+        By.XPATH, '//h1[text()="Thanks for signing up!"]')
 
     def launch_signin(self):
         Base.launch(self, self._login_url)
