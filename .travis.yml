@@ -7,8 +7,8 @@ install:
   - pip install flake8
   - nvm install 4
   - npm config set spin false
-  - npm install eslint -g
+  - npm install
 
 script:
   - flake8 .
-  - eslint .
+  - npm run eslint
