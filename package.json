@@ -1,0 +1,18 @@
+{
+  "name": "services-test",
+  "description": "We test services",
+  "version": "1.0.0",
+  "author": "Cloud Services QA",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "1.10.3"
+  },
+  "license": "MPL-2.0",
+  "private": true,
+  "repository": "mozilla-services/services-test",
+  "scripts": {
+    "eslint": "eslint .",
+    "flake8": "flake8 .",
+    "lint": "npm run flake8 && npm run eslint"
+  }
+}

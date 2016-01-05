@@ -1,5 +1,4 @@
 var Promise = require('promise');
-var expect = require('chai').expect;
 
 var profile = require('../profile');
 

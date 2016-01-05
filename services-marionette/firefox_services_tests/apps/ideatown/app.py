@@ -27,4 +27,3 @@ class IdeaTown(Base):
         login_page.sign_up_for_fxa(False, False)
 
         self.wait_for_element_displayed(*self._ideatown_thanks_for_signing_up_header_locator)
-

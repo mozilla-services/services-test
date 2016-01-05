@@ -35,4 +35,3 @@ class Pocket(Base):
         with self.marionette.using_context(self.CHROME):
             self.wait_for_element_displayed(
                 *self._pocket_chrome_button).click()
-

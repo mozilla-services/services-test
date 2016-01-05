@@ -3,9 +3,7 @@
 
 var chai = require('chai')
 var helper = require('marionette-helper')
-var restmail = require('restmail-client')
-var P = require('promise')
-var config = require('config');
+var config = require('config')
 
 var expect = chai.expect
 

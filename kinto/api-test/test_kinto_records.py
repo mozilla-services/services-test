@@ -195,7 +195,7 @@ class Kinto_Records(unittest.TestCase):
         resource = 'buckets/test_bucket/collections/test_collection/records'
         expected_status_code = 405 if self.client.is_read_only() else 400
         data = '{"data": {"test": }'
-        response = self.client.post_request(
+        self.client.post_request(
             resource, data, status_code=expected_status_code)
 
     def test_utf8_stored_correctly(self):
