@@ -22,7 +22,7 @@ def load_firefox_paths(in_file, out_file):
         os.remove(out_file)
 
     if not os.path.isfile(in_file):
-        print 'Config file not found: %s' % (in_file)
+        print('Config file not found: %s' % (in_file))
         exit(1)
 
     Config = ConfigParser.ConfigParser()
@@ -33,8 +33,8 @@ def load_firefox_paths(in_file, out_file):
             value = Config.get(system, key)
             env_vars.append('export %s=%s' % (key.upper(), value))
     except:
-        print 'Unable to find config for "%s" in %s' % (system, in_file)
-        print 'Valid environments are: %s' % (', '.join(Config.sections()))
+        print('Unable to find config for "%s" in %s' % (system, in_file))
+        print('Valid environments are: %s' % (', '.join(Config.sections())))
         exit(1)
 
     with open(out_file, 'w') as f:
