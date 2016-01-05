@@ -1,13 +1,13 @@
 {
-  "envs" : {
+  "envs": {
     "stage": {
       "test_types": [ "stack-check", "loadtest" ],
       "stack_label": "loopsvrstg",
       "aws_region": "eu-west-1",
       "urls": {
-	"root" : "loop.stage.mozaws.net",
-	"root/push_config" : "push-server-config",
-	"root/heartbeat" : "__heartbeat__"
+        "root" : "loop.stage.mozaws.net",
+        "root/push_config": "push-server-config",
+        "root/heartbeat": "__heartbeat__"
       }
     },
     "pre-prod": {
@@ -15,8 +15,8 @@
       "aws_region": "eu-west-1",
       "urls": {
         "root": "loop.services.mozilla.com",
-	"root/push_config" : "push-server-config",
-	"root/heartbeat" : "__heartbeat__"
+        "root/push_config": "push-server-config",
+        "root/heartbeat": "__heartbeat__"
       }
     },
     "prod": {
@@ -24,14 +24,14 @@
       "aws_region": "eu-west-1",
       "urls": {
         "root": "loop.services.mozilla.com",
-	"root/push_config" : "push-server-config",
-	"root/heartbeat" : "__heartbeat__"
+        "root/push_config": "push-server-config",
+        "root/heartbeat": "__heartbeat__"
       }
     }
   },
   "protocols" : [ "https" ],
   "processes" : [ "loop", "node", "datadog", "circus", "heka", "nginx" ],
   "commands" : {
-      "curl -I": [ "<root>" ]
-    }
+    "curl -I": [ "<root>" ]
+  }
 }

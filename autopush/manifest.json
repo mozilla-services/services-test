@@ -1,35 +1,35 @@
 {
-    "envs" : {
-	"stage": {
-	    "test_types" : [ "stack-check" ],
-            "aws_region": "us-east-1",
-            "stack_label" : "autopush-stage",
-            "aws_region": "us-east-1",
-            "urls": {
-              "root" : "updates-autopush.stage.mozaws.net",
-	      "root/status" : "status",
-              "root/health" : "health"
-            }
-	},
-	"pre-prod": {
-	    "test_types" : [ "stack-check" ],
-            "aws_region": "us-east-1",
-            "stack_label" : "autopush-stage",
-            "urls": {
-	      "root": "autopush.services.mozilla.com",
-              "root/status" : "status",
-              "root/health" : "health"
-            }
-	},
-	"prod": {
-	    "test_types" : [ "stack-check" ],
-            "aws_region": "us-east-1",
-            "urls": {
-	      "root": "updates.push.services.mozilla.com",
-              "root/status" : "status",
-              "root/health" : "health"
-            }
-	}
+  "envs": {
+    "stage": {
+      "test_types": [ "stack-check" ],
+      "aws_region": "us-east-1",
+      "stack_label": "autopush-stage",
+      "aws_region": "us-east-1",
+      "urls": {
+        "root": "updates-autopush.stage.mozaws.net",
+        "root/status": "status",
+        "root/health": "health"
+      }
     },
-    "protocols" : [ "https" ]
+    "pre-prod": {
+      "test_types": [ "stack-check" ],
+      "aws_region": "us-east-1",
+      "stack_label": "autopush-stage",
+      "urls": {
+        "root": "autopush.services.mozilla.com",
+        "root/status": "status",
+        "root/health": "health"
+      }
+    },
+    "prod": {
+      "test_types": [ "stack-check" ],
+      "aws_region": "us-east-1",
+      "urls": {
+        "root": "updates.push.services.mozilla.com",
+        "root/status": "status",
+        "root/health": "health"
+      }
+    }
+  },
+  "protocols": [ "https" ]
 }
