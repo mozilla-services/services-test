@@ -1,11 +1,11 @@
 {
-  "envs" : {
+  "envs": {
     "stage": {
       "test_types": [ "stack-check", "loadtest" ],
       "stack_label": "shavar-server",
       "aws_region": "us-east-1",
       "urls": {
-	"root" : "tracking.stage.mozaws.net"
+        "root" : "tracking.stage.mozaws.net"
       }
     },
     "pre-prod": {
@@ -25,9 +25,9 @@
       }
     }
   },
-  "protocols" : [ "http" ],
-  "processes" : [ "tracking", "node", "datadog", "circus", "heka", "nginx" ],
-  "commands" : {
-      "curl -I": [ "<root>" ]
-    }
+  "protocols": [ "http" ],
+  "processes": [ "tracking", "node", "datadog", "circus", "heka", "nginx" ],
+  "commands": {
+    "curl -I": [ "<root>" ]
+  }
 }

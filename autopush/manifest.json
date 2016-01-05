@@ -4,7 +4,6 @@
       "test_types": [ "stack-check" ],
       "aws_region": "us-east-1",
       "stack_label": "autopush-stage",
-      "aws_region": "us-east-1",
       "urls": {
         "root": "updates-autopush.stage.mozaws.net",
         "root/status": "status",
