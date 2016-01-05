@@ -1,0 +1,12 @@
+sudo: false
+language: python
+python:
+  - "3.4"
+
+install:
+  - pip install flake8
+  - nvm install 4
+
+script:
+  - npm install
+  - npm run lint
