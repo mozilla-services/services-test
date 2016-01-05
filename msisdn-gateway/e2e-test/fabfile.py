@@ -1,5 +1,4 @@
-from fabric.api import *  # noqa
-# import fabric
+from fabric.api import task, local
 
 
 @task
