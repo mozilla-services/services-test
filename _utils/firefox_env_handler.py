@@ -4,13 +4,13 @@ import os
 import platform
 import shutil
 import sys
-import ConfigParser
+import configparser
 
 
 class FirefoxEnvHandler():
-    LINUX = "linux-gnu"
-    MAC = "darwin"
-    WINDOWS = "cygwin"
+    LINUX = 'linux-gnu'
+    MAC = 'darwin'
+    WINDOWS = 'cygwin'
 
     def __init__(self):
         pass
@@ -20,7 +20,7 @@ class FirefoxEnvHandler():
         """
         Do our best to determine the user's current operating system.
         """
-        return platform.system().lower().split("_").pop(0)
+        return platform.system().lower().split('_').pop(0)
 
     @classmethod
     def is_linux(cls):
@@ -51,15 +51,16 @@ class FirefoxEnvHandler():
         return cls.get_os() == cls.WINDOWS
 
     @staticmethod
-    def banner(str, length=79, delimiter="="):
+    def banner(str, length=79, delimiter='='):
         """
         Throws up a debug header to make output subjectively "easier" to read
         in stdout.
         """
         if length <= 0:
             length = len(str)
+
         divider = delimiter * length
-        output = "\n".join(['', divider, str, divider])
+        output = '\n'.join(['', divider, str, divider])
         print(output)
 
     @staticmethod
@@ -69,12 +70,14 @@ class FirefoxEnvHandler():
         """
         if os.path.isdir(path):
             if foot_gun:
-                print("Foot gun safety is on! %s not deleted" % (path))
+                print(("Foot gun safety is on! {0} not deleted".format(path)))
+
             else:
-                print("Deleting %s" % (path))
+                print(("Deleting {0}".format(path)))
                 shutil.rmtree(path)
+
         else:
-            print("%s is not a directory." % (path))
+            print(("{0} is not a directory".format(path)))
 
 
 class IniHandler(FirefoxEnvHandler):
@@ -83,7 +86,7 @@ class IniHandler(FirefoxEnvHandler):
         Creates a new config parser object, and optionally loads a config file
         if `ini_path` was specified.
         """
-        self.config = ConfigParser.ConfigParser()
+        self.config = configparser.ConfigParser()
 
         if ini_path is not None:
             self.load_config(ini_path)
@@ -92,11 +95,11 @@ class IniHandler(FirefoxEnvHandler):
         """
         Load an INI config based on the specified `ini_path`.
         """
-        IniHandler.banner("LOADING %s" % ini_path, 79, "-")
+        IniHandler.banner("LOADING %s" % ini_path, 79, '-')
 
         # Make sure the specified config file exists, fail hard if missing.
         if not os.path.isfile(ini_path):
-            sys.exit("Config file not found: %s" % (ini_path))
+            sys.exit("Config file not found: {0}".format(ini_path))
 
         self.config.read(ini_path)
 
@@ -109,31 +112,31 @@ class IniHandler(FirefoxEnvHandler):
         os_config = os.path.join(config_path, IniHandler.get_os() + ".ini")
         self.load_config(os_config)
 
-    def create_env_file(self, out_file=".env"):
+    def create_env_file(self, out_file='.env'):
         """
         Generate and save the output environment file so we can source it from
         something like .bashrc or .bashprofile.
         """
-        IniHandler.banner("CREATING ENV FILE (%s)" % (out_file))
+        IniHandler.banner("CREATING ENV FILE ({0})".format(out_file))
 
-        env_fmt = "export %s=\"%s\""
+        env_fmt = 'export %s="%s"'
         env_vars = []
 
         # Generic paths to Sikuli and Firefox profile directories.
-        for key in ["PATH_SIKULIX_BIN", "PATH_FIREFOX_PROFILES"]:
-            env_key = self.get_default(key + "_ENV")
+        for key in ['PATH_SIKULIX_BIN', 'PATH_FIREFOX_PROFILES']:
+            env_key = self.get_default(key + '_ENV')
             env_vars.append(env_fmt % (key, env_key))
 
         # Channel specific Firefox binary paths.
         for channel in self.sections():
-            export_name = "PATH_FIREFOX_APP_" + channel.upper()
-            firefox_bin = self.get(channel, "PATH_FIREFOX_BIN_ENV")
+            export_name = 'PATH_FIREFOX_APP_' + channel.upper()
+            firefox_bin = self.get(channel, 'PATH_FIREFOX_BIN_ENV')
             env_vars.append(env_fmt % (export_name, firefox_bin))
 
-        output = "\n".join(env_vars) + "\n"
+        output = '\n'.join(env_vars) + '\n'
         print(output)
 
-        with open(out_file, "w") as env_file:
+        with open(out_file, 'w') as env_file:
             env_file.write(output)
             env_file.close()
 
@@ -156,11 +159,11 @@ class IniHandler(FirefoxEnvHandler):
         Shortcut for calling a config's `set()` method without needing to
         do the visually horrifying `self.config.config.set()`.
         """
-        return self.config.set(section, option, value)
+        return self.config.set(section, option, str(value))
 
     def get_default(self, option):
         """
         Shortcut to get a value from the "DEFAULTS" section of a ConfigParser
         INI file. Doesn't save much time, but reads a bit easier.
         """
-        return self.get("DEFAULT", option)
+        return self.get('DEFAULT', option)

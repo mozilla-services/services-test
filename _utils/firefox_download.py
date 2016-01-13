@@ -3,26 +3,29 @@
 from firefox_env_handler import IniHandler
 
 import os
-import urllib2
+import urllib.request
+import urllib.error
 import sys
 
 
 class FirefoxDownload(object):
 
-    def __init__(self, config, out_dir="temp", clean=False):
+    def __init__(self, config, out_dir='temp', clean=False):
         """
         TODO:
         """
         # Do some basic type checking on the `config` attribute.
         if isinstance(config, IniHandler):
             self.config = config
-        elif isinstance(config, basestring):
+
+        elif isinstance(config, str):
             self.config = IniHandler()
             self.config.load_os_config(config)
-        else:
-            sys.exit("FirefoxDownload: Unexpected config data type")
 
-        self.CACHE_FILE = "cache.ini"
+        else:
+            sys.exit('FirefoxDownload: Unexpected config data type')
+
+        self.CACHE_FILE = 'cache.ini'
         self.out_dir = out_dir
         self.cache_path = os.path.join(out_dir, self.CACHE_FILE)
 
@@ -45,10 +48,10 @@ class FirefoxDownload(object):
 
         # Create an etags cache INI file, if one doesn't already exist.
         if not os.path.isfile(self.cache_path):
-            with open(self.cache_path, "w") as file:
+            with open(self.cache_path, 'w') as file:
                 cache = IniHandler()
-                cache.config.add_section("etags")
-                cache.config.add_section("cached")
+                cache.config.add_section('etags')
+                cache.config.add_section('cached')
                 cache.config.write(file)
                 file.close()
 
@@ -57,7 +60,7 @@ class FirefoxDownload(object):
         Loop over each channel in the config INI file and download the latest
         build.
         """
-        IniHandler.banner("DOWNLOADING FIREFOXES")
+        IniHandler.banner('DOWNLOADING FIREFOXES')
 
         for channel in self.config.sections():
             self.download_channel(channel)
@@ -67,8 +70,8 @@ class FirefoxDownload(object):
         Download a specific channel of Firefox (ie: nightly, aurora, beta, ...)
         """
         # Get the full download URL and output filename from the config.
-        download_filename = self.config.get(channel, "DOWNLOAD_FILENAME")
-        download_url = self.config.get(channel, "DOWNLOAD_URL")
+        download_filename = self.config.get(channel, 'DOWNLOAD_FILENAME')
+        download_url = self.config.get(channel, 'DOWNLOAD_URL')
         out_file = os.path.join(self.out_dir, download_filename)
 
         # Attempt to download the latest version of the Firefox binary for
@@ -80,21 +83,23 @@ class FirefoxDownload(object):
         Download the specified channel Firefox build, using an "intelligent"
         cache, using the archive's current `etag` as a unique identifier.
         """
-        with open(out_file, "wb") as file:
+        with open(out_file, 'wb') as file:
             try:
-                contents = urllib2.urlopen(download_url)
-                etag = contents.headers["etag"]
+                contents = urllib.request.urlopen(download_url)
+                etag = contents.headers['etag']
                 was_cached = False
 
                 # We found this channel in the cache, but not sure if it is
                 # recent.
-                if self.cache.config.has_option("etags", channel):
+                if self.cache.config.has_option('etags', channel):
                     # Etags matched, we "probably" have the latest version.
-                    if etag == self.cache.get("etags", channel):
+                    if etag == self.cache.get('etags', channel):
                         was_cached = True
+
                     # Etag cache miss, download latest channel Firefox binary.
                     else:
                         was_cached = False
+
                 # We didn't find this channel in the cache file, download away!
                 else:
                     was_cached = False
@@ -104,21 +109,22 @@ class FirefoxDownload(object):
                 self.cache.set('cached', channel, was_cached)
 
                 if not was_cached:
-                    print("Downloading [%s] from %s" % (channel, download_url))
+                    print(("Downloading [{0}] from {1}".format(channel, download_url)))
                     file.write(contents.read())
-                else:
-                    print "[%s] etag was cached, skipping download." % channel
 
-            except urllib2.HTTPError as err:
+                else:
+                    print(("[{0}] etag was cached, skipping download.".format(channel)))
+
+            except urllib.error.HTTPError as err:
                 # For some reason the download failed. Possibly due to a config
                 # mismatch in the INI files. :shrug:
                 # TODO: Currently we fail silently here. Fail harder?
-                print("\t", err)
+                print(('\t', err))
 
             file.close()
 
         # Rewrite the Etag cache information back into our internal config.
-        with open(self.cache_path, "w") as cache:
+        with open(self.cache_path, 'w') as cache:
             self.cache.config.write(cache)
             cache.close()
 
