@@ -8,7 +8,7 @@ from firefox_uninstall import FirefoxUninstall
 
 # Load our OS-specific INI config file.
 os_cfg = IniHandler()
-os_cfg.load_os_config("configs")
+os_cfg.load_os_config('configs')
 
 # Create the ".env" file which will need to be "sourced" from the .bashrc or
 # .bashprofile file to get Firefox path ENV vars.
