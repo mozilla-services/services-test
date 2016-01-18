@@ -20,7 +20,7 @@ class Kinto_Sync(unittest.TestCase):
         docker_machine = str(f.read()).strip()
 
         if string.find(docker_machine, "/docker-machine") == -1:
-            print "Could not find docker-machine in our path"
+            print("Could not find docker-machine in our path")
             exit()
 
         f = os.popen('%s ip default' % docker_machine)
