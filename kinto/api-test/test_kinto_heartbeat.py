@@ -18,10 +18,13 @@ class Kinto_Fetch_Heartbeat(unittest.TestCase):
     def test_check_heartbeat(self):
         """Check heartbeat to make sure It's Alive."""
         resource = '__heartbeat__'
-        response = self.client.get_request(resource, status_code=503)
-        self.assertIn('cache', response)
-        self.assertIn('storage', response)
-        self.assertIn('permission', response)
-        self.assertEqual(response['cache'], True)
-        self.assertEqual(response['storage'], True)
-        self.assertEqual(response['permission'], True)
+        expected_response = {
+            'cache': True,
+            'oauth': True,
+            'permission': True,
+            'storage': True
+        }
+        self.assertEquals(
+            sorted(expected_response),
+            sorted(self.client.get_request(resource, status_code=503))
+        )

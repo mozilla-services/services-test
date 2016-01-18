@@ -2,7 +2,7 @@ import json
 import base64
 import requests
 
-stage_url = "https://kinto.stage.mozaws.net/v1/"
+stage_url = "https://kinto.dev.mozaws.net/v1/"
 
 
 class MockClient(object):
