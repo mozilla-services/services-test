@@ -2,13 +2,14 @@
 
 import os
 import platform
+import re
 import shutil
 import sys
 import configparser
 
 
 class FirefoxEnvHandler():
-    LINUX = 'linux-gnu'
+    LINUX = 'linux'
     MAC = 'darwin'
     WINDOWS = 'cygwin'
 
@@ -20,7 +21,8 @@ class FirefoxEnvHandler():
         """
         Do our best to determine the user's current operating system.
         """
-        return platform.system().lower().split('_').pop(0)
+        system = platform.system().lower()
+        return re.split('[-_]', system, maxsplit=1).pop(0)
 
     @classmethod
     def is_linux(cls):
@@ -69,15 +71,11 @@ class FirefoxEnvHandler():
         Recursively delete the specified path.
         """
         if os.path.isdir(path):
-            if foot_gun:
-                print(("Foot gun safety is on! {0} not deleted".format(path)))
-
-            else:
-                print(("Deleting {0}".format(path)))
-                shutil.rmtree(path)
+            print(('Deleting {0}'.format(path)))
+            shutil.rmtree(path)
 
         else:
-            print(("{0} is not a directory".format(path)))
+            print(('{0} is not a directory'.format(path)))
 
 
 class IniHandler(FirefoxEnvHandler):
@@ -86,7 +84,7 @@ class IniHandler(FirefoxEnvHandler):
         Creates a new config parser object, and optionally loads a config file
         if `ini_path` was specified.
         """
-        self.config = configparser.ConfigParser()
+        self.config = configparser.SafeConfigParser(os.environ)
 
         if ini_path is not None:
             self.load_config(ini_path)
@@ -95,11 +93,11 @@ class IniHandler(FirefoxEnvHandler):
         """
         Load an INI config based on the specified `ini_path`.
         """
-        IniHandler.banner("LOADING %s" % ini_path, 79, '-')
+        IniHandler.banner('LOADING {0}'.format(ini_path), 79, '-')
 
         # Make sure the specified config file exists, fail hard if missing.
         if not os.path.isfile(ini_path):
-            sys.exit("Config file not found: {0}".format(ini_path))
+            sys.exit('Config file not found: {0}'.format(ini_path))
 
         self.config.read(ini_path)
 
@@ -109,7 +107,7 @@ class IniHandler(FirefoxEnvHandler):
         will attempt to load a "darwin.ini", "cygwin.ini", or "linux-gnu.ini"
         file from the specified `config_path` based on the current OS.
         """
-        os_config = os.path.join(config_path, IniHandler.get_os() + ".ini")
+        os_config = os.path.join(config_path, IniHandler.get_os() + '.ini')
         self.load_config(os_config)
 
     def create_env_file(self, out_file='.env'):
@@ -117,9 +115,9 @@ class IniHandler(FirefoxEnvHandler):
         Generate and save the output environment file so we can source it from
         something like .bashrc or .bashprofile.
         """
-        IniHandler.banner("CREATING ENV FILE ({0})".format(out_file))
+        IniHandler.banner('CREATING ENV FILE ({0})'.format(out_file))
 
-        env_fmt = 'export %s="%s"'
+        env_fmt = "export %s=\"%s\""
         env_vars = []
 
         # Generic paths to Sikuli and Firefox profile directories.
