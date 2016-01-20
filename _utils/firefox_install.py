@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from firefox_env_handler import IniHandler
+from fabric.api import local
 
 import os
 import sys
@@ -31,22 +32,35 @@ class FirefoxInstall(object):
 
     def install_channel(self, channel, force=False):
         was_cached = self.cache.config.getboolean('cached', channel)
+        filename = self.config.get(channel, 'DOWNLOAD_FILENAME')
+        install_dir = self.config.get(channel, 'PATH_FIREFOX_APP')
+        installer = os.path.join('.', self.out_dir, filename)
 
         if force or not was_cached:
+            print(('Installing {0}'.format(channel)))
+
             if IniHandler.is_linux():
                 # TODO: Move to /opt/* and chmod file?
-                print(("Installing {0}".format(channel)))
+                # `tar -jxf firefox-beta.tar.gz -C ./beta --strip-components=1`?
+                local('tar -jxf {0} && mv firefox {1}'.format(installer, install_dir))
 
             elif IniHandler.is_windows():
-                # TODO: Silent run setup.exe?
-                print(("Installing {0}".format(channel)))
+                local('{0} -ms'.format(installer))
+
+                if channel == 'beta':
+                    # Since Beta and General Release channels install to the same directory,
+                    # install Beta first then rename the directory.
+                    gr_install_dir = self.config.get('gr', 'PATH_FIREFOX_APP')
+                    local('mv "{0}" "{1}"'.format(gr_install_dir, install_dir))
 
             elif IniHandler.is_mac():
                 # TODO: Mount the DMG to /Volumes and copy to /Applications?
-                print(("Installing {0}".format(channel)))
+                print('Do something...')
 
         else:
-            print(("[{0}] was cached, skipping install".format(channel)))
+            print(('[{0}] was cached, skipping install.'.format(channel)))
+
+        local('"{0}" --version # {1}'.format(self.config.get(channel, 'PATH_FIREFOX_BIN_ENV'), channel))
 
 
 def main():

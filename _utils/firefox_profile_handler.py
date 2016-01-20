@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
 from firefox_env_handler import FirefoxEnvHandler, IniHandler
+
 import sys
 
 
 class FirefoxProfileHandler(object):
+
     def __init__(self, config):
         # Do some basic type checking on the `config` attribute.
         if isinstance(config, IniHandler):
@@ -21,8 +23,8 @@ class FirefoxProfileHandler(object):
 
     def switch_prefs(self, profile_name, user_prefs, channel='nightly'):
         channel_firefox_bin = self.config.get(channel, 'PATH_FIREFOX_BIN_ENV')
-        print(("%s -CreateProfile %s".format(channel_firefox_bin, profile_name)))
-        print("copy prefs.js to <new profile name> dir")
+        print(('{0} -CreateProfile {1}'.format(channel_firefox_bin, profile_name)))
+        print('copy prefs.js to <new profile name> dir')
 
     def delete_all_profiles(self):
         FirefoxEnvHandler.clean_folder(self.profile_dir)

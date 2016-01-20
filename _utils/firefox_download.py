@@ -3,9 +3,9 @@
 from firefox_env_handler import IniHandler
 
 import os
-import urllib.request
-import urllib.error
 import sys
+import urllib.error
+import urllib.request
 
 
 class FirefoxDownload(object):
@@ -84,6 +84,8 @@ class FirefoxDownload(object):
         cache, using the archive's current `etag` as a unique identifier.
         """
         with open(out_file, 'wb') as file:
+            # TODO: I flipped a `was_cached` in here while hacking. Try and remember where it was.
+            # Conversely, ignore all caching and rip out the code and just download ~200MB each run.
             try:
                 contents = urllib.request.urlopen(download_url)
                 etag = contents.headers['etag']
@@ -94,7 +96,7 @@ class FirefoxDownload(object):
                 if self.cache.config.has_option('etags', channel):
                     # Etags matched, we "probably" have the latest version.
                     if etag == self.cache.get('etags', channel):
-                        was_cached = True
+                        was_cached = False
 
                     # Etag cache miss, download latest channel Firefox binary.
                     else:
@@ -109,19 +111,18 @@ class FirefoxDownload(object):
                 self.cache.set('cached', channel, was_cached)
 
                 if not was_cached:
-                    print(("Downloading [{0}] from {1}".format(channel, download_url)))
+                    print(('Downloading [{0}] from {1}'.format(channel, download_url)))
                     file.write(contents.read())
+                    file.close()
 
                 else:
-                    print(("[{0}] etag was cached, skipping download.".format(channel)))
+                    print(('[{0}] etag was cached, skipping download.'.format(channel)))
 
             except urllib.error.HTTPError as err:
                 # For some reason the download failed. Possibly due to a config
                 # mismatch in the INI files. :shrug:
                 # TODO: Currently we fail silently here. Fail harder?
                 print(('\t', err))
-
-            file.close()
 
         # Rewrite the Etag cache information back into our internal config.
         with open(self.cache_path, 'w') as cache:
