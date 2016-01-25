@@ -8,12 +8,12 @@ import urllib.error
 import urllib.request
 
 
+CACHE_FILE = 'cache.ini'
+
+
 class FirefoxDownload(object):
 
     def __init__(self, config, out_dir='temp', clean=False):
-        """
-        TODO:
-        """
         # Do some basic type checking on the `config` attribute.
         if isinstance(config, IniHandler):
             self.config = config
@@ -25,9 +25,12 @@ class FirefoxDownload(object):
         else:
             sys.exit('FirefoxDownload: Unexpected config data type')
 
-        self.CACHE_FILE = 'cache.ini'
+        # This cache file will be used to determine if a version of Firefox with
+        # the existing etag was already downloaded, so we only download Firefox
+        # if it is newer than the version already installed.
+
         self.out_dir = out_dir
-        self.cache_path = os.path.join(out_dir, self.CACHE_FILE)
+        self.cache_path = os.path.join(out_dir, CACHE_FILE)
 
         # If `clean` is truthy, delete the current cache folder and then
         # recreate the INI cache file.
@@ -84,8 +87,6 @@ class FirefoxDownload(object):
         cache, using the archive's current `etag` as a unique identifier.
         """
         with open(out_file, 'wb') as file:
-            # TODO: I flipped a `was_cached` in here while hacking. Try and remember where it was.
-            # Conversely, ignore all caching and rip out the code and just download ~200MB each run.
             try:
                 contents = urllib.request.urlopen(download_url)
                 etag = contents.headers['etag']
@@ -94,17 +95,9 @@ class FirefoxDownload(object):
                 # We found this channel in the cache, but not sure if it is
                 # recent.
                 if self.cache.config.has_option('etags', channel):
-                    # Etags matched, we "probably" have the latest version.
+                    # Etags matched, we probably have the latest version.
                     if etag == self.cache.get('etags', channel):
-                        was_cached = False
-
-                    # Etag cache miss, download latest channel Firefox binary.
-                    else:
-                        was_cached = False
-
-                # We didn't find this channel in the cache file, download away!
-                else:
-                    was_cached = False
+                        was_cached = True
 
                 # Update the etag cache with the latest etag fingerprint.
                 self.cache.set('etags', channel, etag)
