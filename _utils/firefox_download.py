@@ -114,8 +114,7 @@ class FirefoxDownload(object):
             except urllib.error.HTTPError as err:
                 # For some reason the download failed. Possibly due to a config
                 # mismatch in the INI files. :shrug:
-                # TODO: Currently we fail silently here. Fail harder?
-                print(('\t', err))
+                sys.exit('ERROR: {0}'.format(err))
 
         # Rewrite the Etag cache information back into our internal config.
         with open(self.cache_path, 'w') as cache:
