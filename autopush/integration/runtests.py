@@ -6,7 +6,6 @@ from marionette.runtests import cli as mn_cli
 class ServicesTestRunner(BaseMarionetteTestRunner):
     def __init__(self, **kwargs):
         BaseMarionetteTestRunner.__init__(self, **kwargs)
-        #self.app = 'fxdesktop'
         self.test_handlers = [FirefoxTestCase]
 
 

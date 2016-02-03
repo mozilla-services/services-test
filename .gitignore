@@ -18,6 +18,7 @@ include/
 */include/
 lib/
 */lib/
+**/venv/
 
 **/.idea
 node_modules

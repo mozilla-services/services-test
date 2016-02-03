@@ -5,17 +5,18 @@
 
 from firefox_puppeteer.testcases.base import FirefoxTestCase
 from marionette_driver import By
-from apps.base import Base
-
-#from apps.pocket.app import Push
+# TODO: Add 'base' from here, or import from "../../services-marionette/firefox_services_tests/apps/base.py"?
+from base import Base
 
 
 class Push(Base):
-    _login_url = 'http://localhost:3000/test/'
-    _pocket_logo_header_locator = (By.CSS_SELECTOR, 'h1.pocket_logo')
+    _test_url = 'http://localhost:3000/test/'
+    _mocha_complete_id = (By.CSS_SELECTOR, 'p#complete')
 
     def launch_express(self):
-        Base.launch(self, self._login_url)
+        Base.launch(self, self._test_url)
+        # TODO: Add code to wait for the #complete id and ensure there were 0 errors.
+
 
 class TestPush(FirefoxTestCase):
 
