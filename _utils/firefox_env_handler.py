@@ -165,3 +165,10 @@ class IniHandler(FirefoxEnvHandler):
         INI file. Doesn't save much time, but reads a bit easier.
         """
         return self.get('DEFAULT', option)
+
+
+if __name__ == '__main__':
+
+    i = IniHandler()
+    i.load_os_config('configs')
+    i.create_env_file()
