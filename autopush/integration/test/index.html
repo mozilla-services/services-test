@@ -6,14 +6,16 @@
 <head>
   <meta charset="utf-8">
   <title>autopush mocha integration tests</title>
-  <link rel="stylesheet" media="all" href="./vendor/mocha-2.2.5.css">
+  <link rel="stylesheet" media="all" href="vendor/mocha-2.2.5.css">
 </head>
 <body>
+
   <div id="mocha">
     <p><a href="../">Index</a></p>
- </div>
+  </div>
   <div id="messages"></div>
   <div id="fixtures"></div>
+
   <script>
     var uncaughtError;
     window.addEventListener("error", function(error) {
@@ -29,17 +31,17 @@
   </script>
 
   <!-- test dependencies -->
-  <script src="./vendor/mocha-2.2.5.js"></script>
-  <script src="./vendor/chai-3.0.0.js"></script>
-  <!-- <script src="../node_modules/chai/chai.js"></script>-->
-  <!-- <script src="./vendor/sinon-1.16.1.js"></script> -->
-  <!-- <script src="./sdk_mock.js"></script> -->
+  <script src="vendor/mocha-2.2.5.js"></script>
+  <script src="vendor/chai-3.0.0.js"></script>
   <script>
     chai.config.includeStack = true;
     mocha.setup({ui: 'bdd', timeout: 10000});
   </script>
+
   <!-- Test scripts -->
+  <script src="/app/converter.js"></script>
   <script src="converter_test.js"></script>
+
   <script>
     describe("Uncaught Error Check", function() {
       it("should load the tests without errors", function() {
@@ -59,6 +61,7 @@
       completeNode.appendChild(document.createTextNode("Complete"));
       document.getElementById("mocha").appendChild(completeNode);
     });
-</script>
+  </script>
+
 </body>
 </html>
