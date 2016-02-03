@@ -1,7 +1,7 @@
 {
   "name": "converter",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "app/server.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
