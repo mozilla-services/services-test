@@ -8,14 +8,43 @@ from marionette_driver import By
 # TODO: Add 'base' from here, or import from "../../services-marionette/firefox_services_tests/apps/base.py"?
 from base import Base
 
+MARIONETTE_TIMEOUT = 60000 # 60 seconds
 
 class Push(Base):
     _test_url = 'http://localhost:3000/test/'
     _mocha_complete_id = (By.CSS_SELECTOR, 'p#complete')
+    _mocha_passes_id = (By.CSS_SELECTOR, 'li.passes em')
+    _mocha_failures_id = (By.CSS_SELECTOR, 'li.failures em')
+    _mocha_errors_id = (By.CSS_SELECTOR, 'pre.error')
 
     def launch_express(self):
+        self.marionette.timeout = MARIONETTE_TIMEOUT
+
         Base.launch(self, self._test_url)
-        # TODO: Add code to wait for the #complete id and ensure there were 0 errors.
+
+        # Wait for "#complete" element
+        self.wait_for_element_displayed(*self._mocha_complete_id)
+
+        num_mocha_passes = int(self.marionette.find_element(*self._mocha_passes_id).text)
+        num_mocha_failures = int(self.marionette.find_element(*self._mocha_failures_id).text)
+
+        print("\nMOCHA SUMMARY\n-------------")
+        print("passed: {0}".format(num_mocha_passes))
+        print("failed: {0}".format(num_mocha_failures))
+        print("")
+
+        if num_mocha_failures == 0:
+            # All our mocha tests have passed. Exit now. \o/
+            return
+
+        mocha_errors_list = self.marionette.find_elements(*self._mocha_errors_id)
+
+        for item in mocha_errors_list:
+            print("----------")
+            print(item.text)
+            print("\n")
+
+        assert False
 
 
 class TestPush(FirefoxTestCase):

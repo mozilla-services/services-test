@@ -2,7 +2,7 @@
 
 import os
 import configargparse
-from subprocess import Popen
+from subprocess import Popen, PIPE
 
 
 def _parse_args():
@@ -28,11 +28,20 @@ def main():
 
     proc_express = Popen(['node', 'app/server.js'])
     proc_test = Popen(['python', 'runtests.py', 'test_push.py',
-                       '--binary', path_nightly])
+                       '--binary', path_nightly], stdout=PIPE, stderr=PIPE)
+
+    out, err = proc_test.communicate()
 
     proc_test.wait()
-
     proc_express.terminate()
+
+    print(err)
+
+    for line in out.split("\n"):
+        if (line == "SUMMARY"):
+            return
+
+        print(line)
 
 if __name__ == '__main__':
     main()
