@@ -5,10 +5,13 @@
 
 from firefox_puppeteer.testcases.base import FirefoxTestCase
 from marionette_driver import By
-# TODO: Add 'base' from here, or import from "../../services-marionette/firefox_services_tests/apps/base.py"?
+#TODO: If Marionette base files will reside locally, we'll want to 
+#       reference a relative path to those, rather than duplicate
+#      base file for every single test.
 from base import Base
 
 MARIONETTE_TIMEOUT = 60000 # 60 seconds
+
 
 class Push(Base):
     _test_url = 'http://localhost:3000/test/'
@@ -16,6 +19,12 @@ class Push(Base):
     _mocha_passes_id = (By.CSS_SELECTOR, 'li.passes em')
     _mocha_failures_id = (By.CSS_SELECTOR, 'li.failures em')
     _mocha_errors_id = (By.CSS_SELECTOR, 'pre.error')
+
+    def print_summary(self, num_mocha_passes, num_mocha_failures):
+        print("\nMOCHA SUMMARY\n-------------")
+        print("passed: {0}".format(num_mocha_passes))
+        print("failed: {0}".format(num_mocha_failures))
+        print("")
 
     def launch_express(self):
         self.marionette.timeout = MARIONETTE_TIMEOUT
@@ -28,10 +37,11 @@ class Push(Base):
         num_mocha_passes = int(self.marionette.find_element(*self._mocha_passes_id).text)
         num_mocha_failures = int(self.marionette.find_element(*self._mocha_failures_id).text)
 
-        print("\nMOCHA SUMMARY\n-------------")
-        print("passed: {0}".format(num_mocha_passes))
-        print("failed: {0}".format(num_mocha_failures))
-        print("")
+        self.print_summary(num_mocha_passes, num_mocha_failures)
+        #print("\nMOCHA SUMMARY\n-------------")
+        #print("passed: {0}".format(num_mocha_passes))
+        #print("failed: {0}".format(num_mocha_failures))
+        #print("")
 
         if num_mocha_failures == 0:
             # All our mocha tests have passed. Exit now. \o/

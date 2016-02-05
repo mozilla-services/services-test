@@ -13,7 +13,6 @@ var server = app.listen(port, function () {
   var host = server.address();
   var baseUrl = "http://" + host.address + ":" + host.port;
   console.log("Tests are viewable at " + baseUrl + "/test/");
-  console.log("Use this for development only.");
 });
 
 // Handle SIGTERM signal.
