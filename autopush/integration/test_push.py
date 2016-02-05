@@ -5,12 +5,13 @@
 
 from firefox_puppeteer.testcases.base import FirefoxTestCase
 from marionette_driver import By
-#TODO: If Marionette base files will reside locally, we'll want to 
+# TODO: If Marionette base files will reside locally, we'll want to
 #       reference a relative path to those, rather than duplicate
-#      base file for every single test.
+#       base file for every single test.
 from base import Base
 
-MARIONETTE_TIMEOUT = 60000 # 60 seconds
+
+MARIONETTE_TIMEOUT = 60000  # 60 seconds
 
 
 class Push(Base):
@@ -38,10 +39,6 @@ class Push(Base):
         num_mocha_failures = int(self.marionette.find_element(*self._mocha_failures_id).text)
 
         self.print_summary(num_mocha_passes, num_mocha_failures)
-        #print("\nMOCHA SUMMARY\n-------------")
-        #print("passed: {0}".format(num_mocha_passes))
-        #print("failed: {0}".format(num_mocha_failures))
-        #print("")
 
         if num_mocha_failures == 0:
             # All our mocha tests have passed. Exit now. \o/
