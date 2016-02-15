@@ -32,12 +32,15 @@ def _parse_args():
     parser = configargparse.ArgumentParser(
         description='CLI tool for creating Firefox profiles via mozprofile CLI')
     parser.add_argument('-a', '--application',
+                        required=True,
                         help='Application to test. Example: "loop-server"')
     parser.add_argument('-t', '--test-type',
+                        required=True,
                         help='Application test type. Example: "stack-check"')
     parser.add_argument('-e', '--env',
                         help='Test environment. Example: "dev", "stage", ...')
     parser.add_argument('-p', '--profile',
+                        required=True,
                         help='Profile name.')
 
     args = parser.parse_args()
