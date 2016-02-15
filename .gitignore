@@ -25,3 +25,4 @@ node_modules
 *.log
 .env
 .tmp
+_temp
