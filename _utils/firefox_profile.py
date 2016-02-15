@@ -26,11 +26,6 @@ FILE_PREFS = 'prefs.ini'
 
 config = configparser.ConfigParser()
 
-application = 'loop-server'
-test_type = 'stack-check'
-env = 'stage'
-profile = 'BANANAS2'
-
 
 def _parse_args():
     """Parses out args for CLI"""
@@ -59,7 +54,8 @@ def prefs_paths(application, test_type, env='stage'):
 
     if os.path.exists(path_app):
         config.read(path_app)
-        if config.has_section(env):  # Make sure the specified INI file has the specified section.
+        # Make sure the specified INI file has the specified section.
+        if config.has_section(env):
             valid_paths.append(path_app + ":" + env)
 
     if os.path.exists(path_app_test_type):
