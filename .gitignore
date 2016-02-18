@@ -3,7 +3,12 @@
 *.py[cod]
 *.sw[op]
 *.dmg
+*.zip
+*.tar*
+*.bz2
 *.bak
+*.BAK
+*.OLD
 
 .Python
 build/
