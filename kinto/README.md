@@ -21,6 +21,9 @@ updated.
 
 ###Run Integration Tests###
 
+The integration tests were developed using Docker version 1.9.1, build a34a1d5 and
+Docker Compose version 1.5.1.
+
 1. Make sure that you have [Docker](https://www.docker.com/) installed on the system you are running the tests on
 2. Start your master and read-only containers using _docker-compose up_
 3. Run the tests using _./bin/py.test integration-test/_
