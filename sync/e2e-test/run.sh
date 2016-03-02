@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## these will be added by Vagrant and the nightly refresh job
-sudo apt-get -y install mercurial
+# sudo apt-get -y install mercurial
 hg clone http://hg.mozilla.org/mozilla-central
 cd mozilla-central/testing/tps
 
