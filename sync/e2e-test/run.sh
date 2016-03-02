@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 
 ## these will be added by Vagrant and the nightly refresh job
 # sudo apt-get -y install mercurial
@@ -10,11 +10,8 @@ hg clone http://hg.mozilla.org/mozilla-central
 #sed -i "s/mozversion ==[^']*/mozversion == 1.4/" setup.py
 
 cd $PWD/mozilla-central/testing/tps
-./create_venv.py $HOME/tps-env
+./create_venv.py --username="tpstps@restmail.net" --password="TESTINGtesting" $HOME/tps-env
 . $HOME/tps-env/bin/activate
-sed -i -e 's/__FXA_ACCOUNT_USERNAME__/tpstps@restmail.net/' \
-       -e 's/__FXA_ACCOUNT_PASSWORD__/TESTING!/' \
-       $HOME/tps-env/config.json
 Xvfb :20 >& /tmp/xerrors &
 export DISPLAY=:20
 runtps --binary=/usr/bin/firefox
