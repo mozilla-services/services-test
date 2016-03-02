@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ## these will be added by Vagrant and the nightly refresh job
-# sudo apt-get -y install mercurial
-# hg clone http://hg.mozilla.org/mozilla-central
-# cd mozilla-central/testing/tps
+sudo apt-get -y install mercurial
+hg clone http://hg.mozilla.org/mozilla-central
+cd mozilla-central/testing/tps
 
 # tweak these:
 #sed -i "s/mozprofile ==[^']*/mozprofile == 0.27/" setup.py
