@@ -4,16 +4,17 @@ import json
 import mimetypes
 import os
 import requests
-import sha256
+# import sha256
 import time
 import unittest
 import uuid
 
 from kinto_client import Client
-from kinto_client import cli_utils
+# from kinto_client import cli_utils
 
 DEFAULT_SERVER = "https://kinto.dev.mozaws.net/v1/"
 FILEPATH = "dev-requirements.txt"
+
 
 class DeploymentTest(unittest.TestCase):
     """
@@ -79,7 +80,7 @@ class DeploymentTest(unittest.TestCase):
             collection=self.collection,
             bucket=self.bucket
         )
-        stored_file = new_record['data']['attachment']['location'];
+        stored_file = new_record['data']['attachment']['location']
         response = requests.get(stored_file, stream=True)
         self.assertEquals(response.text, filecontent)
 
