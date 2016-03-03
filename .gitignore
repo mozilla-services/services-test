@@ -24,7 +24,7 @@ include/
 lib/
 */lib/
 **/venv/
-**/.cache
+**/.cache/
 
 **/.idea
 node_modules
