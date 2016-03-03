@@ -1,0 +1,5 @@
+{
+  "test_deployment.py::DeploymentTest::testChangeOfHash": true, 
+  "test_deployment.py::DeploymentTest::testCleanUp": true, 
+  "test_deployment.py::DeploymentTest::testSanityChecks": true
+}

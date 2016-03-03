@@ -4,5 +4,7 @@ pyopenssl
 ndg-httpsclient
 pyasn1
 pytest
-git+https://github.com/Kinto/kinto.py.git@replication#egg=kinto-client
+kinto-client
 docker-py
+uuid
+sha256
