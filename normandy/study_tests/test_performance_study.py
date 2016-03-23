@@ -1,12 +1,11 @@
-import pytest
 import sys
 import time
 from marionette import Marionette
-from marionette_driver import By, Wait
 from marionette_driver.addons import Addons
 
 EXTENSION = '/Users/chartjes/mozilla-services/services-test/normandy/x-screen-draw-performance-shield-study-1.xpi'
 BASE = 'extensions.@x-screen-draw-performance-shield-study-1'
+
 
 class TestPerformanceStudy():
     def setup(self):
@@ -41,7 +40,7 @@ class TestPerformanceStudy():
             assert True
 
         # If set to None, it means the extension got removed
-        assert self.client.get_pref("%s.variation" % BASE) == None
+        assert self.client.get_pref("%s.variation" % BASE) is None
 
     def test_second_start(self):
         self.client.set_pref('nglayout.initialpaint.delay', None)
