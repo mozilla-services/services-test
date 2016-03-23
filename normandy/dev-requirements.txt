@@ -1,0 +1,3 @@
+pytest
+marionette_driver
+marionette_client
