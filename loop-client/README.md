@@ -16,3 +16,8 @@ The tests are using [pytest](http://pytest.org/latest/) so to run them do the
 following:
 
 `py.test /path/to/test.py`
+
+## Deployment Tests
+
+Make sure to edit the constants that point to various Loop sever end points as
+they differ between staging and production.
