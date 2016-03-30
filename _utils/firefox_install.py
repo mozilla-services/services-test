@@ -41,17 +41,21 @@ class FirefoxInstall(object):
 
             if IniHandler.is_linux():
                 # TODO: Move to /opt/* and chmod file?
-                # `tar -jxf firefox-beta.tar.gz -C ./beta --strip-components=1`?
-                local('tar -jxf {0} && mv firefox {1}'.format(installer, install_dir))
+                # `tar -jxf firefox-beta.tar.gz -C
+                # ./beta --strip-components=1`?
+                local('tar -jxf {0} && mv firefox {1}'.format(
+                    installer, install_dir))
 
             elif IniHandler.is_windows():
                 local('{0} -ms'.format(installer))
 
                 if channel == 'beta':
-                    # Since Beta and General Release channels install to the same directory,
+                    # Since Beta and General Release channels install
+                    # to the same directory,
                     # install Beta first then rename the directory.
                     gr_install_dir = self.config.get('gr', 'PATH_FIREFOX_APP')
-                    local('mv "{0}" "{1}"'.format(gr_install_dir, install_dir))
+                    local('mv "{0}" "{1}"'.format(
+                        gr_install_dir, install_dir))
 
             elif IniHandler.is_mac():
                 # TODO: Mount the DMG to /Volumes and copy to /Applications?
@@ -60,7 +64,8 @@ class FirefoxInstall(object):
         else:
             print(('[{0}] was cached, skipping install.'.format(channel)))
 
-        local('"{0}" --version # {1}'.format(self.config.get(channel, 'PATH_FIREFOX_BIN_ENV'), channel))
+        local('"{0}" --version # {1}'.format(
+            self.config.get(channel, 'PATH_FIREFOX_BIN_ENV'), channel))
 
 
 def main():

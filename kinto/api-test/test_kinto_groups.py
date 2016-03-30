@@ -22,7 +22,8 @@ class Kinto_Groups(unittest.TestCase):
         self.assertIn('code', response)
         self.assertIn('error', response)
         self.assertEqual(response['errno'], 115)
-        self.assertEqual(response['message'], "Method not allowed on this endpoint.")
+        self.assertEqual(
+            response['message'], "Method not allowed on this endpoint.")
         self.assertEqual(response['code'], 405)
         self.assertEqual(response['error'], 'Method Not Allowed')
 
@@ -30,7 +31,8 @@ class Kinto_Groups(unittest.TestCase):
         resource = 'buckets/test_bucket/groups/%s' % group_id
         data = '{"data": {"members": ["%s"]}}' % data
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.put_request(resource, data, status_code=expected_status_code)
+        response = self.client.put_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
             self.group_id = "invalid_group"
@@ -42,7 +44,8 @@ class Kinto_Groups(unittest.TestCase):
         resource = 'buckets/test_bucket'
         # Create test_bucket
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.put_request(resource, status_code=expected_status_code)
+        response = self.client.put_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -70,7 +73,8 @@ class Kinto_Groups(unittest.TestCase):
         resource = 'buckets/test_bucket/groups/test_group'
         data = '{"data": {"members": ["member_auth2"]}}'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.put_request(resource, data, status_code=expected_status_code)
+        response = self.client.put_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -89,14 +93,17 @@ class Kinto_Groups(unittest.TestCase):
             self.create_group("test_group", "member_auth")
         resource = 'buckets/test_bucket/groups/' + self.group_id
         expected_status_code = 404 if self.client.is_read_only() else 200
-        response = self.client.get_request(resource, status_code=expected_status_code)
+        response = self.client.get_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assertIn('errno', response)
             self.assertIn('message', response)
             self.assertIn('code', response)
             self.assertIn('error', response)
             self.assertEqual(response['errno'], 111)
-            self.assertEqual(response['message'], "The resource you are looking for could not be found.")
+            self.assertEqual(
+                response['message'],
+                "The resource you are looking for could not be found.")
             self.assertEqual(response['code'], 404)
             self.assertEqual(response['error'], 'Not Found')
         else:
@@ -118,7 +125,8 @@ class Kinto_Groups(unittest.TestCase):
             self.create_group("test_group", "member_auth")
         resource = 'buckets/test_bucket/groups/' + self.group_id
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.delete_request(resource, status_code=expected_status_code)
+        response = self.client.delete_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
