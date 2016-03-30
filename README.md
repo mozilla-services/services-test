@@ -4,16 +4,30 @@ services-test
 Description
 ----------------------
 
-This repo is intended for: testing tools, test manifests and scripts used by the Mozilla Cloud Services team as part of the Jenkins automated test pipeline.
+This repo is intended for: testing tools, test manifests and scripts used by the Mozilla Cloud Services team as part of the Mozilla Cloud Services automated test pipeline.
 
 See: [services-qa-jenkins](https://github.com/mozilla-services/services-qa-jenkins) for how these tests are used in jenkins jobs.
 
-Includes
+Repo Structure
 ----------------------
-* One directory per project (i.e. absearch, loop, autopush, etc.)
-* Each project directory contains sub-directories (1 per test type)
-* Within each test type sub-directory you will find a "run.sh" file which should install all dependencies and kick off a test of the type indicated by the parent directory
-* Any additional files needed by that test type should be self-contained in that directory.
+To contribute a new automated test to the services-test repo, please adhere to the following guidelines.  This following file structure is required by Jenkins to execute automated tests.
+
+* __project__ (directory)
+ * One directory per project.  For example:
+   * services-test/absearch
+   * services-test/autopush, etc.
+* __test-type__ (directory)
+ * One project child directory per test-type.  For example:
+  * services-test/absearch/e2e-test
+  * services-test/absearch/schema-check, etc.
+* __run__ (file)
+ * Within each test type sub-directory you must include a "run" file which should install all dependencies and kick off a test of the type indicated by the parent directory
+ * example: [example run file](services-test/blob/dev/demo/run)
+* __manifest.ini__ (file)
+ * Within each test-type sub-directory, you must include a manifest file which should specify any environment-specific parameters
+  * example: [example manifest.ini](services-test/blob/dev/demo/manifest.ini)
+* __misc__ (files)
+ * Any additional files needed by that test type should be self-contained in that directory.
 
 Docker Instructions
 ----------------------
