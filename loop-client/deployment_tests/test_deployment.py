@@ -3,6 +3,7 @@ import demjson
 import pytest
 import requests
 
+
 # A fixture to make sure values from our config file are available
 @pytest.fixture
 def conf():
@@ -10,11 +11,13 @@ def conf():
     config.read('manifest.ini')
     return config
 
+
 def test_header(conf, env):
     r = requests.head(conf.get(env, 'root'))
     assert r.headers['Location'] == conf.get(env, 'location')
     assert r.headers['X-Frame-Options'] == u'SAMEORIGIN'
     assert u'Content-Security-Policy' in r.headers
+
 
 def test_server_config(conf, env):
     r = requests.get(conf.get(env, 'root') + '/config.js')
@@ -39,6 +42,7 @@ def test_server_config(conf, env):
 
     assert json_dict['fxosApp']['name'] == conf.get(env, 'loop_fxos_app_name')
 
+
 def test_server_response(conf, env):
     r = requests.get(conf.get(env, 'loop_server'))
     data = r.json()
@@ -51,6 +55,7 @@ def test_server_response(conf, env):
     assert 'i18n' in data
     assert data['name'] == conf.get(env, 'name')
     assert data['version'] == conf.get(env, 'loop_server_version')
+
 
 def test_push_server_config(conf, env):
     r = requests.get(conf.get(env, 'loop_server_push_server_config'))
