@@ -3,7 +3,8 @@ import time
 from marionette import Marionette
 from marionette_driver.addons import Addons
 
-EXTENSION = '/Users/chartjes/mozilla-services/services-test/normandy/x-screen-draw-performance-shield-study-1.xpi'
+EXTENSION = '/Users/chartjes/mozilla-services/services-test/' \
+            'normandy/x-screen-draw-performance-shield-study-1.xpi'
 BASE = 'extensions.@x-screen-draw-performance-shield-study-1'
 
 

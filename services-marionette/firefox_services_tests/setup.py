@@ -18,15 +18,19 @@ deps = [
 
 setup(name='firefox-services-tests',
       version=PACKAGE_VERSION,
-      description='A collection of Mozillas Cloud Services tests run with Marionette',
-      long_description='See https://github.com/mozilla-services/services-test/tree/dev/services-marionette',
+      description='A collection of Mozillas Cloud Services tests '
+                  'run with Marionette',
+      long_description='See https://github.com/mozilla-services/'
+                       'services-test/tree/dev/services-marionette',
       classifiers=['Environment :: Console',
                    'Intended Audience :: Developers',
-                   'License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)',
+                   'License :: OSI Approved :: Mozilla Public License 2.0'
+                   ' (MPL 2.0)',
                    'Natural Language :: English',
                    'Operating System :: OS Independent',
                    'Programming Language :: Python',
-                   'Topic :: Software Development :: Libraries :: Python Modules',
+                   'Topic :: Software Development :: Libraries :: Python '
+                   'Modules',
                    ],
       keywords='mozilla services',
       author='Mozilla Cloud Services QA Team',
