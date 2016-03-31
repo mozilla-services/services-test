@@ -35,8 +35,10 @@ class Push(Base):
         # Wait for "#complete" element
         self.wait_for_element_displayed(*self._mocha_complete_id)
 
-        num_mocha_passes = int(self.marionette.find_element(*self._mocha_passes_id).text)
-        num_mocha_failures = int(self.marionette.find_element(*self._mocha_failures_id).text)
+        num_mocha_passes = int(
+            self.marionette.find_element(*self._mocha_passes_id).text)
+        num_mocha_failures = int(
+            self.marionette.find_element(*self._mocha_failures_id).text)
 
         self.print_summary(num_mocha_passes, num_mocha_failures)
 
@@ -44,7 +46,8 @@ class Push(Base):
             # All our mocha tests have passed. Exit now. \o/
             return
 
-        mocha_errors_list = self.marionette.find_elements(*self._mocha_errors_id)
+        mocha_errors_list = self.marionette.find_elements(
+            *self._mocha_errors_id)
 
         for item in mocha_errors_list:
             print("----------")
