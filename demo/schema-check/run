@@ -7,9 +7,10 @@ print('-----------------------\n')
 print('install some deps here...')
 
 print('\n-----------------------')
-print('RUN TEST')
+print('RUN SCHEMA-CHECK')
 print('-----------------------\n')
-print('hello world.\n')
 
-print('TEST COMPLETE!')
+print('running schema-check!\n')
+
+print('TEST COMPLETE!\n\n')
 

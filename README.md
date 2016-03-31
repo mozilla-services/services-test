@@ -16,16 +16,18 @@ To contribute a new automated test to the services-test repo, please adhere to t
  * One directory per project.  For example:
    * services-test/absearch
    * services-test/autopush, etc.
+* __README.md__ (file) 
+ * Add README file in project folder with links to: project repo (github), readthedocs, testplan, etc. 
 * __test-type__ (directory)
  * One project child directory per test-type.  For example:
   * services-test/absearch/e2e-test
   * services-test/absearch/schema-check, etc.
 * __run__ (file)
- * Within each test type sub-directory you must include a "run" file which should install all dependencies and kick off a test of the type indicated by the parent directory
- * example: [example run file](services-test/blob/dev/demo/run)
+ * Add a "run" file in each test-type directory which should install all dependencies and kick off a test of the type indicated by the parent directory
+ * example: [example run file](services-test/blob/dev/demo/e2e-test/run)
 * __manifest.ini__ (file)
- * Within each test-type sub-directory, you must include a manifest file which should specify any environment-specific parameters
-  * example: [example manifest.ini](services-test/blob/dev/demo/manifest.ini)
+ * Add a manifest file in each test-type directory which should specify any environment-specific parameters
+  * example: [example manifest.ini](services-test/blob/dev/demo/e2e-test/manifest.ini)
 * __misc__ (files)
  * Any additional files needed by that test type should be self-contained in that directory.
 
