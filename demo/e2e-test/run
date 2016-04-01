@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+print('\n-----------------------')
+print('INSTALL')
+print('-----------------------\n')
+
+print('install some deps here...')
+
+print('\n-----------------------')
+print('RUN E2E-TEST(S)')
+print('-----------------------\n')
+
+print('running e2e-test!\n')
+
+print('TESTS COMPLETE!\n\n')
+
