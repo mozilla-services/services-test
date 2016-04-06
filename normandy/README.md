@@ -5,8 +5,8 @@ in order to have an isolated environment.
 
 From /normandy/
 
-1. virtualenv .
-2. ./bin/pip install -r dev-requirements.txt
+1. virtualenv venv
+2. ./venv/bin/pip install -r dev-requirements.txt
 
 ##Running Tests
 
