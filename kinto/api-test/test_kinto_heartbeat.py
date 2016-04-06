@@ -6,7 +6,8 @@ from mockclient import MockClient
 class Kinto_Fetch_Heartbeat(unittest.TestCase):
     """
         Test case to verify the heartbeat
-        Docs: http://kinto.readthedocs.org/en/latest/api/cliquet/utilities.html#get-heartbeat
+        Docs: http://kinto.readthedocs.org/en/latest/api/
+        cliquet/utilities.html#get-heartbeat
     """
 
     def setUp(self):

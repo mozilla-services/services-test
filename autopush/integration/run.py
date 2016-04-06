@@ -24,7 +24,8 @@ def main():
         if os.environ.get('PATH_FIREFOX_APP_NIGHTLY'):
             path_nightly = os.environ.get('PATH_FIREFOX_APP_NIGHTLY')
         else:
-            exit('Unable to locate Firefox binary. Specify using `--binary` arg.')
+            exit('Unable to locate Firefox binary. '
+                 'Specify using `--binary` arg.')
 
     proc_express = Popen(['node', 'app/server.js'])
     proc_test = Popen(['python', 'runtests.py', 'test_push.py',

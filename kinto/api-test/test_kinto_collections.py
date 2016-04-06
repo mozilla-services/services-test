@@ -21,7 +21,8 @@ class Kinto_Collections(unittest.TestCase):
         self.assertIn('code', response)
         self.assertIn('error', response)
         self.assertEqual(response['errno'], 115)
-        self.assertEqual(response['message'], "Method not allowed on this endpoint.")
+        self.assertEqual(
+            response['message'], "Method not allowed on this endpoint.")
         self.assertEqual(response['code'], 405)
         self.assertEqual(response['error'], 'Method Not Allowed')
 
@@ -29,7 +30,8 @@ class Kinto_Collections(unittest.TestCase):
         # Create the bucket
         resource = 'buckets/test_bucket'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.put_request(resource, status_code=expected_status_code)
+        response = self.client.put_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -42,7 +44,8 @@ class Kinto_Collections(unittest.TestCase):
         # Create the collection
         resource = 'buckets/test_bucket/collections/test_collection'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.put_request(resource, status_code=expected_status_code)
+        response = self.client.put_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -58,7 +61,8 @@ class Kinto_Collections(unittest.TestCase):
         resource = 'buckets/test_bucket/collections/test_collection'
         data = ''
         expected_status_code = 405 if self.client.is_read_only() else 400
-        response = self.client.patch_request(resource, data, status_code=expected_status_code)
+        response = self.client.patch_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -67,7 +71,9 @@ class Kinto_Collections(unittest.TestCase):
             self.assertIn('code', response)
             self.assertIn('error', response)
             self.assertEqual(response['errno'], 107)
-            self.assertEqual(response['message'], "Provide at least one of data or permissions")
+            self.assertEqual(
+                response['message'],
+                "Provide at least one of data or permissions")
             self.assertEqual(response['code'], 400)
             self.assertEqual(response['error'], 'Invalid parameters')
 
@@ -75,7 +81,8 @@ class Kinto_Collections(unittest.TestCase):
         resource = 'buckets/test_bucket/collections/test_collection'
         data = '{"data": {"fingerprint": "a_new_fingerprint"}}'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.patch_request(resource, data, status_code=expected_status_code)
+        response = self.client.patch_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -86,7 +93,8 @@ class Kinto_Collections(unittest.TestCase):
             self.assertIn('id', response['data'])
             self.assertIn('schema', response['data'])
             self.assertIn('write', response['permissions'])
-            self.assertEqual(response['data']['fingerprint'], 'a_new_fingerprint')
+            self.assertEqual(
+                response['data']['fingerprint'], 'a_new_fingerprint')
             self.assertEqual(response['data']['id'], 'test_collection')
 
     def test_retrieve_collection(self):
@@ -103,7 +111,8 @@ class Kinto_Collections(unittest.TestCase):
     def test_delete_collection(self):
         resource = 'buckets/test_bucket/collections/delete_collection'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.put_request(resource, status_code=expected_status_code)
+        response = self.client.put_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -116,7 +125,8 @@ class Kinto_Collections(unittest.TestCase):
             self.assertEqual(response['data']['id'], 'delete_collection')
 
         resource = 'buckets/test_bucket/collections/delete_collection'
-        response = self.client.delete_request(resource, status_code=expected_status_code)
+        response = self.client.delete_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -130,7 +140,8 @@ class Kinto_Collections(unittest.TestCase):
     def test_delete_collection_not_exist(self):
         resource = 'buckets/test_bucket/collections/invalid_delete'
         expected_status_code = 405 if self.client.is_read_only() else 404
-        response = self.client.delete_request(resource, status_code=expected_status_code)
+        response = self.client.delete_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -139,6 +150,8 @@ class Kinto_Collections(unittest.TestCase):
             self.assertIn('code', response)
             self.assertIn('error', response)
             self.assertEqual(response['errno'], 111)
-            self.assertEqual(response['message'], "The resource you are looking for could not be found.")
+            self.assertEqual(
+                response['message'],
+                "The resource you are looking for could not be found.")
             self.assertEqual(response['code'], 404)
             self.assertEqual(response['error'], 'Not Found')

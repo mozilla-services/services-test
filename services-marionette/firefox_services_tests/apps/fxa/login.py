@@ -23,7 +23,8 @@ class LoginPage(Base):
 
     # def login_to_fxa(self):
     #     self.wait_for_element_displayed(*self._fxa_sign_in_header_locator)
-    #     # TODO: We need to add or implement functionality that pulls credentials a manifests  file
+    #     # TODO: We need to add or implement functionality
+    #       TODO: that pulls credentials a manifests  file
     #     self.marionette.find_element(*self._fxa_email_input_locator)\
     #         .send_keys()
     #     self.marionette.find_element(*self._fxa_password_input_locator)\
@@ -48,12 +49,14 @@ class LoginPage(Base):
         self.click_element(*self._fxa_sign_up_button_locator)
         self.wait_for_element_displayed(*self._fxa_email_input_locator)
         assert self.marionette.find_element(
-            *self._fxa_email_input_locator).get_attribute('value') == email_address
+            *self._fxa_email_input_locator).get_attribute(
+            'value') == email_address
 
         if request_permission:
             self.wait_for_element_displayed(
                 *self._fxa_accept_request_permission_button_locator)
-            self.click_element(*self._fxa_accept_request_permission_button_locator)
+            self.click_element(
+                *self._fxa_accept_request_permission_button_locator)
         verification_url = utils.check_generated_email(email_address)
 
         while verification_url is None:

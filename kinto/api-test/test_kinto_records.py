@@ -90,7 +90,8 @@ class Kinto_Records(unittest.TestCase):
         if not self.record_id:
             self.create_record("sample_record")
 
-        resource = 'buckets/test_bucket/collections/test_collection/records/' + self.record_id
+        resource = 'buckets/test_bucket/collections/test_collection/records/'\
+                   + self.record_id
         data = '{"data": {"test": "new_record"}}'
         expected_status_code = 405 if self.client.is_read_only() else 200
         response = self.client.put_request(
@@ -110,7 +111,8 @@ class Kinto_Records(unittest.TestCase):
         if not self.record_id:
             self.create_record("sample_record")
 
-        resource = 'buckets/test_bucket/collections/test_collection/records/' + self.record_id
+        resource = 'buckets/test_bucket/collections/test_collection/records/'\
+                   + self.record_id
         data = '{"data": {"test": "updated_record"}}'
         expected_status_code = 405 if self.client.is_read_only() else 200
         response = self.client.patch_request(
@@ -130,7 +132,8 @@ class Kinto_Records(unittest.TestCase):
     def test_retrieve_record(self):
         if not self.record_id or self.record_id == '':
             self.create_record("sample_record")
-        resource = 'buckets/test_bucket/collections/test_collection/records/' + self.record_id
+        resource = 'buckets/test_bucket/collections/test_collection/records/'\
+                   + self.record_id
         expected_status_code = 400 if self.client.is_read_only() else 200
         response = self.client.get_request(
             resource, status_code=expected_status_code)
@@ -163,7 +166,8 @@ class Kinto_Records(unittest.TestCase):
     def test_delete_record(self):
         if not self.record_id or self.record_id == '':
             self.create_record("sample_record")
-        resource = 'buckets/test_bucket/collections/test_collection/records/' + self.record_id
+        resource = 'buckets/test_bucket/collections/test_collection/records/'\
+                   + self.record_id
         expected_status_code = 405 if self.client.is_read_only() else 200
         response = self.client.delete_request(
             resource, status_code=expected_status_code)
