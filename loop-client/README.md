@@ -10,14 +10,12 @@ From /loop-client/
 1. virtualenv .
 2. ./bin/pip install -r requirements.txt
 
-##Running Tests
+Verify that the `manifest.ini` file contains expected values since the tests
+rely on using it for assertions.
+
+## Deployment Tests
 
 The tests are using [pytest](http://pytest.org/latest/) so to run them do the
 following:
 
-`py.test /path/to/test.py`
-
-## Deployment Tests
-
-Make sure to edit the constants that point to various Loop sever end points as
-they differ between staging and production.
+`py.test -v --env=stage deployment_tests/`
