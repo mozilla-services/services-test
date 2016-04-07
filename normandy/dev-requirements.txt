@@ -1,3 +1,5 @@
 pytest
 marionette_driver
 marionette_client
+demjson
+requests
