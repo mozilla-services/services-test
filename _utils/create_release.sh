@@ -1,11 +1,13 @@
 #!/bin/bash -e
 
+# Use for tagging services-test
+
 if (( $# != 1 )); then
     echo "Please specify the tag"
     exit 1;
 fi
 
-LOOP_CLIENT_DIR=$(basename $(pwd))
+HOME_DIR=$(basename $(pwd))
 TAG=$1
 
 echo "Tagging..."
