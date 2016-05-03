@@ -24,10 +24,10 @@ To contribute a new automated test to the services-test repo, please adhere to t
   * services-test/absearch/schema-check, etc.
 * __run__ (file)
  * Add a "run" file in each test-type directory which should install all dependencies and kick off a test of the type indicated by the parent directory
- * example: [example run file](services-test/blob/dev/demo/e2e-test/run)
+ * example: [example run file](/demo/e2e-test/run)
 * __manifest.ini__ (file)
  * Add a manifest file in each test-type directory which should specify any environment-specific parameters
-  * example: [example manifest.ini](services-test/blob/dev/demo/e2e-test/manifest.ini)
+  * example: [example manifest.ini](/demo/e2e-test/manifest.ini)
 * __misc__ (files)
  * Any additional files needed by that test type should be self-contained in that directory.
 
