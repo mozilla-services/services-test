@@ -9,6 +9,8 @@ This document describes the test plan for recipe filtering in Normandy.
    `console-log` action in your local instance. If you don't have this action,
    run the command again.
 
+[normandy-docker-qa]: http://normandy.readthedocs.org/en/latest/qa/docker.html
+
 ## Notes
 
 - All URLs pointing to `https://localhost:8000` are meant to refer to your local

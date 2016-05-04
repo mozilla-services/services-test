@@ -1,4 +1,0 @@
-Fabric3
-configargparse
-configparser
-mozdownload

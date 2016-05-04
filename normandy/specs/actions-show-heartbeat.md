@@ -61,7 +61,7 @@ This document describes the test plan for the `show-heartbeat` action.
 2. Clear localStorage by running `localStorage.clear()` in the web console, and
    open up the Network tab in the DevTools.
 3. Reload the page.
-4. A Heartbeat prompt should appear with the text `Default message` and a button
+4. A Heartbeat prompt should appear with the text `Default message` and a link
    on the right with the text `Default learn more`.
 5. The Network tab should show two HTTP POSTs (one on start, one after showing
    the prompt) to `https://input.mozilla.org/api/v2/hb/` with a 200 return
@@ -129,3 +129,45 @@ This document describes the test plan for the `show-heartbeat` action.
    survey appears are accurate.
 4. Confirm that the custom fields on the "Weight 3 Custom" survey take effect as
    described in Test 1.
+
+## Test 3: "Message with a Button"
+
+### Prep
+
+1. Create a recipe in the admin interface:
+  - Name: Message with a Button Test
+  - Action: `show-heartbeat`
+  - Arguments:
+    - surveyId: `heartbeat-by-user-first-impression`
+    - Default Values:
+      - message: `Default message`
+      - engagementButtonLabel: `Default button label`
+      - thanksMessage: `Default thanks`
+      - postAnswerUrl: `https://example.com`
+    - Surveys (create one)
+      - title: `default`
+      - weight: `1`
+  - Sample Rate: `1`
+  - Enabled: Check
+  - Start time: empty
+  - End time: empty
+  - Locales: empty
+  - Countries: empty
+  - Release channels: empty
+
+### Test
+
+1. Navigate to https://localhost:8000/en-US/repair/?testing.
+2. A Heartbeat prompt should appear with the text `Default message` and a button
+  with the text `Default button label`. There should be no link on the right
+  side of the bar, and no rating stars.
+3. When clicked, the button should open a new tab to `http://example.com`. The
+  button and message should be replaced with the text `Default thanks`.
+4. The URL in the new tab (`example.com`) should have URL parameters appended to
+  it:
+  - `testing=1` should be present.
+  - `source=heartbeat` should be present.
+  - `surveyversion` should be a number.
+  - `updateChannel` should be the channel of the Firefox browser being tested,
+    e.g. `nightly`.
+  - `fxVersion` should be the version of the Firefox browser being tested.
