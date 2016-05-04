@@ -1,0 +1,7 @@
+#!/bin/bash +x
+
+rm -rf push-dev-dashboard
+git clone https://github.com/mozilla-services/push-dev-dashboard.git
+cd push-dev-dashboard
+pip install -r requirements-test.txt
+python manage.py test -v2 dashboard.tests.test_e2e
