@@ -26,10 +26,11 @@ rm -rf mozilla-central
 cp -r /home/jenkins-slave/mozilla-central .
 
 
-cd $PWD/mozilla-central/testing/tps
+cd $PWD/mozilla-central/testing/tps || exit 1
+
 ./create_venv.py --username="tpstps@restmail.net" --password="TESTINGtesting" $HOME/tps-env
 . $HOME/tps-env/bin/activate
-Xvfb :20 >& /tmp/xerrors &
+Xvfb :20 >& ${WORKSPACE}/xerrors &
 export DISPLAY=:20
 runtps --binary=/usr/bin/firefox
 pkill -f :20
