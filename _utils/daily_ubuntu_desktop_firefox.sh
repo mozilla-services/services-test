@@ -4,11 +4,13 @@ echo  "--------------------------"
 echo "INSTALL FIREFOXES"
 echo  "--------------------------"
 
+
 virtualenv venv
 chmod -R 777 venv
 . ./venv/bin/activate
-pip install -r requirements.txt
-python setup.py develop
+pip install ff-tool
+#pip install -r requirements.txt
+#python setup.py develop
 
 ff -c nightly --install-only
 ff -c aurora --install-only
