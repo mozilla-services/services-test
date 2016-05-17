@@ -26,9 +26,8 @@ echo "CLEANUP FIREFOXES"
 echo  "--------------------------"
 echo
 
-echo "HOME_JENKINS_SLAVE: ${HOME_JENKINS_SLAVE}"
-
-cd "${HOME_JENKINS_SLAVE}"
+cd ${HOME_JENKINS_SLAVE}
+echo "YOU ARE HERE: "
 pwd
 ls -la
 rm firefox*
