@@ -26,13 +26,13 @@ echo
 
 cd ${HOME_JENKINS_SLAVE}
 
-ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/_temp/browsers" "${HOME_JENKINS_SLAVE}/firefoxes" 
+ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/_temp/browsers" firefoxes
 
-ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-nightly/firefox" "${HOME_JENKINS_SLAVE/firefox-nightly"
-ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-developer-edition/firefox" "${HOME_JENKINS_SLAVE}/firefox-developer-edition"
-ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-beta/firefox" "${HOME_JENKINS_SLAVE/firefox-beta"
-ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-release/firefox" "${HOME_JENKINS_SLAVE/firefox-release"
-ln -sf "${HOME_JENKINS_SLAVE}/firefox-nightly" "${HOME_JENKINS_SLAVE/firefox"
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-nightly/firefox" firefox-nightly
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-developer-edition/firefox" firefox-developer-edition
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-beta/firefox" firefox-beta
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-release/firefox" firefox-release
+ln -sf "${HOME_JENKINS_SLAVE}/firefox-nightly" firefox
 
 echo
 echo  "--------------------------"
@@ -41,3 +41,4 @@ echo  "--------------------------"
 echo
 
 echo "export PATH=${HOME_JENKINS_SLAVE}:${PATH}" > /home/ubuntu/.bash_aliases
+echo
