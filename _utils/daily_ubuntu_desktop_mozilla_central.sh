@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TODO: replace this with env var
-HOME_JENKINS="/home/jenkins-slave"
+#HOME_JENKINS_SLAVE="/home/jenkins-slave"
 
 echo "--------------------------"
 echo "REMOVE mozilla-central"
@@ -19,5 +19,5 @@ echo "--------------------------"
 echo "SYMLINK mozilla-central"
 echo "--------------------------"
 
-cd "${HOME_JENKINS}"
-ln -sf "${HOME_JENKINS}/workspace/${JOB_NAME}/mozilla-central" mozilla-central > /home/ubuntu/.bash_aliases
+cd "${HOME_JENKINS_SLAVE}"
+ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/mozilla-central" mozilla-central > /home/ubuntu/.bash_aliases

@@ -1,7 +1,7 @@
 #!/bin/bash +x
 
 # TODO: replace this with env var
-HOME_JENKINS="/home/jenkins-slave"
+#HOME_JENKINS_SLAVE="/home/jenkins-slave"
 
 echo  "--------------------------"
 echo "INSTALL FIREFOXES"
@@ -21,22 +21,26 @@ ff -c beta --install-only
 ff -c release --install-only
 
 echo  "--------------------------"
+echo "CLEANUP FIREFOXES"
+echo  "--------------------------"
+
+cd "${HOME_JENKINS_SLAVE}"
+rm firefox*
+
+echo  "--------------------------"
 echo "SYMLINK FIREFOXES"
 echo  "--------------------------"
 
+ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/_temp/browsers" firefoxes 
 
-cd "${HOME_JENKINS}"
-rm firefoxes
-ln -sf "${HOME_JENKINS}/workspace/${JOB_NAME}/_temp/browsers" firefoxes 
-
-ln -sf "${HOME_JENKINS}/firefoxes/firefox-nightly/firefox" firefox-nightly
-ln -sf "${HOME_JENKINS}/firefoxes/firefox-developer-edition/firefox" firefox-developer-edition
-ln -sf "${HOME_JENKINS}/firefoxes/firefox-beta/firefox" firefox-beta
-ln -sf "${HOME_JENKINS}/firefoxes/firefox-release/firefox" firefox-release
-ln -sf "${HOME_JENKINS}/firefox-nightly" firefox
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-nightly/firefox" firefox-nightly
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-developer-edition/firefox" firefox-developer-edition
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-beta/firefox" firefox-beta
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-release/firefox" firefox-release
+ln -sf "${HOME_JENKINS_SLAVE}/firefox-nightly" firefox
 
 echo  "--------------------------"
 echo "ADD FIREFOXES TO PATH"
 echo  "--------------------------"
 
-echo "export PATH=${HOME_JENKINS}:${PATH}" > /home/ubuntu/.bash_aliases
+echo "export PATH=${HOME_JENKINS_SLAVE}:${PATH}" > /home/ubuntu/.bash_aliases
