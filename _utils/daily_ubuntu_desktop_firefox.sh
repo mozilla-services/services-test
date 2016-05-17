@@ -18,13 +18,13 @@ ff -c aurora --install-only
 ff -c beta --install-only
 ff -c release --install-only
 
-ls ${HOME_JENKINS_SLAVE}
-
 echo
 echo  "--------------------------"
 echo "SYMLINK FIREFOXES"
 echo  "--------------------------"
 echo
+
+cd ${HOME_JENKINS_SLAVE}
 
 ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/_temp/browsers" "${HOME_JENKINS_SLAVE}/firefoxes" 
 
@@ -34,8 +34,10 @@ ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-beta/firefox" "${HOME_JENKINS_SL
 ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-release/firefox" "${HOME_JENKINS_SLAVE/firefox-release"
 ln -sf "${HOME_JENKINS_SLAVE}/firefox-nightly" "${HOME_JENKINS_SLAVE/firefox"
 
+echo
 echo  "--------------------------"
 echo "ADD FIREFOXES TO PATH"
 echo  "--------------------------"
+echo
 
 echo "export PATH=${HOME_JENKINS_SLAVE}:${PATH}" > /home/ubuntu/.bash_aliases
