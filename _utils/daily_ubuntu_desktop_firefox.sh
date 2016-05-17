@@ -20,11 +20,18 @@ ff -c release --install-only
 
 echo
 echo  "--------------------------"
+echo "CLEANUP FIREFOXE SYMLINKS"
+echo  "--------------------------"
+echo
+cd ${HOME_JENKINS_SLAVE}
+rm -rf firefox*
+
+echo
+echo  "--------------------------"
 echo "SYMLINK FIREFOXES"
 echo  "--------------------------"
 echo
 
-cd ${HOME_JENKINS_SLAVE}
 
 ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/_temp/browsers" firefoxes
 
@@ -33,6 +40,7 @@ ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-developer-edition/firefox" firef
 ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-beta/firefox" firefox-beta
 ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-release/firefox" firefox-release
 ln -sf "${HOME_JENKINS_SLAVE}/firefox-nightly" firefox
+ls -la
 
 echo
 echo  "--------------------------"
