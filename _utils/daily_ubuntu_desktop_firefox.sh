@@ -1,5 +1,8 @@
 #!/bin/bash +x
 
+# TODO: replace this with env var
+HOME_JENKINS="/home/jenkins-slave"
+
 echo  "--------------------------"
 echo "INSTALL FIREFOXES"
 echo  "--------------------------"
@@ -16,8 +19,6 @@ ff -c nightly --install-only
 ff -c aurora --install-only
 ff -c beta --install-only
 ff -c release --install-only
-
-HOME_JENKINS="/home/jenkins-slave"
 
 echo  "--------------------------"
 echo "SYMLINK FIREFOXES"
