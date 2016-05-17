@@ -18,18 +18,6 @@ ff -c aurora --install-only
 ff -c beta --install-only
 ff -c release --install-only
 
-echo
-echo  "--------------------------"
-echo "CLEANUP FIREFOXES"
-echo  "--------------------------"
-echo
-
-rm -rf ${HOME_JENKINS_SLAVE}/firefoxes
-rm -rf ${HOME_JENKINS_SLAVE}/firefox-nightly
-rm -rf ${HOME_JENKINS_SLAVE}/firefox-developer-edition
-rm -rf ${HOME_JENKINS_SLAVE}/firefox-beta
-rm -rf ${HOME_JENKINS_SLAVE}/firefox-release
-rm -rf ${HOME_JENKINS_SLAVE}/firefox
 ls ${HOME_JENKINS_SLAVE}
 
 echo
