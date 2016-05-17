@@ -33,7 +33,7 @@ echo  "--------------------------"
 echo
 
 
-ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/_temp/browsers" firefoxes
+ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/_utils/_temp/browsers" firefoxes
 
 ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-nightly/firefox" firefox-nightly
 ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-developer-edition/firefox" firefox-developer-edition
