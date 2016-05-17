@@ -87,6 +87,7 @@ Specify what kinds of tests should be run for any given environment
  loadtest      | verify application scalability
  schema-check  | API test
  security      | ZAP test (TBD)
+ cdn-test      | check existence/delivery of remote files
 
 
 Reference
