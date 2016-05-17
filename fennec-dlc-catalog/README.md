@@ -18,6 +18,6 @@ use it to keep the Python version local to this project
 
 ## Running tests
 
-Tests can be run using `py.test --env <environment> tests/`
+Tests can be run using `py.test --env <environment> cdn-test/`
 
 Values for environment are `stage` or `production`
