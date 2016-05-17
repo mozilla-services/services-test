@@ -25,6 +25,7 @@ echo  "--------------------------"
 echo
 cd ${HOME_JENKINS_SLAVE}
 rm -rf firefox*
+ls -la
 
 echo
 echo  "--------------------------"
