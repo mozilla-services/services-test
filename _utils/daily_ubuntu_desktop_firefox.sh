@@ -6,7 +6,7 @@
 echo  "--------------------------"
 echo "INSTALL FIREFOXES"
 echo  "--------------------------"
-
+echo
 
 virtualenv venv
 chmod -R 777 venv
@@ -20,16 +20,24 @@ ff -c aurora --install-only
 ff -c beta --install-only
 ff -c release --install-only
 
+echo
 echo  "--------------------------"
 echo "CLEANUP FIREFOXES"
 echo  "--------------------------"
+echo
+
+echo "HOME_JENKINS_SLAVE: ${HOME_JENKINS_SLAVE}"
 
 cd "${HOME_JENKINS_SLAVE}"
+pwd
+ls -la
 rm firefox*
 
+echo
 echo  "--------------------------"
 echo "SYMLINK FIREFOXES"
 echo  "--------------------------"
+echo
 
 ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/_temp/browsers" firefoxes 
 
