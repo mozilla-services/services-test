@@ -12,8 +12,6 @@ virtualenv venv
 chmod -R 777 venv
 . ./venv/bin/activate
 pip install ff-tool
-#pip install -r requirements.txt
-#python setup.py develop
 
 ff -c nightly --install-only
 ff -c aurora --install-only
@@ -26,11 +24,8 @@ echo "CLEANUP FIREFOXES"
 echo  "--------------------------"
 echo
 
-cd ${HOME_JENKINS_SLAVE}
-echo "YOU ARE HERE: "
-pwd
-ls -la
-rm firefox*
+rm "${HOME_JENKINS_SLAVE}/firefox*"
+ls ${HOME_JENKINS_SLAVE}
 
 echo
 echo  "--------------------------"
@@ -38,13 +33,13 @@ echo "SYMLINK FIREFOXES"
 echo  "--------------------------"
 echo
 
-ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/_temp/browsers" firefoxes 
+ln -sf "${HOME_JENKINS_SLAVE}/workspace/${JOB_NAME}/_temp/browsers" "${HOME_JENKINS_SLAVE}/firefoxes" 
 
-ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-nightly/firefox" firefox-nightly
-ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-developer-edition/firefox" firefox-developer-edition
-ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-beta/firefox" firefox-beta
-ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-release/firefox" firefox-release
-ln -sf "${HOME_JENKINS_SLAVE}/firefox-nightly" firefox
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-nightly/firefox" "${HOME_JENKINS_SLAVE/firefox-nightly"
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-developer-edition/firefox" "${HOME_JENKINS_SLAVE}/firefox-developer-edition"
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-beta/firefox" "${HOME_JENKINS_SLAVE/firefox-beta"
+ln -sf "${HOME_JENKINS_SLAVE}/firefoxes/firefox-release/firefox" "${HOME_JENKINS_SLAVE/firefox-release"
+ln -sf "${HOME_JENKINS_SLAVE}/firefox-nightly" "${HOME_JENKINS_SLAVE/firefox"
 
 echo  "--------------------------"
 echo "ADD FIREFOXES TO PATH"
