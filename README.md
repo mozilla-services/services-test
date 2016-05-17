@@ -81,8 +81,8 @@ Specify what kinds of tests should be run for any given environment
 
  TEST TYPE     | DESCRIPTION
  ------------- | -------------------------------------------
- tag-check     | download tag, make project run unit tests
  stack-check   | verify stack procs, urls, etc. are running
+ config-check  | verify application configuration
  e2e-test      | client-side test
  loadtest      | verify application scalability
  schema-check  | API test

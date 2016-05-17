@@ -18,4 +18,4 @@ rely on using it for assertions.
 The tests are using [pytest](http://pytest.org/latest/) so to run them do the
 following:
 
-`py.test -v --env=stage deployment_tests/`
+`py.test -v --env=<environment> config-check/`
