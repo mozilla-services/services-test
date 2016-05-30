@@ -1,3 +1,5 @@
+#!/bin/bash +x
+
 # grab test manifest by product type:
 #   curl -O https://raw.githubusercontent.com/mozilla-services/services-test/master/{{product}}/manifest.json
 # test_type == security
