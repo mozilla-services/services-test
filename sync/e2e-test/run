@@ -13,6 +13,7 @@
 LOG_FILE=tps_logs.txt
 ERROR_FLAGS="FAIL|ERROR|WTF"
 HOME_JENKINS="/home/jenkins-slave"
+BINARY=$1
 
 if [ ! -d /home/jenkins-slave/mozilla-central ];then
    @echo "MOZILLA-CENTRAL not available"
@@ -34,5 +35,5 @@ cd $PWD/mozilla-central/testing/tps || exit 1
 Xvfb :20 >& ${WORKSPACE}/xerrors &
 export DISPLAY=:20
 #runtps --binary=/usr/bin/firefox
-runtps --binary="${HOME_JENKINS}/firefox-nightly"
+runtps --binary="$1"
 pkill -f :20
