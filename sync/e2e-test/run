@@ -16,11 +16,11 @@ HOME_JENKINS="/home/jenkins-slave"
 BINARY=$1
 
 if [ ! -d /home/jenkins-slave/mozilla-central ];then
-   @echo "MOZILLA-CENTRAL not available"
+   echo "MOZILLA-CENTRAL not available"
    exit 1
 else:
-   @echo "MOZILLA-CENTRAL found!"
-   @echo "starting test......"
+   echo "MOZILLA-CENTRAL found!"
+   echo "starting test......"
 fi
 rm -rf mozilla-central
 
