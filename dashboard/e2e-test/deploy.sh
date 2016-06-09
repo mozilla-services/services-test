@@ -1,3 +1,5 @@
+#!/bin/bash +x
+
 #push the docker image that was built prior to testing
 docker push mozservicesqa/dashboard
 # run vagrant provision on the controller to get the new docker image deployed
