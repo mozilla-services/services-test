@@ -10,10 +10,10 @@
 #sed -i "s/mozversion ==[^']*/mozversion == 1.4/" setup.py
 
 # TODO: pull this from  manifest.ini
-LOG_FILE=tps_logs.txt
+LOG_FILE=test_log.txt
 ERROR_FLAGS="FAIL|ERROR|WTF"
 
-if [ ! -d /home/jenkins-slave/mozilla-central ];then
+if [ ! -d /home/ubuntu/mozilla-central ];then
    @echo "MOZILLA-CENTRAL not available"
    exit 1
 else:
@@ -23,7 +23,7 @@ fi
 rm -rf mozilla-central
 
 # WE COULD ALSO USE THE COPY TO WORKSPACE PLUGIN HERE?
-cp -r /home/jenkins-slave/mozilla-central .
+cp /home/ubuntu/mozilla-central .
 
 
 cd $PWD/mozilla-central/testing/tps || exit 1
