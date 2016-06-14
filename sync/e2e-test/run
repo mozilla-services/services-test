@@ -20,10 +20,10 @@ else:
    @echo "MOZILLA-CENTRAL found!"
    @echo "starting test......"
 fi
-rm -rf mozilla-central
+#rm -rf mozilla-central
 
 # WE COULD ALSO USE THE COPY TO WORKSPACE PLUGIN HERE?
-cp /home/ubuntu/mozilla-central .
+cp -r /home/ubuntu/mozilla-central .
 
 
 cd $PWD/mozilla-central/testing/tps || exit 1
