@@ -32,5 +32,5 @@ cd $PWD/mozilla-central/testing/tps || exit 1
 . $HOME/tps-env/bin/activate
 Xvfb :20 >& ${WORKSPACE}/xerrors &
 export DISPLAY=:20
-runtps --binary=/usr/bin/firefox
+runtps --binary="$1"
 pkill -f :20
