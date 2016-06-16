@@ -1,39 +1,30 @@
 #!/bin/bash -xe
 
-
-# sudo apt-get -y install mercurial
-#hg clone http://hg.mozilla.org/mozilla-central
-# cd mozilla-central/testing/tps
-
 # tweak these:
 #sed -i "s/mozprofile ==[^']*/mozprofile == 0.27/" setup.py
 #sed -i "s/mozversion ==[^']*/mozversion == 1.4/" setup.py
 
 # TODO: pull this from  manifest.ini
-LOG_FILE=tps_logs.txt
+LOG_FILE=test_log.txt
 ERROR_FLAGS="FAIL|ERROR|WTF"
 HOME_JENKINS="/home/jenkins-slave"
 BINARY=$1
 
-if [ ! -d /home/jenkins-slave/mozilla-central ];then
+if [ ! -d /home/ubuntu/mozilla-central ];then
    @echo "MOZILLA-CENTRAL not available"
    exit 1
 else:
    @echo "MOZILLA-CENTRAL found!"
    @echo "starting test......"
 fi
-rm -rf mozilla-central
 
 # WE COULD ALSO USE THE COPY TO WORKSPACE PLUGIN HERE?
-cp -r /home/jenkins-slave/mozilla-central .
-
+cp -r /home/ubuntu/mozilla-central .
 
 cd $PWD/mozilla-central/testing/tps || exit 1
 
 ./create_venv.py --username="tpstps@restmail.net" --password="TESTINGtesting" $HOME/tps-env
 . $HOME/tps-env/bin/activate
-Xvfb :20 >& ${WORKSPACE}/xerrors &
-export DISPLAY=:20
-#runtps --binary=/usr/bin/firefox
-runtps --binary="$1"
+# xvfb-run - uses DISPLAY=:99 (by default)
+xvfb-run runtps --binary="$1"
 pkill -f :20
