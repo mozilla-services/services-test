@@ -2,7 +2,7 @@
   "name": "services-test",
   "description": "We test services",
   "version": "1.0.0",
-  "author": "Cloud Services QA",
+  "author": "Cloud Services QA <cloud-services-qa@mozilla.com>",
   "dependencies": {},
   "devDependencies": {
     "eslint": "1.10.3",
