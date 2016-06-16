@@ -30,7 +30,7 @@ cd $PWD/mozilla-central/testing/tps || exit 1
 
 ./create_venv.py --username="tpstps@restmail.net" --password="TESTINGtesting" $HOME/tps-env
 . $HOME/tps-env/bin/activate
-Xvfb :20 >& ${WORKSPACE}/xerrors &
-export DISPLAY=:20
-runtps --binary="$1"
+# Xvfb :20 >& ${WORKSPACE}/xerrors &
+# export DISPLAY=:20
+xvfb-run runtps --binary="$1"
 pkill -f :20
