@@ -1,18 +1,9 @@
-import configparser
 import hashlib
-import pytest
 import requests
 
 
-# A fixture to make sure values from our config file are available
-@pytest.fixture
-def conf():
-    config = configparser.ConfigParser()
-    config.read('manifest.ini')
-    return config
-
-
 def test_contents(conf, env):
+    print("\nTesting for uploaded Fennec fonts in %s\n" % env)
     uploaded_fonts = [
         'CharisSILCompact-B.ttf',
         'CharisSILCompact-BI.ttf',
