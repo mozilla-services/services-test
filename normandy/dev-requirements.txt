@@ -1,6 +1,4 @@
 configparser
 flake8
-marionette_driver
-marionette_client
 pytest
 requests
