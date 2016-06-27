@@ -5,20 +5,20 @@ in order to have an isolated environment.
 
 From /normandy/
 
-1. virtualenv venv
-2. ./venv/bin/pip install -r dev-requirements.txt
+1. `virtualenv venv`
+2. `source venv/bin/activate` to turn on the virtualenv
+2. `./venv/bin/pip install -r dev-requirements.txt`
 
 ##Running Tests
 
-To run the tests you will need a copy of Firefox with [Marionette support enabled](https://developer.mozilla.org/en-US/docs/Mozilla/QA/Marionette/Builds).
+Check the `manifest.ini` file for values that are required for the tests to run
+in specific environments.
 
-It is recommended that you start Firefox with a brand new profile to eliminate
-unforeseen conflicts with other extensions and preferences.
+### Schema Check Tests
 
-Make sure to check each test for any values that need to be modified from their
-defaults. Several tests rely on a specific extension being installed.
+These tests are designed to look for changes to the API that Firefox will
+communicate with. To run them:
 
-The tests are using [pytest](http://pytest.org/latest/) so to run them do the
-following:
+`py.test --env=<environment> schema-check/`
 
-`py.test /path/to/test.py`
+where `<environment>` is one of `dev`, `stage`, or `prod`
