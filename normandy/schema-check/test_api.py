@@ -10,7 +10,7 @@ def conf():
     return config
 
 
-def test_recipies(conf, env):
+def test_recipes(conf, env):
     r = requests.get(conf.get(env, 'api_root') + '/recipe')
     response = r.json()
     expected_fields = [
