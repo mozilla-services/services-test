@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+from argparse import ArgumentParser
+import sys
+
+
+
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv
+
+    conf_parser = ArgumentParser(prog='ci-test-run')
+
+    conf_parser.add_argument("-p", "--project",
+                             help="Provide a project name")
+    conf_parser.add_argument("-e", "--test-env",
+                             help="Provide the environment to test in\n"
+                             "i.e.: dev, stage, prod")
+
+    args = conf_parser.parse_args()
+
+    test_types(args.project)
+    parse_manifest(args.project, args.test_env)
+
+def test_types(project_name):
+    print(project_name)
+    test_types = []
+    return test_types
+
+def parse_manifest(project_name, test_env):
+    print(args.test_env)
+    print('parse ini file.')
+    return True
+
+# [ { 'platform': 'windows', 'test_bin': '/autopush/e2e-test/run' }, etc. ]
+
+
+if __name__ == "__main__":
+    main()
