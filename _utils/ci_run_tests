@@ -1,0 +1,103 @@
+#!/usr/bin/env python
+import os
+import sys
+import re
+import platform
+from argparse import ArgumentParser
+
+try:
+    import configparser  # Python 3
+except:
+    import ConfigParser as configparser  # Python 2
+
+
+# path to services-test root dir
+PATH_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+HEADER_LINE = '----------------------'
+
+
+def main(argv=None):
+    options = arg_parser()
+    path_root, tests = directory_list(options.project)
+    run_tests(path_root, tests)
+
+
+def arg_parser(argv=None):
+
+    if argv is None:
+        argv = sys.argv
+
+    conf_parser = ArgumentParser(prog='ci-test-run')
+
+    conf_parser.add_argument("-p", "--project",
+                             help="Provide a project name")
+    conf_parser.add_argument("-e", "--test-env",
+                             help="Provide the environment to test in\n"
+                             "i.e.: dev, stage, prod")
+    return conf_parser.parse_args()
+
+
+def directory_list(project_name):
+    path_root = PATH_ROOT
+    if project_name:
+        path_root = '{0}/{1}'.format(PATH_ROOT, project_name)
+    items = os.walk(path_root).next()[1]
+    return path_root, [item for item in items if not item.startswith(('_', '.'))]  # noqa
+
+
+def run_tests(path_root, tests):
+    print('RUN TESTS')
+    for test in tests:
+        path_jenkins = '{0}/{1}/jenkins.ini'.format(path_root, test)
+        response = parse_jenkins_conf(path_jenkins)
+        print('JENKINS PARSE: {0}'.format(response))
+        path_test = '{0}/{1}/run'.format(path_root, test)
+        print(path_test)
+
+
+def parse_jenkins_conf(path_jenkins_conf):
+    header('PARSE JENKINS CONF')
+    if not os.path.isfile(path_jenkins_conf):
+        print 'no jenkins.ini found!\n'
+        return None
+
+    config = configparser.ConfigParser()
+    config.read(path_jenkins_conf)
+    if config.has_section('ci'):
+        ci_enabled = config.getboolean('ci', 'enabled')
+        if ci_enabled:
+            print('ci enabled!')
+            if config.has_option('ci', 'label'):
+                ci_label = config.get('ci', 'label')
+                print('found slave label: {0}'.format(ci_label))
+                return ci_label
+            else:
+                print('no slave label found!')
+                return None
+        else:
+            print('ci NOT enabled!')
+            return None
+    else:
+        print('ci section not found in jenkins.ini')
+        return None
+
+
+def get_os():
+    system = platform.system().lower()
+    system = re.split('[-_]', system, maxsplit=1).pop(0)
+
+    if system == "cygwin":
+        return "windows"
+    if system == "darwin":
+        return "mac"
+
+    # default: linux or undefined
+    return system
+
+
+def header(label):
+    print('{0}\n{1}\n{0}\n'.format(HEADER_LINE, label))
+
+
+if __name__ == "__main__":
+    main()
