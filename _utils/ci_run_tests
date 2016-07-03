@@ -1,8 +1,11 @@
 #!/usr/bin/env python
+
+"""Python module for executing automated tests by Ops CI pipeline"""
 import os
 import sys
 import re
 import platform
+from subprocess import Popen, PIPE, STDOUT
 from argparse import ArgumentParser
 
 try:
@@ -13,12 +16,26 @@ except:
 
 # path to services-test root dir
 PATH_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-HEADER_LINE = '----------------------'
 
 
 def main(argv=None):
     options = arg_parser()
+    if not options.project:
+        header('ERROR')
+        exit('no project specified. ABORTING!')
+
     path_root, tests = directory_list(options.project)
+
+    # run script requires that the test_env (dev, stage, pre-prod, prod, etc.)
+    # be passed in via an env var
+    # correct test_env name(s) will not be enforced as there may be some
+    # custom test_env names in future
+    if options.test_env:
+        os.environ["test_env"] = options.test_env.lower()
+    else:
+        header('ERROR')
+        exit('no test-env specified. ABORTING!')
+
     run_tests(path_root, tests)
 
 
@@ -37,26 +54,44 @@ def arg_parser(argv=None):
     return conf_parser.parse_args()
 
 
-def directory_list(project_name):
+def directory_list(path_parent_dir):
+    """Return list of child directories.
+    Input:
+        path of parent directory
+    """
     path_root = PATH_ROOT
-    if project_name:
-        path_root = '{0}/{1}'.format(PATH_ROOT, project_name)
+    if path_parent_dir:
+        path_root = '{0}/{1}'.format(PATH_ROOT, path_parent_dir)
     items = os.walk(path_root).next()[1]
     return path_root, [item for item in items if not item.startswith(('_', '.'))]  # noqa
 
 
 def run_tests(path_root, tests):
-    print('RUN TESTS')
+    header('RUN TESTS', '*', 60)
+
+    this_os = get_os()
+
     for test in tests:
         path_jenkins = '{0}/{1}/jenkins.ini'.format(path_root, test)
-        response = parse_jenkins_conf(path_jenkins)
-        print('JENKINS PARSE: {0}'.format(response))
-        path_test = '{0}/{1}/run'.format(path_root, test)
-        print(path_test)
+
+        # returns either None or ci_label
+        slave_label = parse_jenkins_conf(path_jenkins)
+        
+        if slave_label is not None:
+            path_test = '{0}/{1}/run'.format(path_root, test)
+            if this_os == 'win' and slave_label == 'WIN-SERVER':
+                local(path_test)
+            elif this_os == 'linux' and slave_label == 'UBUNTU-DESKTOP':
+                local(path_test)
+            elif this_os == 'mac' and slave_label == 'OSX':
+                local(path_test)
+        else:
+            header('ERROR')
+            print('no slave label found. ABORTING!')
 
 
 def parse_jenkins_conf(path_jenkins_conf):
-    header('PARSE JENKINS CONF')
+    header('PARSE JENKINS.INI', '=', 45)
     if not os.path.isfile(path_jenkins_conf):
         print 'no jenkins.ini found!\n'
         return None
@@ -95,8 +130,16 @@ def get_os():
     return system
 
 
-def header(label):
-    print('{0}\n{1}\n{0}\n'.format(HEADER_LINE, label))
+def local(cmd):
+    proc = Popen(cmd, stdout=PIPE, stderr=STDOUT, shell=True)
+    for line in iter(proc.stdout.readline, b''):
+        print(line.strip())
+    proc.stdout.close()
+
+
+def header(label, hdr_char='-', hdr_size=30):
+    header_line = hdr_char * hdr_size
+    print('{0}\n{1}\n{0}\n'.format(header_line, label))
 
 
 if __name__ == "__main__":

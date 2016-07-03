@@ -1,10 +1,35 @@
 #!/usr/bin/env python
+"""The purpose of this file is to demo an automated test workflow.
+Config vars can be pulled from the manifest.ini when a "test_env"
+env var is set = dev | stage | prod, etc.
+"""
+
+import os
+try:
+    import configparser  # Python 3
+except:
+    import ConfigParser as configparser  # Python 2
+
+
+config = configparser.ConfigParser()
+PATH_HERE = os.path.abspath(os.path.join(os.path.dirname(__file__), "."))
+print(PATH_HERE)
+config.read('{0}/manifest.ini'.format(PATH_HERE))
 
 print('\n-----------------------')
 print('INSTALL')
 print('-----------------------\n')
 
-print('install some deps here...')
+print('install some deps here...\n')
+
+print('\n-----------------------')
+print('ENV VAR(S)')
+print('-----------------------\n')
+
+test_env = '{0}'.format(os.environ["test_env"])
+url =  config.get(test_env, 'url_endpoint')
+print('TEST_ENV: {0}\n'.format(test_env))
+print('URL_ENDPOINT: {0}\n'.format(url))
 
 print('\n-----------------------')
 print('RUN E2E-TEST(S)')

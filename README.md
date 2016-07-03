@@ -90,6 +90,21 @@ Specify what kinds of tests should be run for any given environment
  cdn-test      | check existence/delivery of remote files
 
 
+Services-Ops
+----------------------
+Tests can be invoked from the Cloud-Services CI pipeline with the following
+command:
+
+```
+$ services-test/_utils/ci_run_tests -p <project-name> -e <test-env>
+```
+
+where project-name = absearch, pocket, autopush, loop-server, etc.
+and test-env = dev, stage, pre-prod, prod, etc.
+
+
+
+
 Reference
 ----------------------
 
