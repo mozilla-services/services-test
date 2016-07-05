@@ -15,6 +15,11 @@ except:
 
 
 # path to services-test root dir
+
+#PATH_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+print('DEBUG:')
+print(os.path.dirname(__file__))
+print(os.path.join(os.path.dirname(__file__), ".."))
 PATH_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 # DEBUG
