@@ -61,7 +61,8 @@ def directory_list(path_parent_dir):
     """
     path_root = PATH_ROOT
     if path_parent_dir:
-        path_root = '{0}/{1}'.format(PATH_ROOT, path_parent_dir)
+        #path_root = '{0}/{1}'.format(PATH_ROOT, path_parent_dir)
+        path_root = os.path.join(PATH_ROOT, path_parent_dir)
     items = os.walk(path_root).next()[1]
     return path_root, [item for item in items if not item.startswith(('_', '.'))]  # noqa
 
