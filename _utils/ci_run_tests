@@ -17,6 +17,8 @@ except:
 # path to services-test root dir
 PATH_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
+# DEBUG
+print('PATH_ROOT: {0}'.format(PATH_ROOT))
 
 def main(argv=None):
     options = arg_parser()
@@ -63,7 +65,8 @@ def directory_list(path_parent_dir):
     if path_parent_dir:
         #path_root = '{0}/{1}'.format(PATH_ROOT, path_parent_dir)
         path_root = os.path.join(PATH_ROOT, path_parent_dir)
-        print('PATH ROOT: '.format(path_root))
+        # DEBUG 
+        print('PATH ROOT: {0} '.format(path_root))
     items = os.walk(path_root).next()[1]
     return path_root, [item for item in items if not item.startswith(('_', '.'))]  # noqa
 
