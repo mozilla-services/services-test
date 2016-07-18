@@ -1,9 +1,3 @@
-import pytest
-import requests
-
-from bs4 import BeautifulSoup
-
-
 class Test_Open_Graph_Standards:
 
     def test_open_graph_present_tags(self, meta, required_tags, found_tags):

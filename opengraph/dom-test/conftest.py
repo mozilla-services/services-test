@@ -9,9 +9,11 @@ def meta(response_obj):
     soup = BeautifulSoup(response_obj.content, "html.parser")
     return soup.find_all("meta")
 
+
 @pytest.fixture
 def response_obj():
     return requests.get('http://nightly.mozilla.org')
+
 
 @pytest.fixture
 def required_tags():
@@ -22,6 +24,7 @@ def required_tags():
         'og:image',
     ]
     return og_required
+
 
 @pytest.fixture
 def found_tags():
