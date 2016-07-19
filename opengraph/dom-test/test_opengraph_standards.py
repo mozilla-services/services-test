@@ -14,6 +14,6 @@ class Test_Open_Graph_Standards:
             if req_tags in found_tags:
                 continue
             else:
-                print "Item {} not found".format(req_tags)
+                print ("Item {} not found".format(req_tags))
                 og_assert = False
         assert og_assert
