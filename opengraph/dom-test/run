@@ -12,9 +12,10 @@ testUrl(){
 case "$(uname -s)" in
 
 	Darwin)
-		pip install virtualenv pytest requests beautifulsoup4
+		pip install virtualenv
 		virtualenv -p python3.5 venv
 		source venv/bin/activate
+		pip install pytest requests beautifulsoup4
 		testUrl
 		;;
 	Linux)
