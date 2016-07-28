@@ -16,7 +16,7 @@ def meta(response_obj):
 
 @pytest.fixture
 def response_obj(url):
-    return requests.get(url)
+    return requests.get('http://' + url)
 
 
 @pytest.fixture

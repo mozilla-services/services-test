@@ -1,9 +1,28 @@
-#!/bin/bash -xe
+#!/bin/bash
 
-sudo apt-get install virtualenv
-virtualenv venv
-source venv/bin/activate
-pip install pytest
-pip install requests
-pip install beautifulsoup4
-py.test test_opengraph_standards.py
+testUrl(){
+	local value="$(python parse_manifest.py)"
+
+	for url in $value; do
+		echo "Url being tested is $url"
+		py.test test_opengraph_standards.py --url="$url"
+	done
+	}
+
+case "$(uname -s)" in
+
+	Darwin)
+		pip install virtualenv pytest requests beautifulsoup4
+		virtualenv venv
+		source venv/bin/activate
+		testUrl
+		;;
+	Linux)
+		sudo apt-get install virtualenv
+		virtualenv venv
+		source venv/bin/activate
+		pip install pytest requests beautifulsoup4
+		testUrl
+		;;
+	*)
+esac

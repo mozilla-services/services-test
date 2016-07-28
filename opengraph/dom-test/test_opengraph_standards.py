@@ -1,6 +1,6 @@
 class Test_Open_Graph_Standards:
 
-    def test_open_graph_present_tags(self, meta, required_tags, found_tags):
+    def test_open_graph_present_tags(self, meta, url, required_tags, found_tags):
         og_assert = True
 
         # Test url and add found tags to list
@@ -14,6 +14,6 @@ class Test_Open_Graph_Standards:
             if req_tags in found_tags:
                 continue
             else:
-                print("Item {0} not found".format(req_tags))
+                print("Within url {0}: Item {1} not found".format(url, req_tags))
                 og_assert = False
         assert og_assert
