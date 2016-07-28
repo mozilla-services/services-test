@@ -13,13 +13,13 @@ case "$(uname -s)" in
 
 	Darwin)
 		pip install virtualenv pytest requests beautifulsoup4
-		virtualenv venv
+		virtualenv -p python3.5 venv
 		source venv/bin/activate
 		testUrl
 		;;
 	Linux)
 		sudo apt-get install virtualenv
-		virtualenv venv
+		virtualenv -p python3.5 venv
 		source venv/bin/activate
 		pip install pytest requests beautifulsoup4
 		testUrl
