@@ -27,3 +27,14 @@ Docker Compose version 1.5.1.
 1. Make sure that you have [Docker](https://www.docker.com/) installed on the system you are running the tests on
 2. Start your master and read-only containers using _docker-compose up_
 3. Run the tests using _./bin/py.test integration-test/_
+
+###Run Configuration Check Tests###
+
+The configuration check tests are designed to ensure parts of Kinto that are
+used by other applications are working correctly. These tests will report results
+to TestRail.
+
+To tun the tests, do the following
+
+1. Copy _config-check-test/testrail.cfg-dist_ to _config-check-test/testrail.cfg_ and add your TestRail user name and password to the configuration file
+2. Run the tests using _py.test --env=<ENVIRONMENT> --testrail=config-check-test/testrail.cfg config-check-test/_ where <ENVIRONMENT> is _stage_ or _prod_

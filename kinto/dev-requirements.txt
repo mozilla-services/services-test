@@ -3,6 +3,10 @@ requests
 pyopenssl
 ndg-httpsclient
 pyasn1
-pytest
-git+https://github.com/Kinto/kinto.py.git@replication#egg=kinto-client
+pytest<3
 docker-py
+kinto-http
+kinto-signer
+flake8
+ConfigParser
+pytest-testrail
