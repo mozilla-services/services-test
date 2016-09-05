@@ -85,7 +85,8 @@ def run_tests(path_root, tests):
         path_jenkins = '{0}/{1}/jenkins.ini'.format(path_root, test)
 
         # returns either None or ci_label
-        slave_label = parse_jenkins_conf(path_jenkins)
+        label = '{0}/{1}'.format(path_root.split('/')[-1], test)
+        slave_label = parse_jenkins_conf(path_jenkins, label)
         
         if slave_label is not None:
             path_test = '{0}/{1}/run'.format(path_root, test)
@@ -100,8 +101,8 @@ def run_tests(path_root, tests):
             print('no slave label found. ABORTING!')
 
 
-def parse_jenkins_conf(path_jenkins_conf):
-    header('PARSE JENKINS.INI', '=', 45)
+def parse_jenkins_conf(path_jenkins_conf, label=''):
+    header('PARSE: {0} JENKINS.INI'.format(label.upper()), '-', 45)
     if not os.path.isfile(path_jenkins_conf):
         print 'no jenkins.ini found!\n'
         return None
