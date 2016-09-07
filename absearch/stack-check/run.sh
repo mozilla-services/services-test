@@ -1,1 +1,0 @@
-# execute deployment validation script

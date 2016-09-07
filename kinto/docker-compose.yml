@@ -1,0 +1,8 @@
+master:
+  image: kinto/kinto-server
+  ports:
+   - "8888:8888"
+read-only:
+  image: chartjes/kinto-read-only
+  ports:
+   - "8889:8889"

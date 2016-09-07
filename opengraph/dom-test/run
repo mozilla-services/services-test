@@ -1,0 +1,29 @@
+#!/bin/bash
+
+testUrl(){
+	local value="$(python parse_manifest.py)"
+
+	for url in $value; do
+		echo "Url being tested is $url"
+		py.test test_opengraph_standards.py --url="$url"
+	done
+	}
+
+case "$(uname -s)" in
+
+	Darwin)
+		pip install virtualenv
+		virtualenv -p python3.5 venv
+		source venv/bin/activate
+		pip install pytest requests beautifulsoup4
+		testUrl
+		;;
+	Linux)
+		sudo apt-get install virtualenv
+		virtualenv -p python3.5 venv
+		source venv/bin/activate
+		pip install pytest requests beautifulsoup4
+		testUrl
+		;;
+	*)
+esac

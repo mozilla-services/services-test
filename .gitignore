@@ -3,6 +3,12 @@
 *.py[cod]
 *.sw[op]
 *.dmg
+*.zip
+*.tar*
+*.bz2
+*.bak
+*.BAK
+*.OLD
 
 .Python
 build/
@@ -17,7 +23,11 @@ include/
 */include/
 lib/
 */lib/
+**/venv/
 
+**/.idea
 node_modules
 *.log
 .env
+.tmp
+_temp

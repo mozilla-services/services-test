@@ -21,7 +21,8 @@ class Kinto_Buckets(unittest.TestCase):
         self.assertIn('code', response)
         self.assertIn('error', response)
         self.assertEqual(response['errno'], 115)
-        self.assertEqual(response['message'], "Method not allowed on this endpoint.")
+        self.assertEqual(
+            response['message'], "Method not allowed on this endpoint.")
         self.assertEqual(response['code'], 405)
         self.assertEqual(response['error'], 'Method Not Allowed')
 
@@ -29,7 +30,8 @@ class Kinto_Buckets(unittest.TestCase):
         resource = 'buckets'
         data = '{"data": {"id": "test_bucket", "foo": "bar"}}'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.post_request(resource, data, status_code=expected_status_code)
+        response = self.client.post_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -41,7 +43,8 @@ class Kinto_Buckets(unittest.TestCase):
     def test_replace_bucket(self):
         resource = 'buckets/test_bucket'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.put_request(resource, status_code=expected_status_code)
+        response = self.client.put_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -72,7 +75,8 @@ class Kinto_Buckets(unittest.TestCase):
         resource = 'buckets/test_bucket'
         data = ''
         expected_status_code = 405 if self.client.is_read_only() else 400
-        response = self.client.patch_request(resource, data, status_code=expected_status_code)
+        response = self.client.patch_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -81,7 +85,9 @@ class Kinto_Buckets(unittest.TestCase):
             self.assertIn('code', response)
             self.assertIn('error', response)
             self.assertEqual(response['errno'], 107)
-            self.assertEqual(response['message'], "Provide at least one of data or permissions")
+            self.assertEqual(
+                response['message'],
+                "Provide at least one of data or permissions")
             self.assertEqual(response['code'], 400)
             self.assertEqual(response['error'], 'Invalid parameters')
 
@@ -91,7 +97,8 @@ class Kinto_Buckets(unittest.TestCase):
         resource = 'buckets/test_bucket'
         data = '{"permissions": {"read": ["basicauth:foobar"]}}'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.patch_request(resource, data, status_code=expected_status_code)
+        response = self.client.patch_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -99,14 +106,16 @@ class Kinto_Buckets(unittest.TestCase):
             self.assertIn('permissions', response)
             self.assertIn('last_modified', response['data'])
             self.assertIn('id', response['data'])
-            self.assertEqual(response['permissions']['read'], ['basicauth:foobar'])
+            self.assertEqual(
+                response['permissions']['read'], ['basicauth:foobar'])
 
     def test_delete_bucket(self):
         # Create the bucket
         resource = 'buckets'
         data = '{"data": {"id": "delete_bucket"}}'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.post_request(resource, data, status_code=expected_status_code)
+        response = self.client.post_request(
+            resource, data, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
@@ -118,7 +127,8 @@ class Kinto_Buckets(unittest.TestCase):
         # Delete the bucket
         resource = 'buckets/delete_bucket'
         expected_status_code = 405 if self.client.is_read_only() else 200
-        response = self.client.delete_request(resource, status_code=expected_status_code)
+        response = self.client.delete_request(
+            resource, status_code=expected_status_code)
         if self.client.is_read_only():
             self.assert_not_allowed(response)
         else:
