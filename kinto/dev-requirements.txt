@@ -3,8 +3,10 @@ requests
 pyopenssl
 ndg-httpsclient
 pyasn1
-pytest
-kinto-client
+pytest<3
 docker-py
-uuid
-sha256
+kinto-http
+kinto-signer
+flake8
+ConfigParser
+pytest-testrail
