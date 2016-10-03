@@ -93,3 +93,46 @@ def test_certificates_signatures(env, conf):
         assert response
     else:
         pass
+
+
+def test_signatures_after_modifying_collection(env, conf):
+    '''
+    We need two clients - one that connects to the collection that we write
+    data to, and one that contains our signed data
+
+    Before we start, verify the existing signatures are good
+    '''
+    staging_client = Client(
+        server_url=conf.get(env, 'writer_server'),
+        auth=('qa', 'n0sf3ra2'),
+        bucket='staging',
+        collection='qa'
+    )
+    blocklists_client = Client(
+        server_url=conf.get(env, 'writer_server'),
+        auth=('qa', 'n0sf3ra2'),
+        bucket='blocklists',
+        collection='qa'
+    )
+    assert verify_signatures(blocklists_client)
+
+    '''
+    Add a new record
+    Trigger signing
+    Verify the signatures are still good
+    '''
+    data = {'foo': 1, 'bar': 2, 'baz': 'biff'}
+    test_data = staging_client.create_record(data=data)
+    staging_client.patch_collection(data={'status': 'to-sign'})
+    data = blocklists_client.get_collection()
+    assert verify_signatures(blocklists_client)
+
+    '''
+    Remove the record we just added
+    Trigger signing
+    Verify the signatures are still good
+    '''
+    staging_client.delete_record(test_data['data']['id'])
+    staging_client.patch_collection(data={'status': 'to-sign'})
+    data = blocklists_client.get_collection()
+    assert verify_signatures(blocklists_client)
