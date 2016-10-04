@@ -1,3 +1,0 @@
-demjson
-requests
-pytest
