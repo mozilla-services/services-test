@@ -95,6 +95,7 @@ def test_certificates_signatures(env, conf):
         pass
 
 
+@testrail('C7325')
 def test_signatures_after_modifying_collection(env, conf):
     '''
     We need two clients - one that connects to the collection that we write
@@ -121,7 +122,7 @@ def test_signatures_after_modifying_collection(env, conf):
     Trigger signing
     Verify the signatures are still good
     '''
-    data = {'foo': 1, 'bar': 2, 'baz': 'biff'}
+    data = {'foo': '1', 'bar': '2', 'baz': 'biff'}
     test_data = staging_client.create_record(data=data)
     staging_client.patch_collection(data={'status': 'to-sign'})
     data = blocklists_client.get_collection()
