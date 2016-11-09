@@ -35,6 +35,11 @@ def verify_signatures(client):
         return 0
 
 
+def get_signer_id(client):
+    dest_col = client.get_collection()
+    return dest_col['data']['signature']['signer_id']
+
+
 @testrail('C5478')
 def test_addons_signatures(env, conf):
     client = Client(
@@ -42,22 +47,14 @@ def test_addons_signatures(env, conf):
         bucket='blocklists',
         collection='addons'
     )
-    try:
-        dest_col = client.get_collection()
-        records = client.get_records(_sort='-last_modified')
-        timestamp = client.get_records_timestamp()
-        serialized = canonical_json(records, timestamp)
-        signature = dest_col['data']['signature']
-        with open('pub', 'w') as f:
-            f.write(signature['public_key'])
-        signer = ECDSASigner(public_key='pub')
-        assert signer.verify(serialized, signature) is None
-        assert 'signer_id' in signature
-        assert signature['signer_id'] == 'onecrl_key'
-    except KintoException as e:
-        if e.response.status_code == 401:
-            pytest.skip('blocklists/addons collection does not exist')
-        assert False
+    signature_response = verify_signatures(client)
+
+    if signature_response == -1:
+        pytest.skip('blocklists/addons does not exist')
+    else:
+        assert signature_response
+
+    assert get_signer_id(client) == 'onecrl_key'
 
 
 @testrail('C5475')
@@ -67,22 +64,14 @@ def test_plugins_signatures(env, conf):
         bucket='blocklists',
         collection='plugins'
     )
-    try:
-        dest_col = client.get_collection()
-        records = client.get_records(_sort='-last_modified')
-        timestamp = client.get_records_timestamp()
-        serialized = canonical_json(records, timestamp)
-        signature = dest_col['data']['signature']
-        with open('pub', 'w') as f:
-            f.write(signature['public_key'])
-        signer = ECDSASigner(public_key='pub')
-        assert signer.verify(serialized, signature) is None
-        assert 'signer_id' in signature
-        assert signature['signer_id'] == 'onecrl_key'
-    except KintoException as e:
-        if e.response.status_code == 401:
-            pytest.skip('blocklists/plugins collection does not exist')
-        assert False
+    signature_response = verify_signatures(client)
+
+    if signature_response == -1:
+        pytest.skip('blocklists/plugins does not exist')
+    else:
+        assert signature_response
+
+    assert get_signer_id(client) == 'onecrl_key'
 
 
 @testrail('C5476')
@@ -92,22 +81,14 @@ def test_gfx_signatures(env, conf):
         bucket='blocklists',
         collection='gfx'
     )
-    try:
-        dest_col = client.get_collection()
-        records = client.get_records(_sort='-last_modified')
-        timestamp = client.get_records_timestamp()
-        serialized = canonical_json(records, timestamp)
-        signature = dest_col['data']['signature']
-        with open('pub', 'w') as f:
-            f.write(signature['public_key'])
-        signer = ECDSASigner(public_key='pub')
-        assert signer.verify(serialized, signature) is None
-        assert 'signer_id' in signature
-        assert signature['signer_id'] == 'onecrl_key'
-    except KintoException as e:
-        if e.response.status_code == 401:
-            pytest.skip('blocklists/gfx collection does not exist')
-        assert False
+    signature_response = verify_signatures(client)
+
+    if signature_response == -1:
+        pytest.skip('blocklists/gfx does not exist')
+    else:
+        assert signature_response
+
+    assert get_signer_id(client) == 'onecrl_key'
 
 
 @testrail('C5477')
@@ -117,22 +98,14 @@ def test_certificates_signatures(env, conf):
         bucket='blocklists',
         collection='certificates'
     )
-    try:
-        dest_col = client.get_collection()
-        records = client.get_records(_sort='-last_modified')
-        timestamp = client.get_records_timestamp()
-        serialized = canonical_json(records, timestamp)
-        signature = dest_col['data']['signature']
-        with open('pub', 'w') as f:
-            f.write(signature['public_key'])
-        signer = ECDSASigner(public_key='pub')
-        assert signer.verify(serialized, signature) is None
-        assert 'signer_id' in signature
-        assert signature['signer_id'] == 'onecrl_key'
-    except KintoException as e:
-        if e.response.status_code == 401:
-            pytest.skip('blocklists/certificates collection does not exist')
-        assert False
+    signature_response = verify_signatures(client)
+
+    if signature_response == -1:
+        pytest.skip('blocklists/certificates does not exist')
+    else:
+        assert signature_response
+
+    assert get_signer_id(client) == 'onecrl_key'
 
 
 def test_certificate_pinning_signatures(env, conf):
@@ -141,19 +114,11 @@ def test_certificate_pinning_signatures(env, conf):
         bucket='pinning',
         collection='pins'
     )
-    try:
-        dest_col = client.get_collection()
-        records = client.get_records(_sort='-last_modified')
-        timestamp = client.get_records_timestamp()
-        serialized = canonical_json(records, timestamp)
-        signature = dest_col['data']['signature']
-        with open('pub', 'w') as f:
-            f.write(signature['public_key'])
-        signer = ECDSASigner(public_key='pub')
-        assert signer.verify(serialized, signature) is None
-        assert 'signer_id' in signature
-        assert signature['signer_id'] == 'pinningpreload_key'
-    except KintoException as e:
-        if e.response.status_code == 401:
-            pytest.skip('pinning/pins collection does not exist')
-        assert False
+    signature_response = verify_signatures(client)
+
+    if signature_response == -1:
+        pytest.skip('pinning/pins does not exist')
+    else:
+        assert signature_response
+
+    assert get_signer_id(client) == 'pinningpreload_key'
