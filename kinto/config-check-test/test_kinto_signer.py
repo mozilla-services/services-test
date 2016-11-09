@@ -151,7 +151,8 @@ def test_certificate_pinning_signatures(env, conf):
             f.write(signature['public_key'])
         signer = ECDSASigner(public_key='pub')
         assert signer.verify(serialized, signature) is None
-        assert 'signer_id' in dest_col['data']['signature']
+        assert 'signer_id' in signature
+        assert signature['signer_id'] == 'pinningpreload_key'
     except KintoException as e:
         if e.response.status_code == 401:
             pytest.skip('pinning/pins collection does not exist')
