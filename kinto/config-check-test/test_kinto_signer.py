@@ -50,7 +50,7 @@ def test_addons_signatures(env, conf):
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'onecrl_key')
     except KintoException as e:
-        if e.response.statuys_code == 401:
+        if e.response.status_code == 401:
             pytest.fail('blocklists/addons does not exist')
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
@@ -67,7 +67,7 @@ def test_plugins_signatures(env, conf):
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'onecrl_key')
     except KintoException as e:
-        if e.response.statuys_code == 401:
+        if e.response.status_code == 401:
             pytest.fail('blocklists/plugins does not exist')
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
@@ -84,7 +84,7 @@ def test_gfx_signatures(env, conf):
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'onecrl_key')
     except KintoException as e:
-        if e.response.statuys_code == 401:
+        if e.response.status_code == 401:
             pytest.fail('blocklists/gfx does not exist')
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
@@ -101,7 +101,7 @@ def test_certificates_signatures(env, conf):
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'onecrl_key')
     except KintoException as e:
-        if e.response.statuys_code == 401:
+        if e.response.status_code == 401:
             pytest.fail('blocklists/certificates does not exist')
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
@@ -117,6 +117,6 @@ def test_certificate_pinning_signatures(env, conf):
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'pinningpreload_key')
     except KintoException as e:
-        if e.response.statuys_code == 401:
+        if e.response.status_code == 401:
             pytest.fail('pinning/pins does not exist')
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
