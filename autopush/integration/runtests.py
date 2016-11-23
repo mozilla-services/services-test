@@ -12,5 +12,6 @@ class ServicesTestRunner(BaseMarionetteTestRunner):
 def cli():
     mn_cli(runner_class=ServicesTestRunner)
 
+
 if __name__ == '__main__':
     cli()

@@ -38,7 +38,7 @@ def verify_signatures(collection, records, timestamp):
         return 0
 
 
-@testrail('C5478')
+@testrail('C7107')
 def test_addons_signatures(env, conf):
     client = Client(
         server_url=conf.get(env, 'server'),
@@ -55,7 +55,7 @@ def test_addons_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@testrail('C5475')
+@testrail('C7104')
 def test_plugins_signatures(env, conf):
     client = Client(
         server_url=conf.get(env, 'server'),
@@ -72,7 +72,7 @@ def test_plugins_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@testrail('C5476')
+@testrail('C7105')
 def test_gfx_signatures(env, conf):
     client = Client(
         server_url=conf.get(env, 'server'),
@@ -89,7 +89,7 @@ def test_gfx_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@testrail('C5477')
+@testrail('C7106')
 def test_certificates_signatures(env, conf):
     client = Client(
         server_url=conf.get(env, 'server'),
@@ -106,6 +106,7 @@ def test_certificates_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
+@testrail('C10491')
 def test_certificate_pinning_signatures(env, conf):
     client = Client(
         server_url=conf.get(env, 'server'),
