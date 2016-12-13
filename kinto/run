@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd ${WORKSPACE}/kinto
+virtualenv venv
+. ${WORKSPACE}/kinto/venv/bin/activate
+pip install -r dev-requirements.txt
+py.test --env=stage -v config-check-test/test_kinto_signer.py
+
