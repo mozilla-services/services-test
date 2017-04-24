@@ -6,7 +6,7 @@ Description
 
 This repo is intended for: testing tools, test manifests and scripts used by the Mozilla Cloud Services team as part of the Mozilla Cloud Services automated test pipeline.
 
-See: [services-qa-jenkins](https://github.com/mozilla-services/services-qa-jenkins) for how these tests are used in jenkins jobs.
+See: [services-qa-jenkins](https://github.com/mozilla-services/services-qa-jenkins) for how these tests are used in jenkins jobs. This is a private repo that requires permission to view.
 
 Repo Structure
 ----------------------
@@ -16,8 +16,8 @@ To contribute a new automated test to the services-test repo, please adhere to t
  * One directory per project.  For example:
    * services-test/absearch
    * services-test/autopush, etc.
-* {__project__}/__README.md__ (file) 
- * Add README file in project folder with links to: project repo (github), readthedocs, testplan, etc. 
+* {__project__}/__README.md__ (file)
+ * Add README file in project folder with links to: project repo (github), readthedocs, testplan, etc.
 * {__project__}/{__test-type__}/ (directory)
  * One project child directory per test-type.  For example:
   * services-test/absearch/e2e-test
@@ -57,5 +57,3 @@ Specify what kinds of tests should be run for any given environment
  schema-check  | API test
  security      | ZAP test (TBD)
  cdn-test      | check existence/delivery of remote files
-
-
