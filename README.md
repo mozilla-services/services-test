@@ -6,7 +6,7 @@ Description
 
 This repo is intended for: testing tools, test manifests and scripts used by the Mozilla Cloud Services team as part of the Mozilla Cloud Services automated test pipeline.
 
-See: [services-qa-jenkins](https://github.com/mozilla-services/services-qa-jenkins) for how these tests are used in jenkins jobs. This is a private repo that requires permission to view.
+See: [services-qa-jenkins](https://github.com/mozilla-services/services-qa-jenkins) for how these tests are used in Jenkins jobs. This is a private repo that requires permission to view.
 
 Repo Structure
 ----------------------
