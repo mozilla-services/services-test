@@ -4,9 +4,15 @@ services-test
 Description
 ----------------------
 
-This repo is intended for: testing tools, test manifests and scripts used by the Mozilla Cloud Services team as part of the Mozilla Cloud Services automated test pipeline.
+This repo is intended for: testing tools, test manifests and scripts used by the [Mozilla Cloud Services team](https://wiki.mozilla.org/TestEngineering) as part of the Mozilla Cloud Services automated test pipeline.
 
 See: [services-qa-jenkins](https://github.com/mozilla-services/services-qa-jenkins) for how these tests are used in Jenkins jobs. This is a private repo that requires permission to view.
+
+Get Involved
+----------------------
+You can read about our team and how to get involved at [Read the Docs](https://readthedocs.org/projects/firefox-test-engineering/).
+
+Here is a list of [contributors to the repo](https://github.com/mozilla-services/services-test/graphs/contributors).
 
 Repo Structure
 ----------------------
