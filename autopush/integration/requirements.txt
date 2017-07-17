@@ -1,3 +1,0 @@
-marionette_client
-firefox_puppeteer
-configargparse
