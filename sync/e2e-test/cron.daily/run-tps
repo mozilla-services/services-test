@@ -1,0 +1,7 @@
+#!/bin/bash
+
+RECIPIENTS="sync-core@mozilla.com"
+
+# echo "Testing automated delivery of TPS failures." | HOME=/home/ubuntu mailx -s 'Testing TPS mail' $RECIPIENTS
+
+sudo -u ubuntu -i -- bash -c "(cd /home/ubuntu/Library/github/mozilla-services/services-test/sync/e2e-test && make update && make nightly && make prod) >& /tmp/results.txt || HOME=/home/ubuntu mailx -s 'TPS failure' $RECIPIENTS < /tmp/results.txt"

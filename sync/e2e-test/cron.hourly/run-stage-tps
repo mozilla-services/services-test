@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# daily Prod job runs at 06:35 UTC or thereabouts.
+# Was: run the Stage job three times a day, on the hours 16, 20, and 00 UTC.
+# Now: run the Stage job once a day, on the hour 09 UTC.
+
+
+case $(date -u +%H) in
+  09) 
+	;;
+   *)
+      exit 0 
+	;;
+esac
+
+RECIPIENTS="sync-core@mozilla.com"
+
+
+# echo "Testing automated delivery of TPS Stage failures." | HOME=/home/ubuntu mailx -s 'Testing TPS Stage mail' $RECIPIENTS
+# exit 2
+
+sudo -u ubuntu -i -- bash -c "(cd /home/ubuntu/Library/github/mozilla-services/services-test/sync/e2e-test && make update && make nightly && make stage) >& /tmp/stage-results.txt || HOME=/home/ubuntu mailx -s 'TPS Stage failure' $RECIPIENTS < /tmp/stage-results.txt"

@@ -1,0 +1,14 @@
+#!/bin/bash -xe
+
+
+BINARY=$1
+
+CFGDIR=$PWD
+cd $PWD/mozilla-central/testing/tps || exit 1
+
+/bin/rm -rf $HOME/tps-prod
+./create_venv.py $HOME/tps-prod
+. $HOME/tps-prod/bin/activate
+# xvfb-run - uses DISPLAY=:99 (by default)
+xvfb-run runtps --debug --binary="${BINARY}" --testfile=test_sync.js --configfile=$CFGDIR/prod-config.json
+#MOZ_HEADLESS=1 runtps --binary="${BINARY}" --testfile=test_sync.js

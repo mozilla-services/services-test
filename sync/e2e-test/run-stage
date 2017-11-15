@@ -1,0 +1,15 @@
+#!/bin/bash -xe
+
+
+BINARY=$1
+
+CFGDIR=$PWD
+cd $PWD/mozilla-central/testing/tps || exit 1
+
+/bin/rm -rf $HOME/tps-stage
+./create_venv.py  $HOME/tps-stage
+. $HOME/tps-stage/bin/activate
+
+# xvfb-run - uses DISPLAY=:99 (by default)
+#xvfb-run runtps --debug --binary="${BINARY}" 
+MOZ_HEADLESS=1 runtps --debug --binary="${BINARY}" --configfile=$CFGDIR/stage-config.json
