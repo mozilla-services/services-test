@@ -4,10 +4,15 @@ CENTRAL=/mnt/extra/mozilla-central
 
 .PHONY: cron setup update nightly stage prod
 
-# cron setup
+# root-required setup
 # might call this "install" instead -- it needs sudo.
-# so, "sudo make cron"
-cron:
+# so, "sudo make ubuntu"
+ubuntu:
+	apt-get -y update
+	env PAGER=cat apt-get -y --purge dist-upgrade
+	apt-get -y autoremove
+	apt-get -y clean
+	apt-get -y install mercurial
 	cp -i cron.hourly/* /etc/cron.hourly/
 	cp -i cron.daily/*  /etc/cron.daily/
 
