@@ -19,7 +19,7 @@ ubuntu:
 	env PAGER=cat apt-get -y --purge dist-upgrade
 	apt-get -y --purge autoremove
 	apt-get -y clean
-	apt-get -y install mercurial heirloom-mailx xvfb
+	apt-get -y install firefox mercurial heirloom-mailx xvfb
 
 # this also needs root
 # so, "sudo make cron"
