@@ -27,4 +27,4 @@ That's the one-time node setup.
 1. Type `make update` to update the `mozilla-central` tree.
 1. Type `make nightly` to download the latest Firefox Nightly.
 1. Type `make prod` to run a (very short, should take less than 5 minutes) test against Sync Production.
-1. Type `make stage` to run a (longer, will take 20 minutes or so) against Sync Stage.
+1. Type `make stage` to run a (longer, will take 20 minutes or so) test against Sync Stage.
